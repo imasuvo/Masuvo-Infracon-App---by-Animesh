@@ -16,6 +16,8 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import ServicesPage from './pages/ServicesPage';
 import FAQPage from './pages/FAQPage';
+import SavedPropertiesPage from './pages/SavedPropertiesPage';
+import { FavoritesProvider } from './contexts/FavoritesContext';
 
 const AppContent: React.FC = () => {
     // FIX: Using useLocation from the namespace import.
@@ -40,6 +42,7 @@ const AppContent: React.FC = () => {
                     <ReactRouterDOM.Route path="/about" element={<AboutPage />} />
                     <ReactRouterDOM.Route path="/contact" element={<ContactPage />} />
                     <ReactRouterDOM.Route path="/faq" element={<FAQPage />} />
+                    <ReactRouterDOM.Route path="/saved" element={<SavedPropertiesPage />} />
                 </ReactRouterDOM.Routes>
             </main>
             {!isClientPortal && <Footer />}
@@ -52,9 +55,11 @@ const App: React.FC = () => {
   return (
     // FIX: Using HashRouter from the namespace import.
     <ReactRouterDOM.HashRouter>
-        <div className="bg-charcoal max-w-lg mx-auto shadow-2xl shadow-golden-yellow/10">
-            <AppContent />
-        </div>
+        <FavoritesProvider>
+            <div className="bg-charcoal max-w-lg mx-auto shadow-2xl shadow-golden-yellow/10">
+                <AppContent />
+            </div>
+        </FavoritesProvider>
     </ReactRouterDOM.HashRouter>
   );
 }

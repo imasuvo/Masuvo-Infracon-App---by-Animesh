@@ -3,15 +3,21 @@ import React from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { PROPERTIES, COMPANY_INFO } from '../constants';
 import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
+import { useFavorites } from '../contexts/FavoritesContext';
 
 const PropertyDetailPage: React.FC = () => {
     // FIX: Using useParams from the namespace import.
     const { id } = ReactRouterDOM.useParams<{ id: string }>();
     const property = PROPERTIES.find(p => p.id === id);
+    const { isFavorite, toggleFavorite } = useFavorites();
 
     if (!property) {
         return <div className="p-4 text-center">Property not found.</div>;
     }
+
+    const isSaved = isFavorite(property.id);
 
     const DetailItem: React.FC<{ icon: React.ElementType, label: string, value: string, className?: string }> = ({ icon: Icon, label, value, className = '' }) => (
         <div className={`flex items-start ${className}`}>
@@ -30,9 +36,16 @@ const PropertyDetailPage: React.FC = () => {
                  <img src={property.images[0]} alt={property.title} className="w-full h-64 object-cover" />
                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
                  {/* FIX: Using Link from the namespace import. */}
-                 <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal">
+                 <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
                     <ArrowLeftIcon className="h-5 w-5"/>
                  </ReactRouterDOM.Link>
+                 <button 
+                    onClick={() => toggleFavorite(property.id)}
+                    className="absolute top-4 right-4 bg-charcoal/70 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
+                    aria-label={isSaved ? 'Remove from favorites' : 'Add to favorites'}
+                 >
+                    {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
+                 </button>
                  <div className="absolute bottom-0 left-0 p-4">
                      <h1 className="text-3xl font-bold text-white">{property.title}</h1>
                      <p className="text-lg text-golden-yellow font-semibold">{property.price}</p>
