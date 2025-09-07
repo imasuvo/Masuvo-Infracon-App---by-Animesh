@@ -322,8 +322,9 @@ export const COMPANY_INFO = {
 };
 
 export const SOCIAL_LINKS = {
-    facebook: "#",
-    instagram: "#",
-    linkedin: "#",
-    youtube: "#"
+    facebook: "https://www.facebook.com/masuvo.infraco",
+    instagram: "https://www.instagram.com/masuvoinfracon/",
+    linkedin: "https://www.linkedin.com/in/animeshmaji/",
+    youtube: "https://www.youtube.com/@masuvoinfracon",
+    x: "https://x.com/MasuvoInfracon"
 };
