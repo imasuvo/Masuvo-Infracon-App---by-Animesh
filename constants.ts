@@ -231,6 +231,30 @@ export const TESTIMONIALS: Testimonial[] = [
     author: "P. Banerjee",
     project: "3BHK Bungalow, Bidhan Nagar",
     avatar: "https://picsum.photos/seed/avatar3/100/100"
+  },
+  {
+    quote: "The entire process was seamless, from design to execution. Masuvo Infracon's client portal is a fantastic tool that kept us informed every step of the way.",
+    author: "S. & N. Roy",
+    project: "Custom 3BHK, Shyampur",
+    avatar: "https://picsum.photos/seed/avatar4/100/100"
+  },
+  {
+    quote: "We approached Trayaksh Interior for our renovation, and they completely transformed our living space. Their design sense is modern and elegant. Truly impressed!",
+    author: "M. Verma",
+    project: "Interior Renovation, Durgapur-01",
+    avatar: "https://picsum.photos/seed/avatar5/100/100"
+  },
+  {
+    quote: "Building a home can be stressful, but Masuvo Infracon made it an enjoyable journey. Their team is professional, responsive, and dedicated to quality.",
+    author: "K. Singh",
+    project: "4BHK Duplex, Saptarshi Park",
+    avatar: "https://picsum.photos/seed/avatar6/100/100"
+  },
+  {
+    quote: "The quality of materials and the craftsmanship is top-notch. Our bungalow feels solid and looks beautiful. Thank you for building our forever home.",
+    author: "The Das Family",
+    project: "Luxury 3BHK, Fuljhore",
+    avatar: "https://picsum.photos/seed/avatar7/100/100"
   }
 ];
 
