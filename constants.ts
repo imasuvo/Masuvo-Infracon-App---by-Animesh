@@ -217,12 +217,20 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     quote: "Masuvo Infracon delivered our dream home on time without compromising on quality. The team was professional and transparent throughout the process.",
     author: "R. & S. Sharma",
-    project: "4BHK Duplex, Christianpally"
+    project: "4BHK Duplex, Christianpally",
+    avatar: "https://picsum.photos/seed/avatar1/100/100"
   },
   {
     quote: "The attention to detail in both construction and interiors by Trayaksh is exceptional. Highly recommended for anyone looking for a premium experience.",
     author: "A. Gupta",
-    project: "5BHK Triplex, Fuljhore"
+    project: "5BHK Triplex, Fuljhore",
+    avatar: "https://picsum.photos/seed/avatar2/100/100"
+  },
+  {
+    quote: "From start to finish, the communication was excellent. The client portal kept us updated, and the final result exceeded our expectations.",
+    author: "P. Banerjee",
+    project: "3BHK Bungalow, Bidhan Nagar",
+    avatar: "https://picsum.photos/seed/avatar3/100/100"
   }
 ];
 

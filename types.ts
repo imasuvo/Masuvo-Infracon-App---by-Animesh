@@ -26,6 +26,7 @@ export interface Testimonial {
   quote: string;
   author: string;
   project: string;
+  avatar: string;
 }
 
 export enum InteriorCategory {

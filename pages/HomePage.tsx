@@ -47,23 +47,106 @@ const CTAButton: React.FC<{ to: string, children: React.ReactNode }> = ({ to, ch
 
 const TestimonialCarousel: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const timeoutRef = React.useRef<number | null>(null);
+
+    const resetTimeout = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    };
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-        }, 7000);
-        return () => clearInterval(timer);
-    }, []);
+        resetTimeout();
+        timeoutRef.current = window.setTimeout(
+            () =>
+                setCurrentIndex((prevIndex) =>
+                    prevIndex === TESTIMONIALS.length - 1 ? 0 : prevIndex + 1
+                ),
+            7000 // Change slide every 7 seconds
+        );
+
+        return () => {
+            resetTimeout();
+        };
+    }, [currentIndex]);
+
+    const goToSlide = (slideIndex: number) => {
+        setCurrentIndex(slideIndex);
+    };
+    
+    const handleInteractionStart = () => {
+        resetTimeout();
+    };
+
+    const handleInteractionEnd = () => {
+         timeoutRef.current = window.setTimeout(
+            () =>
+                setCurrentIndex((prevIndex) =>
+                    prevIndex === TESTIMONIALS.length - 1 ? 0 : prevIndex + 1
+                ),
+            7000
+        );
+    };
 
     return (
-        <div className="relative h-48 overflow-hidden rounded-xl bg-zinc-800 p-6">
-            {TESTIMONIALS.map((testimonial, index) => (
-                <div key={index} className={`absolute inset-0 p-6 transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}>
-                    <p className="text-gray-300 italic">"{testimonial.quote}"</p>
-                    <p className="mt-4 font-bold text-right text-golden-yellow">- {testimonial.author}</p>
-                    <p className="text-xs text-right text-gray-400">{testimonial.project}</p>
+        <div 
+            className="relative"
+            onMouseEnter={handleInteractionStart}
+            onMouseLeave={handleInteractionEnd}
+            onTouchStart={handleInteractionStart}
+            onTouchEnd={handleInteractionEnd}
+        >
+            <div className="overflow-hidden rounded-xl bg-zinc-800 p-6 relative h-[280px] sm:h-[260px] flex flex-col justify-between">
+                {/* Decorative Quote Icon */}
+                <span className="absolute top-4 left-4 text-7xl font-serif text-golden-yellow/20 opacity-50 select-none" aria-hidden="true">“</span>
+                
+                <div className="relative flex-grow overflow-hidden">
+                    <div
+                        className="absolute inset-0"
+                    >
+                        {TESTIMONIALS.map((testimonial, index) => (
+                            <div 
+                                key={index} 
+                                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                                aria-hidden={index !== currentIndex}
+                            >
+                                <p className="text-gray-300 italic text-md sm:text-lg leading-relaxed pt-8">
+                                    {testimonial.quote}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            ))}
+
+                <div className="relative mt-4">
+                    <div className="relative h-14">
+                        {TESTIMONIALS.map((testimonial, index) => (
+                           <div 
+                                key={index} 
+                                className={`absolute inset-0 flex items-center gap-4 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                                aria-hidden={index !== currentIndex}
+                            >
+                                <img src={testimonial.avatar} alt={testimonial.author} className="w-12 h-12 rounded-full object-cover border-2 border-golden-yellow" />
+                                <div>
+                                    <p className="font-bold text-golden-yellow">{testimonial.author}</p>
+                                    <p className="text-xs text-gray-400">{testimonial.project}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                 </div>
+            </div>
+
+            <div className="flex justify-center mt-4 space-x-2">
+                {TESTIMONIALS.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={`h-2.5 rounded-full transition-all duration-300 ${currentIndex === index ? 'bg-golden-yellow w-6' : 'bg-zinc-600 hover:bg-zinc-500 w-2.5'}`}
+                        aria-label={`Go to testimonial ${index + 1}`}
+                    ></button>
+                ))}
+            </div>
         </div>
     );
 };
