@@ -294,7 +294,7 @@ export const COMPANY_INFO = {
     whatsapp: "919749443553",
     email: "contact@masuvoinfracon.com",
     website: "https://infraconmasuvo.com/",
-    googleMapsLink: "https://www.google.com/maps/search/?api=1&query=P9,+Hambir+Sarani,+Sector-2C,+Bidhannagar,+Durgapur,+West+Bengal+713212"
+    googleMapsLink: "https://share.google/SRPM2ZIIsSernVj0P"
 };
 
 export const SOCIAL_LINKS = {
