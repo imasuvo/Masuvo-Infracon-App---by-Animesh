@@ -1,4 +1,4 @@
-import type { Property, Service, Testimonial, Notification, FAQ } from './types';
+import type { Property, Service, Testimonial, Notification, FAQ, FloorPlan } from './types';
 import { InteriorCategory } from './types';
 import { HomeIcon, BuildingOffice2Icon, PaintBrushIcon, WrenchScrewdriverIcon, SparklesIcon, SunIcon, MoonIcon, UserGroupIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
@@ -304,6 +304,68 @@ export const FAQS: FAQ[] = [
     question: "What kind of warranty or post-construction support do you provide?",
     answer: "We provide a one-year warranty on structural integrity and against any construction defects. Our team is also available for any support or assistance you may need after you move in."
   }
+];
+
+
+export const FLOOR_PLANS: FloorPlan[] = [
+  // 3BHK
+  {
+    id: 'fp_3bhk_1200',
+    type: '3BHK',
+    sizeSqFt: 1200,
+    configuration: 'Super Built-up Area',
+    thumbnailUrl: 'https://picsum.photos/seed/fpthumb3_1200/400/300',
+    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
+    price: '₹24,99,000',
+    description: 'This well-designed 3BHK floor plan offers a perfect blend of comfort and functionality. It includes three spacious bedrooms, two modern bathrooms, a contemporary kitchen, a cozy living area, and a private balcony. Ideal for small families seeking an affordable yet elegant home.',
+    pdfUrl: '#',
+  },
+  {
+    id: 'fp_3bhk_1400',
+    type: '3BHK',
+    sizeSqFt: 1400,
+    configuration: 'Super Built-up Area',
+    thumbnailUrl: 'https://picsum.photos/seed/fpthumb3_1400/400/300',
+    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
+    price: '₹26,99,000',
+    description: 'An expansive 1400 sq. ft. 3BHK layout featuring larger bedrooms and an open-concept living and dining space. Includes three bedrooms, two bathrooms, a utility area attached to the kitchen, and enhanced natural lighting. Perfect for families desiring more space and luxury.',
+    pdfUrl: '#',
+  },
+  // 4BHK
+  {
+    id: 'fp_4bhk_1500',
+    type: '4BHK',
+    sizeSqFt: 1500,
+    configuration: 'Super Built-up Area',
+    thumbnailUrl: 'https://picsum.photos/seed/fpthumb4_1500/400/300',
+    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
+    price: '₹27,99,000',
+    description: 'A spacious 4BHK duplex design optimized for modern family living. The ground floor comprises a living area, kitchen, dining, and one bedroom, while the first floor houses three additional bedrooms. Includes four bedrooms, three bathrooms, a family lounge, and two balconies.',
+    pdfUrl: '#',
+  },
+  {
+    id: 'fp_4bhk_1800',
+    type: '4BHK',
+    sizeSqFt: 1800,
+    configuration: 'Super Built-up Area',
+    thumbnailUrl: 'https://picsum.photos/seed/fpthumb4_1800/400/300',
+    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
+    price: '₹35,49,000',
+    description: 'Luxury 4BHK duplex offering generous room sizes and premium specifications. This layout includes four large bedrooms, four attached bathrooms, a modular kitchen, a separate servant room, a large terrace, and dedicated parking. Designed for those who appreciate fine living.',
+    pdfUrl: '#',
+  },
+  // 5BHK
+  {
+    id: 'fp_5bhk_2200',
+    type: '5BHK',
+    sizeSqFt: 2200,
+    configuration: 'Super Built-up Area',
+    thumbnailUrl: 'https://picsum.photos/seed/fpthumb5_2200/400/300',
+    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
+    price: 'Price on Request',
+    description: 'The ultimate in luxury and space, this 5BHK triplex plan is designed for large families. It features five master bedrooms with en-suite bathrooms, a home theater room, a private gym, a sprawling terrace garden, and a double-height living room. Every detail is crafted to perfection.',
+    pdfUrl: '#',
+  },
 ];
 
 

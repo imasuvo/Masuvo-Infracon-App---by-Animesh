@@ -17,6 +17,7 @@ import ContactPage from './pages/ContactPage';
 import ServicesPage from './pages/ServicesPage';
 import FAQPage from './pages/FAQPage';
 import SavedPropertiesPage from './pages/SavedPropertiesPage';
+import FloorPlansPage from './pages/FloorPlansPage';
 import { FavoritesProvider } from './contexts/FavoritesContext';
 
 const AppContent: React.FC = () => {
@@ -34,6 +35,7 @@ const AppContent: React.FC = () => {
                     <ReactRouterDOM.Route path="/properties" element={<PropertiesPage />} />
                     <ReactRouterDOM.Route path="/properties/:id" element={<PropertyDetailPage />} />
                     <ReactRouterDOM.Route path="/services" element={<ServicesPage />} />
+                    <ReactRouterDOM.Route path="/floor-plans" element={<FloorPlansPage />} />
                     <ReactRouterDOM.Route path="/construction" element={<ConstructionPage />} />
                     <ReactRouterDOM.Route path="/interiors" element={<InteriorDesignPage />} />
                     <ReactRouterDOM.Route path="/budget-estimator" element={<BudgetPage />} />

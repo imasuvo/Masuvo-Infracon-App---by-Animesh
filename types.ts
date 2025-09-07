@@ -71,3 +71,15 @@ export interface CalculatedResource extends Resource {
   calculatedQuantity: string;
   calculatedAmount: number;
 }
+
+export interface FloorPlan {
+  id: string;
+  type: '3BHK' | '4BHK' | '5BHK';
+  sizeSqFt: number;
+  configuration: string; // e.g., "Super Built-up Area"
+  thumbnailUrl: string;
+  viewerUrl: string;
+  price: string;
+  description: string;
+  pdfUrl: string;
+}

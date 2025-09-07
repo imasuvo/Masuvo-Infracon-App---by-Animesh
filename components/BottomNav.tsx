@@ -1,12 +1,12 @@
 import React from 'react';
 // FIX: Changed react-router-dom import to a namespace import to resolve export errors.
 import * as ReactRouterDOM from 'react-router-dom';
-import { HomeIcon, BuildingOffice2Icon, SparklesIcon, BanknotesIcon, PhoneIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, BuildingOffice2Icon, ClipboardDocumentListIcon, BanknotesIcon, PhoneIcon } from '@heroicons/react/24/solid';
 
 const navItems = [
     { path: '/', name: 'Home', icon: HomeIcon },
     { path: '/properties', name: 'Properties', icon: BuildingOffice2Icon },
-    { path: '/services', name: 'Services', icon: SparklesIcon },
+    { path: '/floor-plans', name: 'Plans', icon: ClipboardDocumentListIcon },
     { path: '/budget-estimator', name: 'Budget', icon: BanknotesIcon },
     { path: '/contact', name: 'Contact', icon: PhoneIcon },
 ];
