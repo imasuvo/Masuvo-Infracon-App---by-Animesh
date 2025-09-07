@@ -6,8 +6,8 @@ import { BuildingOffice2Icon, PaintBrushIcon } from '@heroicons/react/24/solid';
 const ServiceLinkCard: React.FC<{ to: string, title: string, description: string, icon: React.ElementType }> = ({ to, title, description, icon: Icon }) => {
     return (
         // FIX: Using Link from the namespace import.
-        <ReactRouterDOM.Link to={to} className="block bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 hover:scale-105 transition-all duration-300 transform">
-            <Icon className="h-12 w-12 text-golden-yellow mb-4" />
+        <ReactRouterDOM.Link to={to} className="group block bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 hover:scale-105 transition-all duration-300 transform">
+            <Icon className="h-12 w-12 text-golden-yellow mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-12" />
             <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
             <p className="text-gray-400">{description}</p>
         </ReactRouterDOM.Link>
