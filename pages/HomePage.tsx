@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PROPERTIES, CONSTRUCTION_SERVICES, TESTIMONIALS, COMPANY_INFO } from '../constants';
 import PropertyCard from '../components/PropertyCard';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import BrochureViewerModal from '../components/BrochureViewerModal';
+import { DocumentTextIcon } from '@heroicons/react/24/solid';
+
 
 const HeroSlider: React.FC = () => {
     const images = [
@@ -154,6 +157,9 @@ const TestimonialCarousel: React.FC = () => {
 
 
 const HomePage: React.FC = () => {
+    const [isBrochureModalOpen, setBrochureModalOpen] = useState(false);
+    const brochurePdfUrl = "https://docs.google.com/gview?url=https://imagecdn.99acres.com/media1/28639/18/572798025O-1740557002439.pdf&embedded=true";
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -197,12 +203,37 @@ const HomePage: React.FC = () => {
                          </Link>
                      </div>
                 </section>
+
+                <section className="px-4">
+                    <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Company Brochure</h3>
+                    <div className="bg-zinc-800 p-6 rounded-xl">
+                        <div className="bg-zinc-900/50 p-8 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-zinc-700">
+                            <DocumentTextIcon className="h-16 w-16 text-golden-yellow/50 mb-4" />
+                            <h4 className="text-lg font-bold text-white">Explore Our Company Profile</h4>
+                            <p className="text-sm text-gray-400 mt-1 mb-4">Get an in-depth look at our projects, mission, and vision.</p>
+                            <button 
+                                onClick={() => setBrochureModalOpen(true)}
+                                className="bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
+                            >
+                                View Brochure
+                            </button>
+                        </div>
+                    </div>
+                </section>
                 
                 <section className="px-4">
                     <h3 className="text-2xl font-bold mb-4 text-golden-yellow">What Our Clients Say</h3>
                     <TestimonialCarousel />
                 </section>
             </div>
+             <AnimatePresence>
+                {isBrochureModalOpen && (
+                    <BrochureViewerModal 
+                        pdfUrl={brochurePdfUrl}
+                        onClose={() => setBrochureModalOpen(false)}
+                    />
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { COMPANY_INFO } from '../constants';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
+import ErrorDisplay from '../components/ErrorDisplay';
 
 const ContactPage: React.FC = () => {
     const [submitted, setSubmitted] = useState(false);
@@ -96,7 +97,7 @@ const ContactPage: React.FC = () => {
                                 required
                             ></textarea>
 
-                            {error && <p className="text-coral-red text-sm">{error}</p>}
+                            {error && <ErrorDisplay title="Submission Failed" message={error} />}
 
                             <button 
                                 type="submit" 

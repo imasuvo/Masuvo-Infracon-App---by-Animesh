@@ -8,6 +8,7 @@ import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { useFavorites } from '../contexts/FavoritesContext';
 import ReadMore from '../components/ReadMore';
 import { motion } from 'framer-motion';
+import NotFoundPage from './NotFoundPage';
 
 const PropertyDetailPage: React.FC = () => {
     // FIX: Using useParams from the named import.
@@ -16,7 +17,7 @@ const PropertyDetailPage: React.FC = () => {
     const { isFavorite, toggleFavorite } = useFavorites();
 
     if (!property) {
-        return <div className="p-4 text-center">Property not found.</div>;
+        return <NotFoundPage />;
     }
 
     const isSaved = isFavorite(property.id);

@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import type { Resource, CalculatedResource, QualityOption } from '../types';
 import { motion } from 'framer-motion';
+import ErrorDisplay from '../components/ErrorDisplay';
 
 const indianStatesAndCities: { [key: string]: string[] } = {
   "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
@@ -91,6 +92,7 @@ const BudgetPage: React.FC = () => {
     const [area, setArea] = useState(1000);
     const [unit, setUnit] = useState<'sqft' | 'sqm'>('sqft');
     const [calculatedData, setCalculatedData] = useState<CalculatedResource[]>([]);
+    const [error, setError] = useState<string | null>(null);
     
     const cities = useMemo(() => indianStatesAndCities[selectedState] || [], [selectedState]);
 
@@ -104,23 +106,33 @@ const BudgetPage: React.FC = () => {
 
     const handleCalculate = (e: React.FormEvent) => {
         e.preventDefault();
-        const areaInSqFt = unit === 'sqm' ? area * 10.764 : area;
+        setError(null);
+        try {
+            if (area <= 0) {
+                throw new Error("Area must be a positive number.");
+            }
+            const areaInSqFt = unit === 'sqm' ? area * 10.764 : area;
 
-        const results = RESOURCES_DATA.map(resource => {
-            const calculatedQuantity = resource.quantityFactor * areaInSqFt;
-            const price = resource.qualityOptions[resource.defaultQuality] || 0;
-            const calculatedAmount = calculatedQuantity * price;
-            
-            return {
-                ...resource,
-                selectedQuality: resource.defaultQuality,
-                calculatedQuantity: `${Math.round(calculatedQuantity).toLocaleString('en-IN')} ${resource.unit}`,
-                calculatedAmount: Math.round(calculatedAmount),
-            };
-        });
+            const results = RESOURCES_DATA.map(resource => {
+                const calculatedQuantity = resource.quantityFactor * areaInSqFt;
+                const price = resource.qualityOptions[resource.defaultQuality] || 0;
+                const calculatedAmount = calculatedQuantity * price;
+                
+                return {
+                    ...resource,
+                    selectedQuality: resource.defaultQuality,
+                    calculatedQuantity: `${Math.round(calculatedQuantity).toLocaleString('en-IN')} ${resource.unit}`,
+                    calculatedAmount: Math.round(calculatedAmount),
+                };
+            });
 
-        setCalculatedData(results);
-        setStep(2);
+            setCalculatedData(results);
+            setStep(2);
+        } catch (err) {
+            console.error("Calculation Error:", err);
+            const message = err instanceof Error ? err.message : "An unexpected error occurred. Please check your inputs.";
+            setError(message);
+        }
     };
 
     const handleQualityChange = (resourceName: string, newQuality: QualityOption) => {
@@ -153,6 +165,11 @@ const BudgetPage: React.FC = () => {
         <>
             <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Home Construction Cost Calculator</h2>
             <p className="text-gray-300 mb-8">Estimate Your Budget</p>
+            {error && (
+                <div className="mb-6">
+                    <ErrorDisplay title="Calculation Error" message={error} />
+                </div>
+            )}
             <form onSubmit={handleCalculate} className="space-y-6 bg-zinc-800 p-6 rounded-xl">
                  <div>
                     <label htmlFor="state" className="block text-sm font-medium text-gray-300 mb-1">Select State</label>

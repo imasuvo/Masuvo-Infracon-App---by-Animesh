@@ -20,6 +20,7 @@ import SavedPropertiesPage from './pages/SavedPropertiesPage';
 import FloorPlansPage from './pages/FloorPlansPage';
 import { FavoritesProvider } from './contexts/FavoritesContext';
 import { AnimatePresence } from 'framer-motion';
+import NotFoundPage from './pages/NotFoundPage';
 
 const AppContent: React.FC = () => {
     // FIX: Using useLocation from the named import.
@@ -47,6 +48,7 @@ const AppContent: React.FC = () => {
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/faq" element={<FAQPage />} />
                         <Route path="/saved" element={<SavedPropertiesPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </AnimatePresence>
             </main>

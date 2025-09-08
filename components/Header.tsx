@@ -12,7 +12,7 @@ const Header: React.FC = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* FIX: Using Link from the named import. */}
                     <Link to="/" className="flex items-center gap-3 group">
-                        <img src="assets/logo.png" alt="Masuvo Infracon Pvt. Ltd. Logo" className="h-12 w-auto group-hover:scale-110 transition-transform duration-300" />
+                        <img src="https://infraconmasuvo.com/wp-content/uploads/2024/02/Masuvo-Infracon-Logo-Rounded.png" alt="Masuvo Infracon Pvt. Ltd. Logo" className="h-12 w-auto group-hover:scale-110 transition-transform duration-300" />
                         <div>
                             <span className="font-bold text-white text-lg tracking-wide group-hover:text-golden-yellow transition-colors">Masuvo Infracon</span>
                             <p className="text-xs text-gray-400 -mt-1 group-hover:text-golden-yellow transition-colors">Made by Animesh</p>
