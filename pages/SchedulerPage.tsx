@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { CalendarIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
+import Spinner from '../components/Spinner';
 
 const SchedulerPage: React.FC = () => {
     const [formType, setFormType] = useState<'visit' | 'office'>('visit');
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     
     // Shared state
     const [fullName, setFullName] = useState('');
@@ -29,13 +31,18 @@ const SchedulerPage: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
         // Here you would typically handle the form submission (e.g., send data to an API)
         console.log({
             formType,
             ...(formType === 'visit' ? { fullName, phone, email, requirement, budget, message } : {}),
             ...(formType === 'office' ? { fullName, phone, email, appointmentType, preferredDate, preferredTime, notes } : {}),
         });
-        setSubmitted(true);
+        // Simulate API call
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setSubmitted(true);
+        }, 1500);
     };
 
     if(submitted) {
@@ -103,8 +110,15 @@ const SchedulerPage: React.FC = () => {
                             </FormSelect>
                             <FormInput label="Budget (Optional)" name="budget" type="number" value={budget} onChange={e => setBudget(e.target.value)} placeholder="Budget in Lakhs (e.g., 50)" />
                             <FormTextarea label="Additional Message" name="message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell us more about your project requirements..." rows={3} />
-                            <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4">
-                                Submit Inquiry
+                            <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4 flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed">
+                                {isSubmitting ? (
+                                    <>
+                                        <Spinner size="sm" className="mr-2 text-charcoal" />
+                                        <span>Submitting...</span>
+                                    </>
+                                ) : (
+                                    <span>Submit Inquiry</span>
+                                )}
                             </button>
                         </>
                     ) : (
@@ -123,8 +137,15 @@ const SchedulerPage: React.FC = () => {
                                 {timeSlots.map(time => <option key={time} value={time}>{time}</option>)}
                             </FormSelect>
                             <FormTextarea label="Additional Notes" name="notes" value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any specific requirements or questions..." rows={3} />
-                            <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4">
-                                Book Appointment
+                             <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4 flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed">
+                                {isSubmitting ? (
+                                    <>
+                                        <Spinner size="sm" className="mr-2 text-charcoal" />
+                                        <span>Booking...</span>
+                                    </>
+                                ) : (
+                                    <span>Book Appointment</span>
+                                )}
                             </button>
                         </>
                     )}

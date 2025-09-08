@@ -35,6 +35,7 @@ const Footer: React.FC = () => {
                     <ReactRouterDOM.Link to="/about" className="hover:text-golden-yellow transition-colors">About Us</ReactRouterDOM.Link>
                     <ReactRouterDOM.Link to="/contact" className="hover:text-golden-yellow transition-colors">Contact</ReactRouterDOM.Link>
                     <ReactRouterDOM.Link to="/faq" className="hover:text-golden-yellow transition-colors">FAQ</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/portal/login" className="hover:text-golden-yellow transition-colors">Client Login</ReactRouterDOM.Link>
                 </div>
 
                 <div className="mt-4 text-center text-xs text-gray-500 space-y-1">

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { ArrowRightOnRectangleIcon, ChatBubbleLeftRightIcon, PhotoIcon, CurrencyDollarIcon, BellIcon } from '@heroicons/react/24/solid';
 import { PROJECT_NOTIFICATIONS } from '../constants';
 import type { Notification, ChatMessage } from '../types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../contexts/AuthContext';
+import { motion } from 'framer-motion';
+
 
 const formatTimeAgo = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -34,8 +36,8 @@ const ProjectMilestone: React.FC<{ title: string, status: 'completed' | 'inprogr
     )
 };
 
-
-const ProjectTracker: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
+const ClientPortalPage: React.FC = () => {
+    const { logout } = useAuth();
     const [notifications, setNotifications] = useState<Notification[]>(PROJECT_NOTIFICATIONS);
     const [showNotifications, setShowNotifications] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>([
@@ -88,6 +90,12 @@ const ProjectTracker: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
     );
 
     return (
+         <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
         <div className="p-4 min-h-screen bg-charcoal">
             <div className="flex justify-between items-center mb-6">
                 <div>
@@ -107,8 +115,9 @@ const ProjectTracker: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
                         </button>
                     </div>
                     <button 
-                        onClick={onLogout} 
-                        className="flex items-center gap-2 bg-zinc-700 hover:bg-zinc-600 text-gray-300 hover:text-white font-semibold text-sm py-2 px-3 rounded-lg transition-colors"
+                        onClick={logout} 
+                        aria-label="Log out of client portal"
+                        className="flex items-center gap-2 bg-zinc-700 hover:bg-zinc-600 text-gray-300 hover:text-white font-semibold text-sm py-2 px-3 rounded-lg transition-transform duration-300 hover:scale-105 active:scale-95"
                     >
                         <ArrowRightOnRectangleIcon className="h-5 w-5" />
                         <span>Logout</span>
@@ -161,7 +170,6 @@ const ProjectTracker: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
                                     className="bg-gradient-to-r from-golden-yellow to-golden-orange h-2.5 rounded-full" 
                                     style={{ width: `${projectDetails.completionPercentage}%` }}
                                     aria-valuenow={projectDetails.completionPercentage}
-                                    // FIX: Changed `aria-valuemin` and `aria-valuemax` from string to number to fix type error.
                                     aria-valuemin={0}
                                     aria-valuemax={100}
                                     role="progressbar"
@@ -192,16 +200,22 @@ const ProjectTracker: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
 
                 {/* Updates */}
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-zinc-800 p-4 rounded-xl text-center">
+                    <button 
+                        onClick={() => alert('Navigating to Photo Updates...')}
+                        className="bg-zinc-800 p-4 rounded-xl text-center hover:bg-zinc-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-golden-yellow"
+                    >
                         <PhotoIcon className="h-8 w-8 mx-auto text-golden-yellow mb-2" />
                         <h4 className="font-semibold">Photo Updates</h4>
                         <p className="text-xs text-gray-400">View latest site photos</p>
-                    </div>
-                    <div className="bg-zinc-800 p-4 rounded-xl text-center">
+                    </button>
+                    <button 
+                        onClick={() => alert('Navigating to Payments...')}
+                        className="bg-zinc-800 p-4 rounded-xl text-center hover:bg-zinc-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-golden-yellow"
+                    >
                         <CurrencyDollarIcon className="h-8 w-8 mx-auto text-golden-yellow mb-2" />
                         <h4 className="font-semibold">Payments</h4>
                         <p className="text-xs text-gray-400">3/5 milestones paid</p>
-                    </div>
+                    </button>
                 </div>
 
                 {/* Chat */}
@@ -239,65 +253,6 @@ const ProjectTracker: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
                 </div>
             </div>
         </div>
-    );
-};
-
-const ClientPortalPage: React.FC = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const handleLogin = (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoggedIn(true);
-    };
-
-    const animationProps = {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: { duration: 0.5 }
-    };
-
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-        >
-            <AnimatePresence mode="wait">
-                {isLoggedIn ? (
-                    <motion.div key="tracker" {...animationProps}>
-                        <ProjectTracker onLogout={() => setIsLoggedIn(false)} />
-                    </motion.div>
-                ) : (
-                    <motion.div key="login" {...animationProps}>
-                        <div className="p-4 min-h-screen flex flex-col justify-center">
-                            <div className="text-center mb-10">
-                                <h2 className="text-3xl font-bold text-golden-yellow">Client Portal</h2>
-                                <p className="text-gray-300">Track your project's progress.</p>
-                            </div>
-
-                            <form onSubmit={handleLogin} className="space-y-4">
-                                <input
-                                    type="text"
-                                    placeholder="Client ID / Email"
-                                    defaultValue="client@example.com"
-                                    className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
-                                />
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    defaultValue="password"
-                                    className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
-                                />
-                                <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
-                                    Login
-                                </button>
-                            </form>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </motion.div>
     );
 };

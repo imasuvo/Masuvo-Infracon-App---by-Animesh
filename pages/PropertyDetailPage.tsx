@@ -1,22 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 // FIX: Using namespace import for react-router-dom to resolve module export errors.
 import * as ReactRouterDOM from 'react-router-dom';
 import { PROPERTIES, COMPANY_INFO } from '../constants';
-import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon, ShareIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon, ShareIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { useFavorites } from '../contexts/FavoritesContext';
 import ReadMore from '../components/ReadMore';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import NotFoundPage from './NotFoundPage';
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
+
+const variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? '100%' : '-100%',
+    opacity: 0,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? '100%' : '-100%',
+    opacity: 0,
+  }),
+};
 
 const PropertyDetailPage: React.FC = () => {
     const { id } = ReactRouterDOM.useParams<{ id: string }>();
     const property = PROPERTIES.find(p => p.id === id);
     const { isFavorite, toggleFavorite } = useFavorites();
+    const [[page, direction], setPage] = useState([0, 0]);
+
 
     if (!property) {
         return <NotFoundPage />;
+    }
+    
+    const imageIndex = property.images?.length > 0 ? ((page % property.images.length) + property.images.length) % property.images.length : 0;
+
+    const paginate = (newDirection: number) => {
+        setPage([page + newDirection, newDirection]);
+    };
+    
+    const handleDotClick = (i: number) => {
+        if (i !== imageIndex) {
+            const diff = i - imageIndex;
+            setPage([page + diff, diff > 0 ? 1 : -1]);
+        }
     }
 
     const isSaved = isFavorite(property.id);
@@ -64,7 +101,7 @@ const PropertyDetailPage: React.FC = () => {
             transition={{ duration: 0.3 }}
         >
             <div className="relative">
-                 <img src={property.images[0]} alt={property.title} className="w-full h-64 object-cover" />
+                 <img src={property.images?.[0] || 'https://picsum.photos/seed/placeholder-hero/800/600'} alt={property.title} className="w-full h-64 object-cover" />
                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
                  <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
                     <ArrowLeftIcon className="h-5 w-5"/>
@@ -85,8 +122,8 @@ const PropertyDetailPage: React.FC = () => {
                         {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
                     </button>
                 </div>
-                 <div className="absolute bottom-0 left-0 p-4">
-                     <h1 className="text-3xl font-bold text-white">{property.title}</h1>
+                 <div className="absolute bottom-0 left-0 p-4 w-full">
+                     <h1 className="text-3xl font-bold text-white break-words">{property.title}</h1>
                      <p className="text-lg text-golden-yellow font-semibold">{property.price}</p>
                  </div>
             </div>
@@ -109,11 +146,68 @@ const PropertyDetailPage: React.FC = () => {
                 
                 <div>
                     <h2 className="text-xl font-semibold text-golden-yellow mb-2">Photo Gallery</h2>
-                    <div className="grid grid-cols-2 gap-2">
-                        {property.images.map((img, index) => (
-                            <img key={index} src={img} alt={`${property.title} view ${index+1}`} className="rounded-lg object-cover w-full h-32"/>
-                        ))}
-                    </div>
+                    {property.images && property.images.length > 0 ? (
+                        <div className="relative w-full h-64 rounded-lg overflow-hidden bg-zinc-800 flex items-center justify-center">
+                            <AnimatePresence initial={false} custom={direction}>
+                                <motion.img
+                                    key={page}
+                                    src={property.images[imageIndex]}
+                                    alt={`${property.title} view ${imageIndex + 1}`}
+                                    custom={direction}
+                                    variants={variants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{
+                                        x: { type: 'spring', stiffness: 300, damping: 30 },
+                                        opacity: { duration: 0.2 },
+                                    }}
+                                    className="absolute w-full h-full object-cover"
+                                    drag="x"
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    dragElastic={1}
+                                    onDragEnd={(e, { offset, velocity }) => {
+                                        const swipe = swipePower(offset.x, velocity.x);
+                                        if (swipe < -swipeConfidenceThreshold) {
+                                            paginate(1);
+                                        } else if (swipe > swipeConfidenceThreshold) {
+                                            paginate(-1);
+                                        }
+                                    }}
+                                />
+                            </AnimatePresence>
+                            
+                            <button
+                                onClick={() => paginate(-1)}
+                                className="absolute top-1/2 left-2 -translate-y-1/2 bg-charcoal/60 p-2 rounded-full text-white hover:bg-charcoal/90 transition-colors z-10"
+                                aria-label="Previous image"
+                            >
+                                <ChevronLeftIcon className="h-6 w-6" />
+                            </button>
+                            <button
+                                onClick={() => paginate(1)}
+                                className="absolute top-1/2 right-2 -translate-y-1/2 bg-charcoal/60 p-2 rounded-full text-white hover:bg-charcoal/90 transition-colors z-10"
+                                aria-label="Next image"
+                            >
+                                <ChevronRightIcon className="h-6 w-6" />
+                            </button>
+
+                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                                {property.images.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => handleDotClick(i)}
+                                        className={`h-2.5 w-2.5 rounded-full transition-colors ${i === imageIndex ? 'bg-white' : 'bg-white/50 hover:bg-white/75'}`}
+                                        aria-label={`Go to image ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                         <div className="relative w-full h-64 rounded-lg overflow-hidden bg-zinc-800 flex items-center justify-center">
+                             <img src='https://picsum.photos/seed/placeholder/800/600' alt="Placeholder" className="w-full h-full object-cover" />
+                        </div>
+                    )}
                 </div>
 
                 <div>

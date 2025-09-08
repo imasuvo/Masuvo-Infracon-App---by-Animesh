@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import Spinner from './Spinner';
 
 interface DownloadFormModalProps {
   onClose: () => void;
@@ -9,20 +10,27 @@ interface DownloadFormModalProps {
 
 const DownloadFormModal: React.FC<DownloadFormModalProps> = ({ onClose, onSuccess }) => {
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
         // This is a static implementation. In a real app, you would send
         // form data to a backend or email service here.
         const formData = new FormData(e.target as HTMLFormElement);
         const data = Object.fromEntries(formData.entries());
         console.log("Form submitted with data:", data);
         
-        setSubmitted(true);
-
+        // Simulate API call
         setTimeout(() => {
-            onSuccess(); // Trigger download after a short delay
-        }, 1500); // Wait 1.5s to show the success message
+            setIsSubmitting(false);
+            setSubmitted(true);
+
+            // Wait 1.5s to show the success message then trigger download
+            setTimeout(() => {
+                onSuccess();
+            }, 1500); 
+        }, 1500);
     };
 
     return (
@@ -69,8 +77,15 @@ const DownloadFormModal: React.FC<DownloadFormModalProps> = ({ onClose, onSucces
                             <label htmlFor="phone" className="sr-only">Phone Number</label>
                             <input id="phone" type="tel" name="phone" placeholder="Phone Number" className="w-full bg-zinc-700 text-white rounded-lg p-3 border border-transparent focus:border-golden-yellow focus:ring-0 transition" required />
                         </div>
-                         <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
-                            Submit & Download
+                         <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
+                            {isSubmitting ? (
+                                <>
+                                    <Spinner size="sm" className="mr-2 text-charcoal" />
+                                    <span>Submitting...</span>
+                                </>
+                            ) : (
+                                <span>Submit & Download</span>
+                            )}
                         </button>
                     </form>
                 )}

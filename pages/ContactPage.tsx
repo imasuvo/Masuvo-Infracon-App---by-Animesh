@@ -3,6 +3,7 @@ import { COMPANY_INFO } from '../constants';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
 import ErrorDisplay from '../components/ErrorDisplay';
+import Spinner from '../components/Spinner';
 
 const ContactPage: React.FC = () => {
     const [submitted, setSubmitted] = useState(false);
@@ -102,9 +103,16 @@ const ContactPage: React.FC = () => {
                             <button 
                                 type="submit" 
                                 disabled={isSubmitting}
-                                className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                             >
-                                {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
+                                {isSubmitting ? (
+                                    <>
+                                        <Spinner size="sm" className="mr-2 text-charcoal" />
+                                        <span>Submitting...</span>
+                                    </>
+                                ) : (
+                                    <span>Submit Inquiry</span>
+                                )}
                             </button>
                         </form>
                     )}

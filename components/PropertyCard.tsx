@@ -51,9 +51,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     };
     
     return (
-        <ReactRouterDOM.Link to={`/properties/${property.id}`} className="block bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
-            <div className="relative">
-                <img src={property.images[0]} alt={property.title} className="w-full h-48 object-cover" />
+        <ReactRouterDOM.Link to={`/properties/${property.id}`} className="group block bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
+            <div className="relative overflow-hidden">
+                <img src={property.images?.[0] || 'https://picsum.photos/seed/placeholder/800/600'} alt={property.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" />
                  <div className="absolute top-3 right-3 flex items-center gap-2">
                     <button 
                         onClick={handleShareClick}
