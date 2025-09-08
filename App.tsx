@@ -19,6 +19,7 @@ import FAQPage from './pages/FAQPage';
 import SavedPropertiesPage from './pages/SavedPropertiesPage';
 import FloorPlansPage from './pages/FloorPlansPage';
 import { FavoritesProvider } from './contexts/FavoritesContext';
+import { AnimatePresence } from 'framer-motion';
 
 const AppContent: React.FC = () => {
     // FIX: Using useLocation from the named import.
@@ -29,23 +30,25 @@ const AppContent: React.FC = () => {
         <div className="min-h-screen flex flex-col font-sans">
             {!isClientPortal && <Header />}
             <main className="flex-grow pb-20">
-                {/* FIX: Using Routes and Route from the named imports. */}
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/properties" element={<PropertiesPage />} />
-                    <Route path="/properties/:id" element={<PropertyDetailPage />} />
-                    <Route path="/services" element={<ServicesPage />} />
-                    <Route path="/floor-plans" element={<FloorPlansPage />} />
-                    <Route path="/construction" element={<ConstructionPage />} />
-                    <Route path="/interiors" element={<InteriorDesignPage />} />
-                    <Route path="/budget-estimator" element={<BudgetPage />} />
-                    <Route path="/schedule-visit" element={<SchedulerPage />} />
-                    <Route path="/portal" element={<ClientPortalPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/faq" element={<FAQPage />} />
-                    <Route path="/saved" element={<SavedPropertiesPage />} />
-                </Routes>
+                <AnimatePresence mode="wait">
+                    {/* FIX: Using Routes and Route from the named imports. */}
+                    <Routes location={location} key={location.pathname}>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/properties" element={<PropertiesPage />} />
+                        <Route path="/properties/:id" element={<PropertyDetailPage />} />
+                        <Route path="/services" element={<ServicesPage />} />
+                        <Route path="/floor-plans" element={<FloorPlansPage />} />
+                        <Route path="/construction" element={<ConstructionPage />} />
+                        <Route path="/interiors" element={<InteriorDesignPage />} />
+                        <Route path="/budget-estimator" element={<BudgetPage />} />
+                        <Route path="/schedule-visit" element={<SchedulerPage />} />
+                        <Route path="/portal" element={<ClientPortalPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/faq" element={<FAQPage />} />
+                        <Route path="/saved" element={<SavedPropertiesPage />} />
+                    </Routes>
+                </AnimatePresence>
             </main>
             {!isClientPortal && <Footer />}
             {!isClientPortal && <BottomNav />}

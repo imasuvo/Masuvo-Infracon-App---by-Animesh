@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FAQS } from '../constants';
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/solid';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQItem: React.FC<{
     faq: { question: string; answer: string };
@@ -21,11 +22,26 @@ const FAQItem: React.FC<{
                     <PlusIcon className="h-5 w-5 text-gray-400 flex-shrink-0" />
                 )}
             </button>
-            {isOpen && (
-                <div className="pb-4 pr-6 text-gray-300">
-                    <p>{faq.answer}</p>
-                </div>
-            )}
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.section
+                        key="content"
+                        initial="collapsed"
+                        animate="open"
+                        exit="collapsed"
+                        variants={{
+                            open: { opacity: 1, height: 'auto' },
+                            collapsed: { opacity: 0, height: 0 },
+                        }}
+                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        className="overflow-hidden"
+                    >
+                        <div className="pb-4 pr-6 text-gray-300">
+                            <p>{faq.answer}</p>
+                        </div>
+                    </motion.section>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
@@ -39,21 +55,28 @@ const FAQPage: React.FC = () => {
     };
 
     return (
-        <div className="p-4 min-h-screen">
-            <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Frequently Asked Questions</h2>
-            <p className="text-gray-300 mb-8">Find answers to common questions about our services.</p>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <div className="p-4 min-h-screen">
+                <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Frequently Asked Questions</h2>
+                <p className="text-gray-300 mb-8">Find answers to common questions about our services.</p>
 
-            <div className="bg-zinc-800 p-4 rounded-xl">
-                {FAQS.map((faq, index) => (
-                    <FAQItem
-                        key={index}
-                        faq={faq}
-                        isOpen={openIndex === index}
-                        onClick={() => handleToggle(index)}
-                    />
-                ))}
+                <div className="bg-zinc-800 p-4 rounded-xl">
+                    {FAQS.map((faq, index) => (
+                        <FAQItem
+                            key={index}
+                            faq={faq}
+                            isOpen={openIndex === index}
+                            onClick={() => handleToggle(index)}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

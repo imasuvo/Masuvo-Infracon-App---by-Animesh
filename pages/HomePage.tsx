@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PROPERTIES, CONSTRUCTION_SERVICES, TESTIMONIALS, COMPANY_INFO } from '../constants';
 import PropertyCard from '../components/PropertyCard';
+import { motion } from 'framer-motion';
 
 const HeroSlider: React.FC = () => {
     const images = [
@@ -154,48 +155,55 @@ const TestimonialCarousel: React.FC = () => {
 
 const HomePage: React.FC = () => {
     return (
-        <div className="space-y-12 pb-12">
-            <HeroSlider />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <div className="space-y-12 pb-12">
+                <HeroSlider />
 
-            <div className="px-4 space-y-4 -mt-10 relative z-10">
-                <div className="flex gap-2">
-                    <CTAButton to="/schedule-visit">Schedule Site Visit</CTAButton>
-                    <CTAButton to="/budget-estimator">Estimate Budget</CTAButton>
+                <div className="px-4 space-y-4 -mt-10 relative z-10">
+                    <div className="flex gap-2">
+                        <CTAButton to="/schedule-visit">Schedule Site Visit</CTAButton>
+                        <CTAButton to="/budget-estimator">Estimate Budget</CTAButton>
+                    </div>
                 </div>
+
+                <section className="px-4">
+                    <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Featured Properties</h3>
+                    <div className="space-y-6">
+                        {PROPERTIES.slice(0, 2).map(prop => (
+                            <PropertyCard key={prop.id} property={prop} />
+                        ))}
+                    </div>
+                    {/* FIX: Using Link from the named import. */}
+                    <Link to="/properties" className="block text-center mt-6 text-golden-yellow hover:underline">View All Properties</Link>
+                </section>
+
+                <section className="px-4">
+                     <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Our Services</h3>
+                     <div className="grid grid-cols-2 gap-4">
+                         {/* FIX: Using Link from the named import. */}
+                         <Link to="/construction" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
+                            <h4 className="font-semibold text-lg">Construction</h4>
+                            <p className="text-sm text-gray-400">Quality you can trust.</p>
+                         </Link>
+                         {/* FIX: Using Link from the named import. */}
+                         <Link to="/interiors" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
+                            <h4 className="font-semibold text-lg">Trayaksh Interior</h4>
+                            <p className="text-sm text-gray-400">Designs that inspire.</p>
+                         </Link>
+                     </div>
+                </section>
+                
+                <section className="px-4">
+                    <h3 className="text-2xl font-bold mb-4 text-golden-yellow">What Our Clients Say</h3>
+                    <TestimonialCarousel />
+                </section>
             </div>
-
-            <section className="px-4">
-                <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Featured Properties</h3>
-                <div className="space-y-6">
-                    {PROPERTIES.slice(0, 2).map(prop => (
-                        <PropertyCard key={prop.id} property={prop} />
-                    ))}
-                </div>
-                {/* FIX: Using Link from the named import. */}
-                <Link to="/properties" className="block text-center mt-6 text-golden-yellow hover:underline">View All Properties</Link>
-            </section>
-
-            <section className="px-4">
-                 <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Our Services</h3>
-                 <div className="grid grid-cols-2 gap-4">
-                     {/* FIX: Using Link from the named import. */}
-                     <Link to="/construction" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
-                        <h4 className="font-semibold text-lg">Construction</h4>
-                        <p className="text-sm text-gray-400">Quality you can trust.</p>
-                     </Link>
-                     {/* FIX: Using Link from the named import. */}
-                     <Link to="/interiors" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
-                        <h4 className="font-semibold text-lg">Trayaksh Interior</h4>
-                        <p className="text-sm text-gray-400">Designs that inspire.</p>
-                     </Link>
-                 </div>
-            </section>
-            
-            <section className="px-4">
-                <h3 className="text-2xl font-bold mb-4 text-golden-yellow">What Our Clients Say</h3>
-                <TestimonialCarousel />
-            </section>
-        </div>
+        </motion.div>
     );
 };
 

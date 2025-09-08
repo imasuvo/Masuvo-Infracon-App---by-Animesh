@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRightOnRectangleIcon, ChatBubbleLeftRightIcon, PhotoIcon, CurrencyDollarIcon, BellIcon } from '@heroicons/react/24/solid';
 import { PROJECT_NOTIFICATIONS } from '../constants';
 import type { Notification, ChatMessage } from '../types';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const formatTimeAgo = (timestamp: string): string => {
     const date = new Date(timestamp);
@@ -249,35 +250,55 @@ const ClientPortalPage: React.FC = () => {
         setIsLoggedIn(true);
     };
 
-    if (isLoggedIn) {
-        return <ProjectTracker onLogout={() => setIsLoggedIn(false)} />;
-    }
+    const animationProps = {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 }
+    };
 
     return (
-        <div className="p-4 min-h-screen flex flex-col justify-center">
-            <div className="text-center mb-10">
-                <h2 className="text-3xl font-bold text-golden-yellow">Client Portal</h2>
-                <p className="text-gray-300">Track your project's progress.</p>
-            </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <AnimatePresence mode="wait">
+                {isLoggedIn ? (
+                    <motion.div key="tracker" {...animationProps}>
+                        <ProjectTracker onLogout={() => setIsLoggedIn(false)} />
+                    </motion.div>
+                ) : (
+                    <motion.div key="login" {...animationProps}>
+                        <div className="p-4 min-h-screen flex flex-col justify-center">
+                            <div className="text-center mb-10">
+                                <h2 className="text-3xl font-bold text-golden-yellow">Client Portal</h2>
+                                <p className="text-gray-300">Track your project's progress.</p>
+                            </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
-                <input
-                    type="text"
-                    placeholder="Client ID / Email"
-                    defaultValue="client@example.com"
-                    className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    defaultValue="password"
-                    className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
-                />
-                <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
-                    Login
-                </button>
-            </form>
-        </div>
+                            <form onSubmit={handleLogin} className="space-y-4">
+                                <input
+                                    type="text"
+                                    placeholder="Client ID / Email"
+                                    defaultValue="client@example.com"
+                                    className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    defaultValue="password"
+                                    className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
+                                />
+                                <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                                    Login
+                                </button>
+                            </form>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };
 

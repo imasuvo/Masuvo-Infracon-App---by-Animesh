@@ -2,6 +2,7 @@ import React from 'react';
 // FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
 import { Link } from 'react-router-dom';
 import { BuildingOffice2Icon, PaintBrushIcon } from '@heroicons/react/24/solid';
+import { motion } from 'framer-motion';
 
 const ServiceLinkCard: React.FC<{ to: string, title: string, description: string, icon: React.ElementType }> = ({ to, title, description, icon: Icon }) => {
     return (
@@ -16,25 +17,32 @@ const ServiceLinkCard: React.FC<{ to: string, title: string, description: string
 
 const ServicesPage: React.FC = () => {
     return (
-        <div className="p-4 min-h-screen">
-            <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Our Services</h2>
-            <p className="text-gray-300 mb-8">Comprehensive solutions for your dream home.</p>
-            
-            <div className="space-y-6">
-                <ServiceLinkCard 
-                    to="/construction"
-                    title="Construction Services"
-                    description="Building your vision with strength, precision, and unparalleled quality."
-                    icon={BuildingOffice2Icon}
-                />
-                <ServiceLinkCard 
-                    to="/interiors"
-                    title="Trayaksh Interior"
-                    description="Crafting bespoke interiors that reflect your unique style and personality."
-                    icon={PaintBrushIcon}
-                />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <div className="p-4 min-h-screen">
+                <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Our Services</h2>
+                <p className="text-gray-300 mb-8">Comprehensive solutions for your dream home.</p>
+                
+                <div className="space-y-6">
+                    <ServiceLinkCard 
+                        to="/construction"
+                        title="Construction Services"
+                        description="Building your vision with strength, precision, and unparalleled quality."
+                        icon={BuildingOffice2Icon}
+                    />
+                    <ServiceLinkCard 
+                        to="/interiors"
+                        title="Trayaksh Interior"
+                        description="Crafting bespoke interiors that reflect your unique style and personality."
+                        icon={PaintBrushIcon}
+                    />
+                </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

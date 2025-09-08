@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FLOOR_PLANS, COMPANY_INFO } from '../constants';
 import type { FloorPlan } from '../types';
 import { ArrowLeftIcon, DocumentArrowDownIcon, CalendarDaysIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
+// FIX: Imported Transition type from framer-motion to resolve type error.
+import { motion, AnimatePresence, Transition } from 'framer-motion';
 
 // --- HELPER FUNCTIONS & COMPONENTS ---
 
@@ -152,13 +154,59 @@ const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> =
 const FloorPlansPage: React.FC = () => {
     const [selectedPlan, setSelectedPlan] = useState<FloorPlan | null>(null);
 
-    // This allows for smooth transitions between views by rendering one or the other.
-    // CSS transitions could be added for more advanced effects if needed.
-    if (selectedPlan) {
-        return <FloorPlanDetailView plan={selectedPlan} onBack={() => setSelectedPlan(null)} />;
-    }
+    const viewVariants = {
+        initial: { opacity: 0, x: '100%' },
+        in: { opacity: 1, x: 0 },
+        out: { opacity: 0, x: '-100%' },
+    };
 
-    return <FloorPlanListView onSelectPlan={setSelectedPlan} />;
+    const listVariants = {
+        initial: { opacity: 0, x: '-100%' },
+        in: { opacity: 1, x: 0 },
+        out: { opacity: 0, x: '100%' },
+    };
+    
+    // FIX: Added Transition type to ensure properties are correctly typed for framer-motion.
+    const viewTransition: Transition = {
+        type: 'tween',
+        ease: 'anticipate',
+        duration: 0.5,
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <AnimatePresence mode="wait">
+                {selectedPlan ? (
+                    <motion.div
+                        key="detail"
+                        initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={viewVariants}
+                        transition={viewTransition}
+                    >
+                        <FloorPlanDetailView plan={selectedPlan} onBack={() => setSelectedPlan(null)} />
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key="list"
+                        initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={listVariants}
+                        transition={viewTransition}
+                    >
+                        <FloorPlanListView onSelectPlan={setSelectedPlan} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
 };
 
 export default FloorPlansPage;

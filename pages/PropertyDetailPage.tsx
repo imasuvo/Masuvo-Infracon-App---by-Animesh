@@ -7,6 +7,7 @@ import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { useFavorites } from '../contexts/FavoritesContext';
 import ReadMore from '../components/ReadMore';
+import { motion } from 'framer-motion';
 
 const PropertyDetailPage: React.FC = () => {
     // FIX: Using useParams from the named import.
@@ -56,7 +57,12 @@ const PropertyDetailPage: React.FC = () => {
 
 
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
             <div className="relative">
                  <img src={property.images[0]} alt={property.title} className="w-full h-64 object-cover" />
                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
@@ -141,7 +147,7 @@ const PropertyDetailPage: React.FC = () => {
                     </a>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

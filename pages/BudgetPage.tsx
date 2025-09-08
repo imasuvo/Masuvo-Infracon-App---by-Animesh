@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 // FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
 import { Link } from 'react-router-dom';
 import type { Resource, CalculatedResource, QualityOption } from '../types';
+import { motion } from 'framer-motion';
 
 const indianStatesAndCities: { [key: string]: string[] } = {
   "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
@@ -247,9 +248,16 @@ const BudgetPage: React.FC = () => {
     );
 
     return (
-        <div className="p-4 min-h-screen">
-            {step === 1 ? renderStep1() : renderStep2()}
-        </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <div className="p-4 min-h-screen">
+                {step === 1 ? renderStep1() : renderStep2()}
+            </div>
+        </motion.div>
     );
 };
 

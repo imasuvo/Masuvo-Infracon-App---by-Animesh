@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CONSTRUCTION_SERVICES } from '../constants';
 import type { Service } from '../types';
 import ReadMore from '../components/ReadMore';
+import { motion } from 'framer-motion';
 
 const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
     <div className="bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
@@ -15,23 +16,30 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
 
 const ConstructionPage: React.FC = () => {
     return (
-        <div className="p-4 min-h-screen">
-            <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Construction Services</h2>
-            <p className="text-gray-300 mb-8">Building your vision with strength and precision.</p>
-            
-            <div className="space-y-6">
-                {CONSTRUCTION_SERVICES.map((service, index) => (
-                    <ServiceCard key={index} service={service} />
-                ))}
-            </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+        >
+            <div className="p-4 min-h-screen">
+                <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Construction Services</h2>
+                <p className="text-gray-300 mb-8">Building your vision with strength and precision.</p>
+                
+                <div className="space-y-6">
+                    {CONSTRUCTION_SERVICES.map((service, index) => (
+                        <ServiceCard key={index} service={service} />
+                    ))}
+                </div>
 
-            <div className="mt-10 text-center">
-                 {/* FIX: Using Link from the named import. */}
-                 <Link to="/budget-estimator" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
-                    Get Free Estimate
-                </Link>
+                <div className="mt-10 text-center">
+                     {/* FIX: Using Link from the named import. */}
+                     <Link to="/budget-estimator" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                        Get Free Estimate
+                    </Link>
+                </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
