@@ -79,6 +79,7 @@ export interface FloorPlan {
   configuration: string; // e.g., "Super Built-up Area"
   thumbnailUrl: string;
   viewerUrl: string;
+  model3dUrl: string;
   price: string;
   description: string;
   pdfUrl: string;

@@ -1,15 +1,16 @@
 import React from 'react';
-// FIX: Changed react-router-dom import to a namespace import to resolve export errors.
-import * as ReactRouterDOM from 'react-router-dom';
+// FIX: Replaced namespace import of 'react-router-dom' with named imports to resolve export errors.
+import { useParams, Link } from 'react-router-dom';
 import { PROPERTIES, COMPANY_INFO } from '../constants';
 import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { useFavorites } from '../contexts/FavoritesContext';
+import ReadMore from '../components/ReadMore';
 
 const PropertyDetailPage: React.FC = () => {
-    // FIX: Using useParams from the namespace import.
-    const { id } = ReactRouterDOM.useParams<{ id: string }>();
+    // FIX: Using useParams from the named import.
+    const { id } = useParams<{ id: string }>();
     const property = PROPERTIES.find(p => p.id === id);
     const { isFavorite, toggleFavorite } = useFavorites();
 
@@ -35,10 +36,10 @@ const PropertyDetailPage: React.FC = () => {
             <div className="relative">
                  <img src={property.images[0]} alt={property.title} className="w-full h-64 object-cover" />
                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
-                 {/* FIX: Using Link from the namespace import. */}
-                 <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
+                 {/* FIX: Using Link from the named import. */}
+                 <Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
                     <ArrowLeftIcon className="h-5 w-5"/>
-                 </ReactRouterDOM.Link>
+                 </Link>
                  <button 
                     onClick={() => toggleFavorite(property.id)}
                     className="absolute top-4 right-4 bg-charcoal/70 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
@@ -65,7 +66,7 @@ const PropertyDetailPage: React.FC = () => {
 
                 <div>
                     <h2 className="text-xl font-semibold text-golden-yellow mb-2">Description</h2>
-                    <p className="text-gray-300">{property.description}</p>
+                    <ReadMore text={property.description} maxLength={150} />
                 </div>
                 
                 <div>

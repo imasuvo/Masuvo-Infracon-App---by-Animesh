@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-// FIX: Changed react-router-dom import to a namespace import to resolve export errors.
-import * as ReactRouterDOM from 'react-router-dom';
+// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
+import { Link } from 'react-router-dom';
 import { PROPERTIES, CONSTRUCTION_SERVICES, TESTIMONIALS, COMPANY_INFO } from '../constants';
 import PropertyCard from '../components/PropertyCard';
 
 const HeroSlider: React.FC = () => {
     const images = [
-        'https://picsum.photos/seed/hero1/800/600',
-        'https://picsum.photos/seed/hero2/800/600',
-        'https://picsum.photos/seed/hero3/800/600',
+        '/assets/hero/hero1.jpg',
+        '/assets/hero/hero2.jpg',
+        '/assets/hero/hero3.jpg',
     ];
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -38,11 +38,11 @@ const HeroSlider: React.FC = () => {
     );
 };
 
-// FIX: Using Link from the namespace import.
+// FIX: Using Link from the named import.
 const CTAButton: React.FC<{ to: string, children: React.ReactNode }> = ({ to, children }) => (
-    <ReactRouterDOM.Link to={to} className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold py-3 px-4 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+    <Link to={to} className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold py-3 px-4 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
         {children}
-    </ReactRouterDOM.Link>
+    </Link>
 );
 
 const TestimonialCarousel: React.FC = () => {
@@ -171,23 +171,23 @@ const HomePage: React.FC = () => {
                         <PropertyCard key={prop.id} property={prop} />
                     ))}
                 </div>
-                {/* FIX: Using Link from the namespace import. */}
-                <ReactRouterDOM.Link to="/properties" className="block text-center mt-6 text-golden-yellow hover:underline">View All Properties</ReactRouterDOM.Link>
+                {/* FIX: Using Link from the named import. */}
+                <Link to="/properties" className="block text-center mt-6 text-golden-yellow hover:underline">View All Properties</Link>
             </section>
 
             <section className="px-4">
                  <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Our Services</h3>
                  <div className="grid grid-cols-2 gap-4">
-                     {/* FIX: Using Link from the namespace import. */}
-                     <ReactRouterDOM.Link to="/construction" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
+                     {/* FIX: Using Link from the named import. */}
+                     <Link to="/construction" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
                         <h4 className="font-semibold text-lg">Construction</h4>
                         <p className="text-sm text-gray-400">Quality you can trust.</p>
-                     </ReactRouterDOM.Link>
-                     {/* FIX: Using Link from the namespace import. */}
-                     <ReactRouterDOM.Link to="/interiors" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
+                     </Link>
+                     {/* FIX: Using Link from the named import. */}
+                     <Link to="/interiors" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
                         <h4 className="font-semibold text-lg">Trayaksh Interior</h4>
                         <p className="text-sm text-gray-400">Designs that inspire.</p>
-                     </ReactRouterDOM.Link>
+                     </Link>
                  </div>
             </section>
             

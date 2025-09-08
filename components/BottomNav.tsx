@@ -1,6 +1,6 @@
 import React from 'react';
-// FIX: Changed react-router-dom import to a namespace import to resolve export errors.
-import * as ReactRouterDOM from 'react-router-dom';
+// FIX: Replaced namespace import of 'react-router-dom' with named imports to resolve export errors.
+import { NavLink, useLocation } from 'react-router-dom';
 import { HomeIcon, BuildingOffice2Icon, ClipboardDocumentListIcon, BanknotesIcon, PhoneIcon } from '@heroicons/react/24/solid';
 
 const navItems = [
@@ -12,8 +12,8 @@ const navItems = [
 ];
 
 const BottomNav: React.FC = () => {
-    // FIX: Using useLocation from the namespace import to get current path.
-    const location = ReactRouterDOM.useLocation();
+    // FIX: Using useLocation from the named import to get current path.
+    const location = useLocation();
     const activeClass = 'text-golden-yellow';
     const inactiveClass = 'text-gray-400';
 
@@ -30,8 +30,8 @@ const BottomNav: React.FC = () => {
         <nav className="fixed bottom-0 left-0 right-0 bg-charcoal/90 backdrop-blur-sm border-t border-golden-yellow/20 max-w-lg mx-auto z-50">
             <div className="flex justify-around h-16">
                 {navItems.map((item) => (
-                    // FIX: Using NavLink from the namespace import.
-                    <ReactRouterDOM.NavLink
+                    // FIX: Using NavLink from the named import.
+                    <NavLink
                         key={item.name}
                         to={item.path}
                         end={item.path === '/'}
@@ -42,7 +42,7 @@ const BottomNav: React.FC = () => {
                     >
                         <item.icon className="h-6 w-6 mb-1" />
                         <span>{item.name}</span>
-                    </ReactRouterDOM.NavLink>
+                    </NavLink>
                 ))}
             </div>
         </nav>

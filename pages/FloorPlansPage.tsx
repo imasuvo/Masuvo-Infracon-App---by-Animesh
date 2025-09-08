@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
+import { Link } from 'react-router-dom';
 import { FLOOR_PLANS, COMPANY_INFO } from '../constants';
 import type { FloorPlan } from '../types';
 import { ArrowLeftIcon, DocumentArrowDownIcon, CalendarDaysIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
@@ -26,7 +27,7 @@ const DetailCTAButton: React.FC<{ children: React.ReactNode; icon: React.Element
     );
 
     if (to) {
-        return <ReactRouterDOM.Link to={to}>{content}</ReactRouterDOM.Link>;
+        return <Link to={to}>{content}</Link>;
     }
     return <button onClick={onClick} className="w-full">{content}</button>;
 };
@@ -51,16 +52,17 @@ const FloorPlanDetailView: React.FC<{ plan: FloorPlan; onBack: () => void }> = (
                 </div>
 
                 <div>
-                    <h3 className="text-xl font-semibold text-golden-yellow mb-3">2D/3D Floor Plan Viewer</h3>
+                    <h3 className="text-xl font-semibold text-golden-yellow mb-3">Interactive 3D Model</h3>
                     <div className="h-96 rounded-lg overflow-hidden border-2 border-golden-yellow/20">
                         <iframe 
-                            src={plan.viewerUrl}
+                            src={plan.model3dUrl}
                             width="100%" 
                             height="100%" 
                             style={{border:0}} 
+                            allow="autoplay; fullscreen; xr-spatial-tracking"
                             allowFullScreen={true} 
                             loading="lazy"
-                            title={`${plan.type} Floor Plan Viewer`}
+                            title={`${plan.type} 3D Floor Plan Model`}
                         ></iframe>
                     </div>
                 </div>
@@ -124,9 +126,9 @@ const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> =
                                     View Details
                                 </button>
                                 <div className="flex gap-2">
-                                    <ReactRouterDOM.Link to="/schedule-visit" className="flex-1 text-center bg-zinc-700 hover:bg-zinc-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
+                                    <Link to="/schedule-visit" className="flex-1 text-center bg-zinc-700 hover:bg-zinc-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
                                         Book Site Visit
-                                    </ReactRouterDOM.Link>
+                                    </Link>
                                     <a 
                                         href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hi, I am interested in the ${plan.sizeSqFt} sq.ft ${plan.type} floor plan (ID: ${plan.id})`}
                                         target="_blank" 

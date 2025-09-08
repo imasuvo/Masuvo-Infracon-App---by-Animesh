@@ -1,14 +1,15 @@
 import React from 'react';
-// FIX: Changed react-router-dom import to a namespace import to resolve export errors.
-import * as ReactRouterDOM from 'react-router-dom';
+// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
+import { Link } from 'react-router-dom';
 import { CONSTRUCTION_SERVICES } from '../constants';
 import type { Service } from '../types';
+import ReadMore from '../components/ReadMore';
 
 const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
     <div className="bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
         <service.icon className="h-10 w-10 text-golden-yellow mb-4" />
         <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-        <p className="text-gray-400">{service.description}</p>
+        <ReadMore text={service.description} maxLength={80} />
     </div>
 );
 
@@ -25,10 +26,10 @@ const ConstructionPage: React.FC = () => {
             </div>
 
             <div className="mt-10 text-center">
-                 {/* FIX: Using Link from the namespace import. */}
-                 <ReactRouterDOM.Link to="/budget-estimator" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                 {/* FIX: Using Link from the named import. */}
+                 <Link to="/budget-estimator" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
                     Get Free Estimate
-                </ReactRouterDOM.Link>
+                </Link>
             </div>
         </div>
     );
