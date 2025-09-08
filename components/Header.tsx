@@ -11,7 +11,7 @@ const Header: React.FC = () => {
             <div className="max-w-lg mx-auto px-4 sm:px-6">
                 <div className="flex items-center justify-between h-16">
                     <ReactRouterDOM.Link to="/" className="flex items-center gap-3 group">
-                        <img src="https://picsum.photos/seed/logo/200/200" alt="Masuvo Infracon Pvt. Ltd. Logo" className="h-12 w-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <img src="https://infraconmasuvo.com/wp-content/uploads/2025/02/Masuvo-Infracon-Logo-Rounded.png" alt="Masuvo Infracon Pvt. Ltd. Logo" className="h-12 w-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300" />
                         <div>
                             <span className="font-bold text-white text-lg tracking-wide group-hover:text-golden-yellow transition-colors">Masuvo Infracon</span>
                             <p className="text-xs text-gray-400 -mt-1 group-hover:text-golden-yellow transition-colors">Made by Animesh</p>
