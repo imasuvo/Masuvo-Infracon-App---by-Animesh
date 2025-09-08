@@ -2,7 +2,7 @@ import React from 'react';
 // FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
 import { Link } from 'react-router-dom';
 import type { Property } from '../types';
-import { MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -21,19 +21,56 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         e.stopPropagation();
         toggleFavorite(property.id);
     };
+
+    const handleShareClick = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const propertyUrl = `${window.location.origin}${window.location.pathname}#/properties/${property.id}`;
+        const shareData = {
+            title: property.title,
+            text: `Check out this property: ${property.title}`,
+            url: propertyUrl,
+        };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.error('Error sharing:', err);
+            }
+        } else {
+            // Fallback for browsers that don't support the Web Share API
+            try {
+                await navigator.clipboard.writeText(propertyUrl);
+                alert('Property link copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy link:', err);
+                alert('Could not copy link. Please copy it manually.');
+            }
+        }
+    };
     
     return (
         // FIX: Using Link from the named import.
         <Link to={`/properties/${property.id}`} className="block bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
             <div className="relative">
                 <img src={property.images[0]} alt={property.title} className="w-full h-48 object-cover" />
-                <button 
-                    onClick={handleFavoriteClick}
-                    className="absolute top-3 right-3 bg-charcoal/60 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
-                    aria-label={isSaved ? 'Remove from favorites' : 'Add to favorites'}
-                >
-                    {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
-                </button>
+                 <div className="absolute top-3 right-3 flex items-center gap-2">
+                    <button 
+                        onClick={handleShareClick}
+                        className="bg-charcoal/60 p-2 rounded-full text-white hover:text-golden-yellow transition-colors duration-200 z-10"
+                        aria-label="Share property"
+                    >
+                        <ShareIcon className="h-6 w-6" />
+                    </button>
+                    <button 
+                        onClick={handleFavoriteClick}
+                        className="bg-charcoal/60 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
+                        aria-label={isSaved ? 'Remove from favorites' : 'Add to favorites'}
+                    >
+                        {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
+                    </button>
+                </div>
                 <div className="absolute top-2 left-2 bg-charcoal/70 text-white text-sm font-bold py-1 px-3 rounded-full">
                     {property.price}
                 </div>

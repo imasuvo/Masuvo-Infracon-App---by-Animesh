@@ -62,7 +62,7 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
              <div className="bg-zinc-800 p-6 rounded-xl">
                  <h3 className="text-xl font-semibold mb-2 text-golden-yellow">Founder's Message</h3>
                  <div className="flex items-start gap-4">
-                    <img src="/assets/founder.jpg" alt={COMPANY_INFO.founder} className="w-20 h-20 rounded-full object-cover border-2 border-golden-yellow" />
+                    <img src="assets/founder.jpg" alt={COMPANY_INFO.founder} className="w-20 h-20 rounded-full object-cover border-2 border-golden-yellow" />
                     <div>
                         <p className="text-gray-300 italic">"Our goal is simple: to build homes that we would be proud to live in ourselves. Quality is not an act, it is a habit."</p>
                         <p className="mt-2 font-bold text-right text-white">- {COMPANY_INFO.founder}</p>

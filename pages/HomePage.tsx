@@ -6,9 +6,9 @@ import PropertyCard from '../components/PropertyCard';
 
 const HeroSlider: React.FC = () => {
     const images = [
-        '/assets/hero/hero1.jpg',
-        '/assets/hero/hero2.jpg',
-        '/assets/hero/hero3.jpg',
+        'assets/hero/hero1.jpg',
+        'assets/hero/hero2.jpg',
+        'assets/hero/hero3.jpg',
     ];
     const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -2,7 +2,7 @@ import React from 'react';
 // FIX: Replaced namespace import of 'react-router-dom' with named imports to resolve export errors.
 import { useParams, Link } from 'react-router-dom';
 import { PROPERTIES, COMPANY_INFO } from '../constants';
-import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon, ShareIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { useFavorites } from '../contexts/FavoritesContext';
@@ -19,6 +19,30 @@ const PropertyDetailPage: React.FC = () => {
     }
 
     const isSaved = isFavorite(property.id);
+
+    const handleShare = async () => {
+        const shareData = {
+            title: property.title,
+            text: property.description,
+            url: window.location.href,
+        };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.error('Error sharing:', err);
+            }
+        } else {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                alert('Property link copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy link:', err);
+                alert('Could not copy link. Please copy it manually.');
+            }
+        }
+    };
 
     const DetailItem: React.FC<{ icon: React.ElementType, label: string, value: string, className?: string }> = ({ icon: Icon, label, value, className = '' }) => (
         <div className={`flex items-start ${className}`}>
@@ -40,13 +64,22 @@ const PropertyDetailPage: React.FC = () => {
                  <Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
                     <ArrowLeftIcon className="h-5 w-5"/>
                  </Link>
-                 <button 
-                    onClick={() => toggleFavorite(property.id)}
-                    className="absolute top-4 right-4 bg-charcoal/70 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
-                    aria-label={isSaved ? 'Remove from favorites' : 'Add to favorites'}
-                 >
-                    {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
-                 </button>
+                 <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <button
+                        onClick={handleShare}
+                        className="bg-charcoal/70 p-2 rounded-full text-white hover:text-golden-yellow transition-colors duration-200 z-10"
+                        aria-label="Share property"
+                    >
+                        <ShareIcon className="h-6 w-6" />
+                    </button>
+                    <button 
+                        onClick={() => toggleFavorite(property.id)}
+                        className="bg-charcoal/70 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
+                        aria-label={isSaved ? 'Remove from favorites' : 'Add to favorites'}
+                    >
+                        {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
+                    </button>
+                </div>
                  <div className="absolute bottom-0 left-0 p-4">
                      <h1 className="text-3xl font-bold text-white">{property.title}</h1>
                      <p className="text-lg text-golden-yellow font-semibold">{property.price}</p>
