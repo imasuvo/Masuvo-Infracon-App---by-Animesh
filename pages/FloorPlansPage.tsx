@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { FLOOR_PLANS, COMPANY_INFO } from '../constants';
 import type { FloorPlan } from '../types';
 import { ArrowLeftIcon, DocumentArrowDownIcon, CalendarDaysIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
@@ -29,7 +29,7 @@ const DetailCTAButton: React.FC<{ children: React.ReactNode; icon: React.Element
     );
 
     if (to) {
-        return <Link to={to}>{content}</Link>;
+        return <ReactRouterDOM.Link to={to}>{content}</ReactRouterDOM.Link>;
     }
     return <button onClick={onClick} className="w-full">{content}</button>;
 };
@@ -128,9 +128,9 @@ const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> =
                                     View Details
                                 </button>
                                 <div className="flex gap-2">
-                                    <Link to="/schedule-visit" className="flex-1 text-center bg-zinc-700 hover:bg-zinc-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
+                                    <ReactRouterDOM.Link to="/schedule-visit" className="flex-1 text-center bg-zinc-700 hover:bg-zinc-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors">
                                         Book Site Visit
-                                    </Link>
+                                    </ReactRouterDOM.Link>
                                     <a 
                                         href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hi, I am interested in the ${plan.sizeSqFt} sq.ft ${plan.type} floor plan (ID: ${plan.id})`}
                                         target="_blank" 

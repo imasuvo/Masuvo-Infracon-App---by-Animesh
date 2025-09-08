@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
 
@@ -17,12 +18,12 @@ const NotFoundPage: React.FC = () => {
             <p className="text-gray-300 mb-8 max-w-md">
                 Sorry, the page you are looking for does not exist. It might have been moved or deleted.
             </p>
-            <Link
+            <ReactRouterDOM.Link
                 to="/"
                 className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
             >
                 Go to Homepage
-            </Link>
+            </ReactRouterDOM.Link>
         </motion.div>
     );
 };

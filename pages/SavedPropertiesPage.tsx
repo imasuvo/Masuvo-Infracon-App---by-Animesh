@@ -1,6 +1,6 @@
 import React from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { PROPERTIES } from '../constants';
 import PropertyCard from '../components/PropertyCard';
@@ -32,12 +32,12 @@ const SavedPropertiesPage: React.FC = () => {
                         <HeartIcon className="h-16 w-16 text-zinc-600 mb-4" />
                         <h3 className="text-xl font-semibold text-white">No Saved Properties Yet</h3>
                         <p className="text-gray-400 mt-2">Tap the heart icon on any property to save it here.</p>
-                        <Link 
+                        <ReactRouterDOM.Link 
                             to="/properties" 
                             className="mt-6 bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
                         >
                             Browse Properties
-                        </Link>
+                        </ReactRouterDOM.Link>
                     </div>
                 )}
             </div>

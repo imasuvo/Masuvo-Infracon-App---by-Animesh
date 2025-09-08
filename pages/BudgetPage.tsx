@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import type { Resource, CalculatedResource, QualityOption } from '../types';
 import { motion } from 'framer-motion';
 import ErrorDisplay from '../components/ErrorDisplay';
@@ -252,9 +252,9 @@ const BudgetPage: React.FC = () => {
                 <button onClick={() => alert('PDF download functionality coming soon!')} className="flex-1 bg-zinc-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-zinc-600 transition-colors">
                     Download Estimate PDF
                 </button>
-                 <Link to="/contact" className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                 <ReactRouterDOM.Link to="/contact" className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
                     Request Custom Quote
-                </Link>
+                </ReactRouterDOM.Link>
             </div>
 
             <div className="mt-8 text-xs text-gray-500 bg-zinc-800 p-4 rounded-lg">

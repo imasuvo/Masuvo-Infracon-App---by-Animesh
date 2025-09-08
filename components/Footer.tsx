@@ -1,6 +1,6 @@
 import React from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { COMPANY_INFO, SOCIAL_LINKS } from '../constants';
 
 const SocialIcon: React.FC<{ href: string, children: React.ReactNode }> = ({ href, children }) => (
@@ -32,10 +32,9 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className="mt-6 text-center text-sm text-gray-400 flex justify-center gap-x-4 gap-y-2 flex-wrap">
-                    {/* FIX: Using Link from the named import. */}
-                    <Link to="/about" className="hover:text-golden-yellow transition-colors">About Us</Link>
-                    <Link to="/contact" className="hover:text-golden-yellow transition-colors">Contact</Link>
-                    <Link to="/faq" className="hover:text-golden-yellow transition-colors">FAQ</Link>
+                    <ReactRouterDOM.Link to="/about" className="hover:text-golden-yellow transition-colors">About Us</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/contact" className="hover:text-golden-yellow transition-colors">Contact</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/faq" className="hover:text-golden-yellow transition-colors">FAQ</ReactRouterDOM.Link>
                 </div>
 
                 <div className="mt-4 text-center text-xs text-gray-500 space-y-1">

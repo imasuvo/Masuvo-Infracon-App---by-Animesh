@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { INTERIOR_DESIGN_GALLERY } from '../constants';
 import { InteriorCategory } from '../types';
 import { motion } from 'framer-motion';
@@ -46,10 +46,9 @@ const InteriorDesignPage: React.FC = () => {
                 </div>
 
                  <div className="mt-10 text-center">
-                     {/* FIX: Using Link from the named import. */}
-                     <Link to="/schedule-visit" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                     <ReactRouterDOM.Link to="/schedule-visit" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
                         Book Interior Consultation
-                    </Link>
+                    </ReactRouterDOM.Link>
                 </div>
             </div>
         </motion.div>

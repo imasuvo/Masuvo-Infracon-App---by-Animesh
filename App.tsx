@@ -1,6 +1,6 @@
 import React from 'react';
-// FIX: Changed react-router-dom import to named imports to resolve export errors.
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BottomNav from './components/BottomNav';
@@ -23,8 +23,7 @@ import { AnimatePresence } from 'framer-motion';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppContent: React.FC = () => {
-    // FIX: Using useLocation from the named import.
-    const location = useLocation();
+    const location = ReactRouterDOM.useLocation();
     const isClientPortal = location.pathname.startsWith('/portal');
 
     return (
@@ -32,24 +31,23 @@ const AppContent: React.FC = () => {
             {!isClientPortal && <Header />}
             <main className="flex-grow pb-20">
                 <AnimatePresence mode="wait">
-                    {/* FIX: Using Routes and Route from the named imports. */}
-                    <Routes location={location} key={location.pathname}>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/properties" element={<PropertiesPage />} />
-                        <Route path="/properties/:id" element={<PropertyDetailPage />} />
-                        <Route path="/services" element={<ServicesPage />} />
-                        <Route path="/floor-plans" element={<FloorPlansPage />} />
-                        <Route path="/construction" element={<ConstructionPage />} />
-                        <Route path="/interiors" element={<InteriorDesignPage />} />
-                        <Route path="/budget-estimator" element={<BudgetPage />} />
-                        <Route path="/schedule-visit" element={<SchedulerPage />} />
-                        <Route path="/portal" element={<ClientPortalPage />} />
-                        <Route path="/about" element={<AboutPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
-                        <Route path="/faq" element={<FAQPage />} />
-                        <Route path="/saved" element={<SavedPropertiesPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
+                    <ReactRouterDOM.Routes location={location} key={location.pathname}>
+                        <ReactRouterDOM.Route path="/" element={<HomePage />} />
+                        <ReactRouterDOM.Route path="/properties" element={<PropertiesPage />} />
+                        <ReactRouterDOM.Route path="/properties/:id" element={<PropertyDetailPage />} />
+                        <ReactRouterDOM.Route path="/services" element={<ServicesPage />} />
+                        <ReactRouterDOM.Route path="/floor-plans" element={<FloorPlansPage />} />
+                        <ReactRouterDOM.Route path="/construction" element={<ConstructionPage />} />
+                        <ReactRouterDOM.Route path="/interiors" element={<InteriorDesignPage />} />
+                        <ReactRouterDOM.Route path="/budget-estimator" element={<BudgetPage />} />
+                        <ReactRouterDOM.Route path="/schedule-visit" element={<SchedulerPage />} />
+                        <ReactRouterDOM.Route path="/portal" element={<ClientPortalPage />} />
+                        <ReactRouterDOM.Route path="/about" element={<AboutPage />} />
+                        <ReactRouterDOM.Route path="/contact" element={<ContactPage />} />
+                        <ReactRouterDOM.Route path="/faq" element={<FAQPage />} />
+                        <ReactRouterDOM.Route path="/saved" element={<SavedPropertiesPage />} />
+                        <ReactRouterDOM.Route path="*" element={<NotFoundPage />} />
+                    </ReactRouterDOM.Routes>
                 </AnimatePresence>
             </main>
             {!isClientPortal && <Footer />}
@@ -60,14 +58,13 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    // FIX: Using HashRouter from the named import.
-    <HashRouter>
+    <ReactRouterDOM.HashRouter>
         <FavoritesProvider>
             <div className="bg-charcoal max-w-lg mx-auto shadow-2xl shadow-golden-yellow/10">
                 <AppContent />
             </div>
         </FavoritesProvider>
-    </HashRouter>
+    </ReactRouterDOM.HashRouter>
   );
 }
 

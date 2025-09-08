@@ -1,6 +1,6 @@
 import React from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with named imports to resolve export errors.
-import { useParams, Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { PROPERTIES, COMPANY_INFO } from '../constants';
 import { ArrowLeftIcon, MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon, ShareIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -11,8 +11,7 @@ import { motion } from 'framer-motion';
 import NotFoundPage from './NotFoundPage';
 
 const PropertyDetailPage: React.FC = () => {
-    // FIX: Using useParams from the named import.
-    const { id } = useParams<{ id: string }>();
+    const { id } = ReactRouterDOM.useParams<{ id: string }>();
     const property = PROPERTIES.find(p => p.id === id);
     const { isFavorite, toggleFavorite } = useFavorites();
 
@@ -67,10 +66,9 @@ const PropertyDetailPage: React.FC = () => {
             <div className="relative">
                  <img src={property.images[0]} alt={property.title} className="w-full h-64 object-cover" />
                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
-                 {/* FIX: Using Link from the named import. */}
-                 <Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
+                 <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
                     <ArrowLeftIcon className="h-5 w-5"/>
-                 </Link>
+                 </ReactRouterDOM.Link>
                  <div className="absolute top-4 right-4 flex items-center gap-2">
                     <button
                         onClick={handleShare}

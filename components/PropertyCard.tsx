@@ -1,6 +1,6 @@
 import React from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import type { Property } from '../types';
 import { MapPinIcon, BuildingOfficeIcon, ArrowsPointingOutIcon, GlobeAltIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -51,8 +51,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     };
     
     return (
-        // FIX: Using Link from the named import.
-        <Link to={`/properties/${property.id}`} className="block bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
+        <ReactRouterDOM.Link to={`/properties/${property.id}`} className="block bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
             <div className="relative">
                 <img src={property.images[0]} alt={property.title} className="w-full h-48 object-cover" />
                  <div className="absolute top-3 right-3 flex items-center gap-2">
@@ -98,7 +97,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                     )}
                 </div>
             </div>
-        </Link>
+        </ReactRouterDOM.Link>
     );
 };
 

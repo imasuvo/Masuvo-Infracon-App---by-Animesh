@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// FIX: Replaced namespace import of 'react-router-dom' with a named import for Link to resolve export errors.
-import { Link } from 'react-router-dom';
+// FIX: Using namespace import for react-router-dom to resolve module export errors.
+import * as ReactRouterDOM from 'react-router-dom';
 import { COMPANY_INFO } from '../constants';
 import { CheckCircleIcon, DocumentTextIcon } from '@heroicons/react/24/solid';
 import ReadMore from '../components/ReadMore';
@@ -8,9 +8,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import BrochureViewerModal from '../components/BrochureViewerModal';
 
 const CTAButton: React.FC<{ to: string, children: React.ReactNode }> = ({ to, children }) => (
-    <Link to={to} className="inline-block mt-4 bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+    <ReactRouterDOM.Link to={to} className="inline-block mt-4 bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
         {children}
-    </Link>
+    </ReactRouterDOM.Link>
 );
 
 
@@ -88,7 +88,7 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
                  <div className="bg-zinc-800 p-6 rounded-xl">
                      <h3 className="text-xl font-semibold mb-2 text-golden-yellow">Founder's Message</h3>
                      <div className="flex items-start gap-4">
-                        <img src="assets/founder.jpg" alt={COMPANY_INFO.founder} className="w-20 h-20 rounded-full object-cover border-2 border-golden-yellow" />
+                        <img src="https://picsum.photos/seed/founder/200/200" alt={COMPANY_INFO.founder} className="w-20 h-20 rounded-full object-cover border-2 border-golden-yellow" />
                         <div>
                             <p className="text-gray-300 italic">"Our goal is simple: to build homes that we would be proud to live in ourselves. Quality is not an act, it is a habit."</p>
                             <p className="mt-2 font-bold text-right text-white">- {COMPANY_INFO.founder}</p>
