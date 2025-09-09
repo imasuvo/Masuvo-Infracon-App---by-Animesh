@@ -52,22 +52,22 @@ const SchedulerPage: React.FC = () => {
                 <h2 className="text-2xl font-bold mb-2 text-golden-yellow">
                     {formType === 'visit' ? 'Inquiry Submitted!' : 'Appointment Booked!'}
                 </h2>
-                <p className="text-gray-300">Thank you! Our team will contact you shortly to confirm the details.</p>
+                <p className="text-gray-600 dark:text-gray-300">Thank you! Our team will contact you shortly to confirm the details.</p>
             </div>
         )
     }
 
     const FormInput: React.FC<{ label: string; name: string; type: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; placeholder: string; required?: boolean }> = ({ label, ...props }) => (
         <div>
-            <label htmlFor={props.name} className="block text-sm font-medium text-gray-300 mb-1">{label}</label>
-            <input {...props} id={props.name} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" />
+            <label htmlFor={props.name} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+            <input {...props} id={props.name} className="w-full bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" />
         </div>
     );
 
     const FormSelect: React.FC<{ label: string; name: string; value: string; onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void; children: React.ReactNode; required?: boolean }> = ({ label, ...props }) => (
          <div>
-            <label htmlFor={props.name} className="block text-sm font-medium text-gray-300 mb-1">{label}</label>
-            <select {...props} id={props.name} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3 appearance-none">
+            <label htmlFor={props.name} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+            <select {...props} id={props.name} className="w-full bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3 appearance-none">
                 {props.children}
             </select>
         </div>
@@ -75,8 +75,8 @@ const SchedulerPage: React.FC = () => {
 
      const FormTextarea: React.FC<{ label: string; name: string; value: string; onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; placeholder: string; rows?: number }> = ({ label, ...props }) => (
         <div>
-            <label htmlFor={props.name} className="block text-sm font-medium text-gray-300 mb-1">{label}</label>
-            <textarea {...props} id={props.name} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"></textarea>
+            <label htmlFor={props.name} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+            <textarea {...props} id={props.name} className="w-full bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3"></textarea>
         </div>
     );
 
@@ -90,11 +90,11 @@ const SchedulerPage: React.FC = () => {
         >
             <div className="p-4 min-h-screen">
                 <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Book an Appointment</h2>
-                <p className="text-gray-300 mb-8">Choose a convenient time to meet us.</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">Choose a convenient time to meet us.</p>
                 
                 <div className="flex gap-4 mb-6">
-                    <button type="button" onClick={() => setFormType('visit')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'visit' ? 'bg-golden-yellow text-charcoal font-semibold' : 'bg-zinc-700'}`}>Schedule Site Visit</button>
-                    <button type="button" onClick={() => setFormType('office')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'office' ? 'bg-golden-yellow text-charcoal font-semibold' : 'bg-zinc-700'}`}>Book Office Appointment</button>
+                    <button type="button" onClick={() => setFormType('visit')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'visit' ? 'bg-golden-yellow text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700'}`}>Schedule Site Visit</button>
+                    <button type="button" onClick={() => setFormType('office')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'office' ? 'bg-golden-yellow text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700'}`}>Book Office Appointment</button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">

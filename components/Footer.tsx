@@ -4,21 +4,21 @@ import * as ReactRouterDOM from 'react-router-dom';
 import { COMPANY_INFO, SOCIAL_LINKS } from '../constants';
 
 const SocialIcon: React.FC<{ href: string, children: React.ReactNode }> = ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-golden-yellow transition-colors duration-300">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-golden-yellow transition-colors duration-300">
         {children}
     </a>
 );
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-zinc-900 border-t border-golden-yellow/20">
+        <footer className="bg-gray-100 dark:bg-zinc-900 border-t border-gray-200 dark:border-golden-yellow/20">
             <div className="max-w-lg mx-auto py-6 px-4 sm:px-6">
                 <div className="flex justify-center space-x-6">
                     <SocialIcon href={SOCIAL_LINKS.facebook}>
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
                     </SocialIcon>
                     <SocialIcon href={SOCIAL_LINKS.instagram}>
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.398 1.363.444 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.046 1.064-.197 1.791-.444 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.398-2.427.444-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.046-1.791-.197-2.427-.444a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.398-1.363-.444-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.046-1.064.197-1.791.444-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.398 2.427-.444C9.531 2.013 9.885 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm6.406-11.845a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z" clipRule="evenodd" /></svg>
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.398 1.363.444 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.046 1.064-.197 1.791-.444 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.398-2.427.444-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.046-1.791-.197-2.427-.444a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.398-1.363-.444-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.046-1.064.197-1.791.444-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363.398 2.427-.444C9.531 2.013 9.885 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm6.406-11.845a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z" clipRule="evenodd" /></svg>
                     </SocialIcon>
                     <SocialIcon href={SOCIAL_LINKS.x}>
                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -31,14 +31,14 @@ const Footer: React.FC = () => {
                     </SocialIcon>
                 </div>
 
-                <div className="mt-6 text-center text-sm text-gray-400 flex justify-center gap-x-4 gap-y-2 flex-wrap">
+                <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400 flex justify-center gap-x-4 gap-y-2 flex-wrap">
                     <ReactRouterDOM.Link to="/about" className="hover:text-golden-yellow transition-colors">About Us</ReactRouterDOM.Link>
                     <ReactRouterDOM.Link to="/contact" className="hover:text-golden-yellow transition-colors">Contact</ReactRouterDOM.Link>
                     <ReactRouterDOM.Link to="/faq" className="hover:text-golden-yellow transition-colors">FAQ</ReactRouterDOM.Link>
                     <ReactRouterDOM.Link to="/portal/login" className="hover:text-golden-yellow transition-colors">Client Login</ReactRouterDOM.Link>
                 </div>
 
-                <div className="mt-4 text-center text-xs text-gray-500 space-y-1">
+                <div className="mt-4 text-center text-xs text-gray-500 dark:text-gray-500 space-y-1">
                     <p><a href={COMPANY_INFO.website} target="_blank" rel="noopener noreferrer" className="hover:text-golden-yellow transition-colors">{COMPANY_INFO.website.replace('https://', '')}</a></p>
                     <p>&copy; {new Date().getFullYear()} Masuvo Infracon Pvt. Ltd. All Rights Reserved.</p>
                 </div>

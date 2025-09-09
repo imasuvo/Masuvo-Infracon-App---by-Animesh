@@ -10,6 +10,8 @@ import ScrollToTop from './components/ScrollToTop';
 import { FavoritesProvider } from './contexts/FavoritesContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProjectProvider } from './contexts/ProjectContext';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -37,13 +39,15 @@ import AdminDocumentsPage from './pages/AdminDocumentsPage';
 const App: React.FC = () => {
     return (
         <ReactRouterDOM.HashRouter>
-            <FavoritesProvider>
-                 <AuthProvider>
-                    <ProjectProvider>
-                        <AppContent />
-                    </ProjectProvider>
-                </AuthProvider>
-            </FavoritesProvider>
+            <ThemeProvider>
+                <FavoritesProvider>
+                     <AuthProvider>
+                        <ProjectProvider>
+                            <AppContent />
+                        </ProjectProvider>
+                    </AuthProvider>
+                </FavoritesProvider>
+            </ThemeProvider>
         </ReactRouterDOM.HashRouter>
     );
 };
@@ -56,7 +60,7 @@ const AppContent: React.FC = () => {
     const showLayout = !isClientPortalDashboard && !isAdminPage;
 
     return (
-         <div className={`${showLayout ? 'max-w-lg mx-auto' : ''} bg-charcoal text-gray-100 font-sans flex flex-col min-h-screen`}>
+         <div className={`${showLayout ? 'max-w-lg mx-auto' : ''} bg-white dark:bg-charcoal text-zinc-900 dark:text-gray-100 font-sans flex flex-col min-h-screen`}>
             <ScrollToTop />
             {showLayout && <Header />}
 

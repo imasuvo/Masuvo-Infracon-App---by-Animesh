@@ -114,7 +114,7 @@ const TestimonialCarousel: React.FC = () => {
                  timeoutRef.current = window.setTimeout(() => paginate(1), 7000);
             }}
         >
-            <div className="overflow-hidden rounded-xl bg-zinc-800 p-6 relative h-[300px] sm:h-[280px] flex flex-col justify-center">
+            <div className="overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 p-6 relative h-[300px] sm:h-[280px] flex flex-col justify-center">
                 {/* Decorative Quote Icon */}
                 <span className="absolute top-4 left-4 text-7xl font-serif text-golden-yellow/20 opacity-50 select-none z-0" aria-hidden="true">“</span>
                 
@@ -144,14 +144,14 @@ const TestimonialCarousel: React.FC = () => {
                         }}
                         className="absolute inset-0 p-6 flex flex-col justify-center"
                     >
-                         <p className="text-gray-300 italic text-md sm:text-lg leading-relaxed pt-2 relative z-10">
+                         <p className="text-gray-600 dark:text-gray-300 italic text-md sm:text-lg leading-relaxed pt-2 relative z-10">
                             {TESTIMONIALS[imageIndex].quote}
                         </p>
-                        <div className="relative mt-6 flex items-center gap-4 z-10">
+                        <div className="relative mt-auto flex items-center gap-4 z-10 pt-4">
                             <img src={TESTIMONIALS[imageIndex].avatar} alt={TESTIMONIALS[imageIndex].author} className="w-12 h-12 rounded-full object-cover border-2 border-golden-yellow" />
                             <div>
                                 <p className="font-bold text-golden-yellow">{TESTIMONIALS[imageIndex].author}</p>
-                                <p className="text-xs text-gray-400">{TESTIMONIALS[imageIndex].project}</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">{TESTIMONIALS[imageIndex].project}</p>
                             </div>
                         </div>
                     </motion.div>
@@ -160,14 +160,14 @@ const TestimonialCarousel: React.FC = () => {
             
             <button
                 onClick={() => paginate(-1)}
-                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 bg-charcoal/60 p-2 rounded-full text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
+                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
                 aria-label="Previous testimonial"
             >
                 <ChevronLeftIcon className="h-6 w-6" />
             </button>
             <button
                 onClick={() => paginate(1)}
-                className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-3 bg-charcoal/60 p-2 rounded-full text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
+                className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-3 bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
                 aria-label="Next testimonial"
             >
                 <ChevronRightIcon className="h-6 w-6" />
@@ -178,7 +178,7 @@ const TestimonialCarousel: React.FC = () => {
                     <button
                         key={index}
                         onClick={() => goToSlide(index)}
-                        className={`h-2.5 rounded-full transition-all duration-300 ${imageIndex === index ? 'bg-golden-yellow w-6' : 'bg-zinc-600 hover:bg-zinc-500 w-2.5'}`}
+                        className={`h-2.5 rounded-full transition-all duration-300 ${imageIndex === index ? 'bg-golden-yellow w-6' : 'bg-gray-300 dark:bg-zinc-600 hover:bg-gray-400 dark:hover:bg-zinc-500 w-2.5'}`}
                         aria-label={`Go to testimonial ${index + 1}`}
                     ></button>
                 ))}
@@ -222,24 +222,24 @@ const HomePage: React.FC = () => {
                 <section className="px-4">
                      <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Our Services</h3>
                      <div className="grid grid-cols-2 gap-4">
-                         <ReactRouterDOM.Link to="/construction" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
+                         <ReactRouterDOM.Link to="/construction" className="block p-4 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors duration-300">
                             <h4 className="font-semibold text-lg">Construction</h4>
-                            <p className="text-sm text-gray-400">Quality you can trust.</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Quality you can trust.</p>
                          </ReactRouterDOM.Link>
-                         <ReactRouterDOM.Link to="/interiors" className="block p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors duration-300">
+                         <ReactRouterDOM.Link to="/interiors" className="block p-4 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors duration-300">
                             <h4 className="font-semibold text-lg">Trayaksh Interior</h4>
-                            <p className="text-sm text-gray-400">Designs that inspire.</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Designs that inspire.</p>
                          </ReactRouterDOM.Link>
                      </div>
                 </section>
 
                 <section className="px-4">
                     <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Company Brochure</h3>
-                    <div className="bg-zinc-800 p-6 rounded-xl">
-                        <div className="bg-zinc-900/50 p-8 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-zinc-700">
+                    <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
+                        <div className="bg-white/50 dark:bg-zinc-900/50 p-8 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-300 dark:border-zinc-700">
                             <DocumentTextIcon className="h-16 w-16 text-golden-yellow/50 mb-4" />
-                            <h4 className="text-lg font-bold text-white">Explore Our Company Profile</h4>
-                            <p className="text-sm text-gray-400 mt-1 mb-4">Get an in-depth look at our projects, mission, and vision.</p>
+                            <h4 className="text-lg font-bold text-zinc-900 dark:text-white">Explore Our Company Profile</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-4">Get an in-depth look at our projects, mission, and vision.</p>
                             <button 
                                 onClick={() => setBrochureModalOpen(true)}
                                 className="bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"

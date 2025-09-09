@@ -41,7 +41,7 @@ const ClientPortalLoginPage: React.FC = () => {
             <div className="p-4 flex-grow flex flex-col justify-center">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-bold text-golden-yellow">Client Portal Login</h2>
-                    <p className="text-gray-300">Access your project dashboard.</p>
+                    <p className="text-gray-600 dark:text-gray-300">Access your project dashboard.</p>
                 </div>
 
                 {error && <div className="mb-4"><ErrorDisplay title="Login Failed" message={error} /></div>}
@@ -55,7 +55,7 @@ const ClientPortalLoginPage: React.FC = () => {
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
+                            className="w-full bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3"
                             required
                         />
                     </div>
@@ -67,7 +67,7 @@ const ClientPortalLoginPage: React.FC = () => {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3"
+                            className="w-full bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3"
                             required
                         />
                     </div>
@@ -87,14 +87,14 @@ const ClientPortalLoginPage: React.FC = () => {
                     </button>
                 </form>
                  <div className="text-center mt-6">
-                    <ReactRouterDOM.Link to="/" className="text-sm text-gray-400 hover:text-golden-yellow hover:underline transition-colors">
+                    <ReactRouterDOM.Link to="/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-golden-yellow hover:underline transition-colors">
                         ← Back to Home
                     </ReactRouterDOM.Link>
                 </div>
-                <div className="text-center mt-8 pt-4 border-t border-zinc-700/50">
-                    <p className="text-xs text-zinc-500">
+                <div className="text-center mt-8 pt-4 border-t border-gray-200 dark:border-zinc-700/50">
+                    <p className="text-xs text-gray-400 dark:text-zinc-500">
                         Are you an administrator?{' '}
-                        <ReactRouterDOM.Link to="/admin" className="font-semibold text-zinc-400 hover:text-golden-yellow hover:underline transition-colors">
+                        <ReactRouterDOM.Link to="/admin" className="font-semibold text-gray-500 dark:text-zinc-400 hover:text-golden-yellow hover:underline transition-colors">
                             Sign in here.
                         </ReactRouterDOM.Link>
                     </p>

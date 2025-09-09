@@ -14,7 +14,7 @@ const navItems = [
 const BottomNav: React.FC = () => {
     const location = ReactRouterDOM.useLocation();
     const activeClass = 'text-golden-yellow';
-    const inactiveClass = 'text-gray-400';
+    const inactiveClass = 'text-gray-500 dark:text-gray-400';
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
         // If the user clicks on the link for the page they are already on,
@@ -26,7 +26,7 @@ const BottomNav: React.FC = () => {
     };
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-charcoal/90 backdrop-blur-sm border-t border-golden-yellow/20 max-w-lg mx-auto z-50">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-charcoal/90 backdrop-blur-sm border-t border-gray-200 dark:border-golden-yellow/20 max-w-lg mx-auto z-50">
             <div className="flex justify-around h-16">
                 {navItems.map((item) => (
                     <ReactRouterDOM.NavLink

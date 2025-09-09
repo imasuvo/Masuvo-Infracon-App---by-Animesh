@@ -9,7 +9,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (text.length <= maxLength) {
-    return <p className="text-gray-300 whitespace-pre-wrap">{text}</p>;
+    return <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">{text}</p>;
   }
 
   const toggleReadMore = () => {
@@ -18,7 +18,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength }) => {
 
   return (
     <div>
-      <p className="text-gray-300 whitespace-pre-wrap">
+      <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
         {isExpanded ? text : `${text.substring(0, maxLength)}...`}
       </p>
       <button 

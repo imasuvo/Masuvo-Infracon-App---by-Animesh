@@ -48,14 +48,14 @@ const ContactPage: React.FC = () => {
         >
             <div className="p-4 min-h-screen">
                  <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Get in Touch with Masuvo Infracon</h2>
-                 <p className="text-gray-300 mb-8">We're here to help you build your dream home.</p>
+                 <p className="text-gray-600 dark:text-gray-300 mb-8">We're here to help you build your dream home.</p>
 
-                <div className="bg-zinc-800 p-6 rounded-xl mb-8">
+                <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl mb-8">
                     {submitted ? (
                         <div className="text-center py-8">
                             <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4 animate-pulse" />
-                            <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                            <p className="text-gray-300">Thank you for reaching out. We'll get back to you shortly.</p>
+                            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">Message Sent!</h3>
+                            <p className="text-gray-600 dark:text-gray-300">Thank you for reaching out. We'll get back to you shortly.</p>
                         </div>
                     ) : (
                         <form 
@@ -64,7 +64,7 @@ const ContactPage: React.FC = () => {
                             onSubmit={handleSubmit}
                             className="space-y-4"
                         >
-                            <h3 className="text-xl font-semibold text-white">Send us a message</h3>
+                            <h3 className="text-xl font-semibold text-zinc-900 dark:text-white">Send us a message</h3>
                             
                             <input type="hidden" name="_cc" value="animeshmaji777@gmail.com" />
                             <input type="hidden" name="_captcha" value="false" />
@@ -73,28 +73,28 @@ const ContactPage: React.FC = () => {
                                 type="text" 
                                 name="name" 
                                 placeholder="Full Name" 
-                                className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" 
+                                className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" 
                                 required 
                             />
                             <input 
                                 type="email" 
                                 name="email"
                                 placeholder="Email Address" 
-                                className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" 
+                                className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" 
                                 required 
                             />
                             <input 
                                 type="tel" 
                                 name="phone"
                                 placeholder="Phone Number" 
-                                className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" 
+                                className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" 
                                 required 
                             />
                             <textarea 
                                 name="message"
                                 placeholder="Your Message" 
                                 rows={4} 
-                                className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" 
+                                className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" 
                                 required
                             ></textarea>
 
@@ -122,14 +122,14 @@ const ContactPage: React.FC = () => {
                 <div className="text-center">
                      <h3 className="text-xl font-semibold text-golden-yellow mb-4">Or Contact Us Directly</h3>
                      <div className="grid grid-cols-2 gap-2 mb-2">
-                        <a href={`tel:${COMPANY_INFO.phone}`} className="bg-zinc-800 p-4 rounded-xl text-center hover:bg-zinc-700 transition-colors">
+                        <a href={`tel:${COMPANY_INFO.phone}`} className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl text-center hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
                             <p className="font-semibold text-golden-yellow">Call Now</p>
                         </a>
-                         <a href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello Masuvo Infracon!`} target="_blank" rel="noopener noreferrer" className="bg-zinc-800 p-4 rounded-xl text-center hover:bg-zinc-700 transition-colors">
+                         <a href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello Masuvo Infracon!`} target="_blank" rel="noopener noreferrer" className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl text-center hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
                             <p className="font-semibold text-golden-yellow">WhatsApp</p>
                         </a>
                     </div>
-                    <a href={COMPANY_INFO.googleMapsLink} target="_blank" rel="noopener noreferrer" className="block bg-zinc-800 p-4 rounded-xl text-center hover:bg-zinc-700 transition-colors">
+                    <a href={COMPANY_INFO.googleMapsLink} target="_blank" rel="noopener noreferrer" className="block bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl text-center hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
                         <p className="font-semibold text-golden-yellow">Get Directions</p>
                     </a>
                 </div>

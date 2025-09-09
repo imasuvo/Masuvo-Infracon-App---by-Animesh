@@ -7,9 +7,9 @@ import ReadMore from '../components/ReadMore';
 import { motion } from 'framer-motion';
 
 const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
-    <div className="bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
+    <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
         <service.icon className="h-10 w-10 text-golden-yellow mb-4" />
-        <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+        <h3 className="text-xl font-bold mb-2 text-zinc-900 dark:text-white">{service.title}</h3>
         <ReadMore text={service.description} maxLength={80} />
     </div>
 );
@@ -24,7 +24,7 @@ const ConstructionPage: React.FC = () => {
         >
             <div className="p-4 min-h-screen">
                 <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Construction Services</h2>
-                <p className="text-gray-300 mb-8">Building your vision with strength and precision.</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">Building your vision with strength and precision.</p>
                 
                 <div className="space-y-6">
                     {CONSTRUCTION_SERVICES.map((service, index) => (

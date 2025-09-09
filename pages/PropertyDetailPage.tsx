@@ -86,8 +86,8 @@ const PropertyDetailPage: React.FC = () => {
         <div className={`flex items-start ${className}`}>
             <Icon className="h-5 w-5 mr-3 text-golden-yellow flex-shrink-0 mt-0.5" />
             <div>
-                <p className="text-xs text-gray-400">{label}</p>
-                <p className="font-semibold text-white">{value}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{label}</p>
+                <p className="font-semibold text-zinc-900 dark:text-white">{value}</p>
             </div>
         </div>
     );
@@ -102,34 +102,34 @@ const PropertyDetailPage: React.FC = () => {
         >
             <div className="relative">
                  <img src={property.images?.[0] || 'https://picsum.photos/seed/placeholder-hero/800/600'} alt={property.title} className="w-full h-64 object-cover" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
-                 <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-charcoal/70 p-2 rounded-full text-white hover:bg-charcoal z-10">
+                 <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-charcoal via-white/50 dark:via-charcoal/50 to-transparent"></div>
+                 <ReactRouterDOM.Link to="/properties" className="absolute top-4 left-4 bg-black/50 p-2 rounded-full text-white hover:bg-black/80 z-10">
                     <ArrowLeftIcon className="h-5 w-5"/>
                  </ReactRouterDOM.Link>
                  <div className="absolute top-4 right-4 flex items-center gap-2">
                     <button
                         onClick={handleShare}
-                        className="bg-charcoal/70 p-2 rounded-full text-white hover:text-golden-yellow transition-colors duration-200 z-10"
+                        className="bg-black/50 p-2 rounded-full text-white hover:text-golden-yellow transition-colors duration-200 z-10"
                         aria-label="Share property"
                     >
                         <ShareIcon className="h-6 w-6" />
                     </button>
                     <button 
                         onClick={() => toggleFavorite(property.id)}
-                        className="bg-charcoal/70 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
+                        className="bg-black/50 p-2 rounded-full text-white hover:text-coral-red transition-colors duration-200 z-10"
                         aria-label={isSaved ? 'Remove from favorites' : 'Add to favorites'}
                     >
                         {isSaved ? <HeartIconSolid className="h-6 w-6 text-coral-red" /> : <HeartIconOutline className="h-6 w-6" />}
                     </button>
                 </div>
                  <div className="absolute bottom-0 left-0 p-4 w-full">
-                     <h1 className="text-3xl font-bold text-white break-words">{property.title}</h1>
+                     <h1 className="text-3xl font-bold text-zinc-900 dark:text-white break-words">{property.title}</h1>
                      <p className="text-lg text-golden-yellow font-semibold">{property.price}</p>
                  </div>
             </div>
             
             <div className="p-4 space-y-6">
-                <div className="grid grid-cols-2 gap-y-4 gap-x-2 bg-zinc-800 p-4 rounded-xl">
+                <div className="grid grid-cols-2 gap-y-4 gap-x-2 bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">
                     <DetailItem icon={BuildingOfficeIcon} label="Type" value={`${property.type} ${property.style}`} />
                     <DetailItem icon={ArrowsPointingOutIcon} label="Built-up Area" value={`${property.size.toLocaleString('en-IN')} sq. ft.`} />
                     {property.landArea && (
@@ -147,7 +147,7 @@ const PropertyDetailPage: React.FC = () => {
                 <div>
                     <h2 className="text-xl font-semibold text-golden-yellow mb-2">Photo Gallery</h2>
                     {property.images && property.images.length > 0 ? (
-                        <div className="relative w-full h-64 rounded-lg overflow-hidden bg-zinc-800 flex items-center justify-center">
+                        <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-200 dark:bg-zinc-800 flex items-center justify-center">
                             <AnimatePresence initial={false} custom={direction}>
                                 <motion.img
                                     key={page}
@@ -179,14 +179,14 @@ const PropertyDetailPage: React.FC = () => {
                             
                             <button
                                 onClick={() => paginate(-1)}
-                                className="absolute top-1/2 left-2 -translate-y-1/2 bg-charcoal/60 p-2 rounded-full text-white hover:bg-charcoal/90 transition-colors z-10"
+                                className="absolute top-1/2 left-2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/80 transition-colors z-10"
                                 aria-label="Previous image"
                             >
                                 <ChevronLeftIcon className="h-6 w-6" />
                             </button>
                             <button
                                 onClick={() => paginate(1)}
-                                className="absolute top-1/2 right-2 -translate-y-1/2 bg-charcoal/60 p-2 rounded-full text-white hover:bg-charcoal/90 transition-colors z-10"
+                                className="absolute top-1/2 right-2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/80 transition-colors z-10"
                                 aria-label="Next image"
                             >
                                 <ChevronRightIcon className="h-6 w-6" />
@@ -204,7 +204,7 @@ const PropertyDetailPage: React.FC = () => {
                             </div>
                         </div>
                     ) : (
-                         <div className="relative w-full h-64 rounded-lg overflow-hidden bg-zinc-800 flex items-center justify-center">
+                         <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-200 dark:bg-zinc-800 flex items-center justify-center">
                              <img src='https://picsum.photos/seed/placeholder/800/600' alt="Placeholder" className="w-full h-full object-cover" />
                         </div>
                     )}
@@ -230,7 +230,7 @@ const PropertyDetailPage: React.FC = () => {
                         ></iframe>
                     </div>
                 </div>
-                 <div className="fixed bottom-20 left-0 right-0 p-4 bg-charcoal/80 backdrop-blur-sm max-w-lg mx-auto">
+                 <div className="fixed bottom-20 left-0 right-0 p-4 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm max-w-lg mx-auto">
                     <a href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hi, I am interested in the property: ${property.title} (ID: ${property.id})`}
                         target="_blank" 
                         rel="noopener noreferrer"

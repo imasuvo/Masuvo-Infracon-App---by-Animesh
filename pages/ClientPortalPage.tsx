@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useProject } from '../contexts/ProjectContext';
+import { useTheme } from '../contexts/ThemeContext';
 import Spinner from '../components/Spinner';
 import ErrorDisplay from '../components/ErrorDisplay';
 import { ClientDocument } from '../types';
@@ -82,14 +83,11 @@ const GraphProgressBar: React.FC<{ progress: number; currentStage: string; theme
 const ClientPortalPage: React.FC = () => {
     const { isAuthenticated, logout } = useAuth();
     const { project, loading, error } = useProject();
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
     const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const notificationsRef = useRef<HTMLDivElement>(null);
-    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-        const savedTheme = localStorage.getItem('portalTheme');
-        return (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'dark';
-    });
 
     // Feedback form state
     const [rating, setRating] = useState(0);
@@ -104,10 +102,6 @@ const ClientPortalPage: React.FC = () => {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        localStorage.setItem('portalTheme', theme);
-    }, [theme]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -234,7 +228,7 @@ const ClientPortalPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <button 
-                        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
+                        onClick={toggleTheme} 
                         className={`p-2 rounded-full ${theme === 'light' ? 'text-gray-600 hover:bg-gray-200' : 'text-gray-300 hover:bg-zinc-700'} transition-colors`} 
                         aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                     >

@@ -29,9 +29,9 @@ const SavedPropertiesPage: React.FC = () => {
                     </div>
                 ) : (
                     <div className="text-center py-20 flex flex-col items-center">
-                        <HeartIcon className="h-16 w-16 text-zinc-600 mb-4" />
-                        <h3 className="text-xl font-semibold text-white">No Saved Properties Yet</h3>
-                        <p className="text-gray-400 mt-2">Tap the heart icon on any property to save it here.</p>
+                        <HeartIcon className="h-16 w-16 text-gray-300 dark:text-zinc-600 mb-4" />
+                        <h3 className="text-xl font-semibold text-zinc-900 dark:text-white">No Saved Properties Yet</h3>
+                        <p className="text-gray-600 dark:text-gray-400 mt-2">Tap the heart icon on any property to save it here.</p>
                         <ReactRouterDOM.Link 
                             to="/properties" 
                             className="mt-6 bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"

@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 
 const ServiceLinkCard: React.FC<{ to: string, title: string, description: string, icon: React.ElementType }> = ({ to, title, description, icon: Icon }) => {
     return (
-        <ReactRouterDOM.Link to={to} className="group block bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 hover:scale-105 transition-all duration-300 transform">
+        <ReactRouterDOM.Link to={to} className="group block bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl shadow-lg hover:shadow-golden-yellow/20 hover:scale-105 transition-all duration-300 transform">
             <Icon className="h-12 w-12 text-golden-yellow mb-4 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-12" />
-            <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
-            <p className="text-gray-400">{description}</p>
+            <h3 className="text-2xl font-bold mb-2 text-zinc-900 dark:text-white">{title}</h3>
+            <p className="text-gray-600 dark:text-gray-400">{description}</p>
         </ReactRouterDOM.Link>
     );
 };
@@ -24,7 +24,7 @@ const ServicesPage: React.FC = () => {
         >
             <div className="p-4 min-h-screen">
                 <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Our Services</h2>
-                <p className="text-gray-300 mb-8">Comprehensive solutions for your dream home.</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">Comprehensive solutions for your dream home.</p>
                 
                 <div className="space-y-6">
                     <ServiceLinkCard 

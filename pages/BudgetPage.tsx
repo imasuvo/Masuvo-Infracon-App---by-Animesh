@@ -164,37 +164,37 @@ const BudgetPage: React.FC = () => {
     const renderStep1 = () => (
         <>
             <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Home Construction Cost Calculator</h2>
-            <p className="text-gray-300 mb-8">Estimate Your Budget</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-8">Estimate Your Budget</p>
             {error && (
                 <div className="mb-6">
                     <ErrorDisplay title="Calculation Error" message={error} />
                 </div>
             )}
-            <form onSubmit={handleCalculate} className="space-y-6 bg-zinc-800 p-6 rounded-xl">
+            <form onSubmit={handleCalculate} className="space-y-6 bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
                  <div>
-                    <label htmlFor="state" className="block text-sm font-medium text-gray-300 mb-1">Select State</label>
-                    <select id="state" value={selectedState} onChange={e => setSelectedState(e.target.value)} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" required>
+                    <label htmlFor="state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Select State</label>
+                    <select id="state" value={selectedState} onChange={e => setSelectedState(e.target.value)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" required>
                         <option value="" disabled>-- Select a State --</option>
                         {Object.keys(indianStatesAndCities).sort().map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="city" className="block text-sm font-medium text-gray-300 mb-1">Select City</label>
-                    <select id="city" value={selectedCity} onChange={e => setSelectedCity(e.target.value)} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" required disabled={!selectedState}>
+                    <label htmlFor="city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Select City</label>
+                    <select id="city" value={selectedCity} onChange={e => setSelectedCity(e.target.value)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" required disabled={!selectedState}>
                         <option value="" disabled>-- Select a City --</option>
                         {cities.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="area" className="block text-sm font-medium text-gray-300 mb-1">Area (Plot Size)</label>
-                    <input id="area" type="number" value={area} onChange={e => setArea(Number(e.target.value))} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-3" required min="1"/>
+                    <label htmlFor="area" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Area (Plot Size)</label>
+                    <input id="area" type="number" value={area} onChange={e => setArea(Number(e.target.value))} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" required min="1"/>
                 </div>
                 <div className="flex items-center gap-4">
-                    <label className="flex items-center text-gray-300">
+                    <label className="flex items-center text-gray-700 dark:text-gray-300">
                         <input type="radio" name="unit" value="sqft" checked={unit === 'sqft'} onChange={() => setUnit('sqft')} className="form-radio accent-golden-yellow mr-2"/>
                         Sq. Feet
                     </label>
-                     <label className="flex items-center text-gray-300">
+                     <label className="flex items-center text-gray-700 dark:text-gray-300">
                         <input type="radio" name="unit" value="sqm" checked={unit === 'sqm'} onChange={() => setUnit('sqm')} className="form-radio accent-golden-yellow mr-2"/>
                         Sq. Meter
                     </label>
@@ -209,13 +209,13 @@ const BudgetPage: React.FC = () => {
     const renderStep2 = () => (
         <>
              <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Estimated Results</h2>
-             <p className="text-gray-300 mb-2">For {area} {unit === 'sqft' ? 'Sq. Feet' : 'Sq. Meter'} in {selectedCity}, {selectedState}</p>
+             <p className="text-gray-600 dark:text-gray-300 mb-2">For {area} {unit === 'sqft' ? 'Sq. Feet' : 'Sq. Meter'} in {selectedCity}, {selectedState}</p>
              <button onClick={() => setStep(1)} className="text-sm text-golden-yellow hover:underline mb-6">← Go Back & Edit</button>
 
-            <div className="bg-zinc-800 p-6 rounded-xl mb-6">
-                <h3 className="text-lg text-gray-400">Total Estimated Cost</h3>
+            <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl mb-6">
+                <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Cost</h3>
                 <p className="text-4xl font-bold text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
-                <p className="text-sm text-gray-300">Cost Per Sq. Ft: <span className="font-semibold">₹{costPerSqFt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">Cost Per Sq. Ft: <span className="font-semibold">₹{costPerSqFt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
                 
                 <div className="mt-4">
                     <h4 className="font-semibold mb-2">Cost Distribution</h4>
@@ -226,16 +226,16 @@ const BudgetPage: React.FC = () => {
             <div className="space-y-4">
                  <h3 className="text-xl font-semibold text-golden-yellow mb-2">Phase-wise Cost Breakdown</h3>
                 {calculatedData.map(resource => (
-                    <div key={resource.name} className="bg-zinc-800 p-4 rounded-xl">
+                    <div key={resource.name} className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">
                         <div className="flex justify-between items-start">
                            <div>
                                 <h4 className="font-bold">{resource.name}</h4>
-                                <p className="text-sm text-gray-400">Qty: {resource.calculatedQuantity}</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {resource.calculatedQuantity}</p>
                            </div>
                            <p className="text-lg font-semibold text-golden-yellow">₹{resource.calculatedAmount.toLocaleString('en-IN')}</p>
                         </div>
                          <div className="mt-2">
-                            <select value={resource.selectedQuality} onChange={e => handleQualityChange(resource.name, e.target.value as QualityOption)} className="w-full bg-zinc-700 border-zinc-600 text-white rounded-lg p-2 text-sm">
+                            <select value={resource.selectedQuality} onChange={e => handleQualityChange(resource.name, e.target.value as QualityOption)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-2 text-sm">
                                 {Object.keys(resource.qualityOptions).map(q => <option key={q} value={q}>{q}</option>)}
                             </select>
                         </div>
@@ -243,13 +243,13 @@ const BudgetPage: React.FC = () => {
                 ))}
             </div>
 
-            <div className="mt-8 text-center bg-zinc-900 p-6 rounded-xl border border-golden-yellow/30">
-                <h3 className="text-lg text-gray-400">Total Estimated Amount</h3>
+            <div className="mt-8 text-center bg-gray-200 dark:bg-zinc-900 p-6 rounded-xl border border-golden-yellow/30">
+                <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Amount</h3>
                 <p className="text-3xl font-bold text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
             </div>
 
              <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                <button onClick={() => alert('PDF download functionality coming soon!')} className="flex-1 bg-zinc-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-zinc-600 transition-colors">
+                <button onClick={() => alert('PDF download functionality coming soon!')} className="flex-1 bg-gray-300 dark:bg-zinc-700 text-zinc-900 dark:text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-gray-400 dark:hover:bg-zinc-600 transition-colors">
                     Download Estimate PDF
                 </button>
                  <ReactRouterDOM.Link to="/contact" className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
@@ -257,7 +257,7 @@ const BudgetPage: React.FC = () => {
                 </ReactRouterDOM.Link>
             </div>
 
-            <div className="mt-8 text-xs text-gray-500 bg-zinc-800 p-4 rounded-lg">
+            <div className="mt-8 text-xs text-gray-500 bg-gray-100 dark:bg-zinc-800 p-4 rounded-lg">
                 <h4 className="font-bold mb-1">Disclaimer</h4>
                 <p>The costs indicated are approximate for each resource. Actual costs may vary by city and project requirements. Please consult your contractor or visit our nearest outlet for accurate pricing. The amount shown does not include compound wall area. Default quality is Medium but can be changed using dropdown options.</p>
             </div>

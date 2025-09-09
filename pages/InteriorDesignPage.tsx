@@ -20,7 +20,7 @@ const InteriorDesignPage: React.FC = () => {
             <div className="p-4 min-h-screen">
                 <div className="text-center mb-8">
                     <h2 className="text-3xl font-bold text-golden-yellow">Trayaksh Interior</h2>
-                    <p className="text-gray-300">Crafting spaces that reflect your style.</p>
+                    <p className="text-gray-600 dark:text-gray-300">Crafting spaces that reflect your style.</p>
                 </div>
 
                 <div className="mb-6">
@@ -29,7 +29,7 @@ const InteriorDesignPage: React.FC = () => {
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
-                                className={`px-4 py-2 text-sm rounded-full transition-colors duration-300 ${activeCategory === category ? 'bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold' : 'bg-zinc-700 text-gray-300'}`}
+                                className={`px-4 py-2 text-sm rounded-full transition-colors duration-300 ${activeCategory === category ? 'bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
                             >
                                 {category}
                             </button>
