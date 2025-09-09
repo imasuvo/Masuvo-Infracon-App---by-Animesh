@@ -114,7 +114,7 @@ const TestimonialCarousel: React.FC = () => {
                  timeoutRef.current = window.setTimeout(() => paginate(1), 7000);
             }}
         >
-            <div className="overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 p-6 relative h-[300px] sm:h-[280px] flex flex-col justify-center">
+            <div className="overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 relative h-[300px] sm:h-[280px] flex flex-col justify-center">
                 {/* Decorative Quote Icon */}
                 <span className="absolute top-4 left-4 text-7xl font-serif text-orange-600/20 dark:text-golden-yellow/20 opacity-50 select-none z-0" aria-hidden="true">“</span>
                 
@@ -144,10 +144,10 @@ const TestimonialCarousel: React.FC = () => {
                         }}
                         className="absolute inset-0 p-6 flex flex-col justify-center"
                     >
-                         <p className="text-gray-600 dark:text-gray-300 italic text-md sm:text-lg leading-relaxed pt-2 relative z-10">
+                         <p className="text-gray-600 dark:text-gray-300 italic text-md sm:text-lg leading-relaxed relative z-10">
                             {TESTIMONIALS[imageIndex].quote}
                         </p>
-                        <div className="relative mt-auto flex items-center gap-4 z-10 pt-4">
+                        <div className="relative mt-6 flex items-center gap-4 z-10">
                             <img src={TESTIMONIALS[imageIndex].avatar} alt={TESTIMONIALS[imageIndex].author} className="w-12 h-12 rounded-full object-cover border-2 border-orange-600 dark:border-golden-yellow" />
                             <div>
                                 <p className="font-bold text-orange-600 dark:text-golden-yellow">{TESTIMONIALS[imageIndex].author}</p>

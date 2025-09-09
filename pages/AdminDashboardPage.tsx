@@ -29,9 +29,11 @@ interface SearchResult {
 
 const QuickActionButton: React.FC<{ icon: React.ElementType; label: string; onClick?: () => void; to?: string }> = ({ icon: Icon, label, onClick, to }) => {
     const content = (
-        <div className="bg-zinc-800 p-4 rounded-lg hover:bg-zinc-700 transition-all duration-300 flex flex-col items-center justify-center gap-2 aspect-square group hover:scale-105">
-            <Icon className="h-8 w-8 text-golden-yellow transition-transform duration-300 group-hover:scale-110" />
-            <span className="text-sm font-semibold text-center text-white">{label}</span>
+        <div className="bg-zinc-700 p-4 rounded-lg hover:bg-zinc-600 transition-all duration-300 flex items-center gap-4 group hover:scale-105">
+            <div className="p-3 bg-golden-yellow/20 rounded-full">
+                 <Icon className="h-6 w-6 text-golden-yellow" />
+            </div>
+            <span className="font-semibold text-white">{label}</span>
         </div>
     );
 
@@ -183,7 +185,11 @@ const AdminDashboardPage: React.FC = () => {
                                             <li key={index}>
                                                 <ReactRouterDOM.Link
                                                     to={result.link}
-                                                    onClick={() => setIsSearchFocused(false)}
+                                                    state={{ highlight: result.name }} // Pass name to highlight
+                                                    onClick={() => {
+                                                        setSearchQuery('');
+                                                        setIsSearchFocused(false);
+                                                    }}
                                                     className="flex items-center gap-3 p-3 hover:bg-zinc-700/50 transition-colors"
                                                 >
                                                     {getIconForType(result.type)}
@@ -230,9 +236,9 @@ const AdminDashboardPage: React.FC = () => {
                     </div>
                 </section>
                 
-                <section>
+                <section className="bg-zinc-800 p-6 rounded-lg">
                     <h2 className="text-lg font-semibold text-gray-300 mb-4">Quick Actions</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {(role === 'Super Admin' || role === 'Project Manager') && (
                             <QuickActionButton to="/admin/projects" icon={DocumentPlusIcon} label="Add Project" />
                         )}

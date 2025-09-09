@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 // FIX: Using namespace import for react-router-dom to resolve module export errors.
 import * as ReactRouterDOM from 'react-router-dom';
 import { ArrowLeftIcon, ArrowUpTrayIcon, DocumentDuplicateIcon } from '@heroicons/react/24/solid';
-import { ClientDocument } from '../types';
+import { ClientDocument, ProjectDocument } from '../types';
+import { MOCK_PROJECT_DATA } from '../constants';
 
 const CLIENT_DOCS_STORAGE_KEY = 'client_uploaded_documents';
+const adminDocuments: ProjectDocument[] = MOCK_PROJECT_DATA.documents;
 
 const AdminDocumentsPage: React.FC = () => {
     const navigate = ReactRouterDOM.useNavigate();
+    const location = ReactRouterDOM.useLocation();
     const [clientDocuments, setClientDocuments] = useState<ClientDocument[]>([]);
+    const [highlightedId, setHighlightedId] = useState<string | null>(null);
 
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('admin_auth') === 'true';
@@ -31,6 +35,22 @@ const AdminDocumentsPage: React.FC = () => {
             setClientDocuments(JSON.parse(storedDocs));
         }
     }, [navigate]);
+    
+     useEffect(() => {
+        const highlightName = location.state?.highlight;
+        if (highlightName) {
+            const docToHighlight = adminDocuments.find(d => d.name === highlightName);
+            if (docToHighlight) {
+                setHighlightedId(docToHighlight.id.toString());
+                const element = document.getElementById(`doc-${docToHighlight.id}`);
+                element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                const timer = setTimeout(() => setHighlightedId(null), 3000); // Highlight for 3 seconds
+                return () => clearTimeout(timer);
+            }
+        }
+    }, [location.state]);
+
 
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -101,6 +121,37 @@ const AdminDocumentsPage: React.FC = () => {
                             </button>
                         </div>
                     </form>
+                </section>
+
+                 {/* Admin Uploaded Documents List */}
+                <section className="bg-zinc-800 p-6 rounded-lg">
+                    <h2 className="text-lg font-semibold text-golden-yellow mb-4">Project Documents (Admin)</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left text-sm">
+                            <thead className="bg-zinc-700/50 text-gray-300 uppercase tracking-wider">
+                                <tr>
+                                    <th className="p-3">Document Name</th>
+                                    <th className="p-3">Type</th>
+                                    <th className="p-3 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {adminDocuments.map(doc => (
+                                    <tr 
+                                        key={doc.id}
+                                        id={`doc-${doc.id}`}
+                                        className={`border-b border-zinc-700 last:border-0 hover:bg-zinc-700/30 transition-colors duration-300 ${highlightedId === doc.id.toString() ? 'bg-golden-yellow/20' : ''}`}
+                                    >
+                                        <td className="p-3 font-medium">{doc.name}</td>
+                                        <td className="p-3">{doc.type}</td>
+                                        <td className="p-3 text-center">
+                                            <a href={doc.url} className="text-xs font-semibold text-golden-yellow hover:underline">View</a>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 {/* Client Uploaded Documents List */}

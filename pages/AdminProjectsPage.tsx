@@ -9,6 +9,7 @@ const ADMIN_PROJECTS_STORAGE_KEY = 'admin_projects';
 
 const AdminProjectsPage: React.FC = () => {
     const navigate = ReactRouterDOM.useNavigate();
+    const location = ReactRouterDOM.useLocation();
 
     // Form state
     const [projectName, setProjectName] = useState('');
@@ -20,6 +21,7 @@ const AdminProjectsPage: React.FC = () => {
 
     // Projects list state
     const [projects, setProjects] = useState<AdminProject[]>([]);
+    const [highlightedId, setHighlightedId] = useState<string | null>(null);
 
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('admin_auth') === 'true';
@@ -42,6 +44,22 @@ const AdminProjectsPage: React.FC = () => {
             setProjects(JSON.parse(storedProjects));
         }
     }, [navigate]);
+    
+    useEffect(() => {
+        const highlightName = location.state?.highlight;
+        if (highlightName && projects.length > 0) {
+            const projectToHighlight = projects.find(p => p.projectName === highlightName);
+            if (projectToHighlight) {
+                setHighlightedId(projectToHighlight.id);
+                const element = document.getElementById(projectToHighlight.id);
+                element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                const timer = setTimeout(() => setHighlightedId(null), 3000); // Highlight for 3 seconds
+                return () => clearTimeout(timer);
+            }
+        }
+    }, [location.state, projects]);
+
 
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -168,7 +186,11 @@ const AdminProjectsPage: React.FC = () => {
                                 </thead>
                                 <tbody>
                                     {projects.map(p => (
-                                        <tr key={p.id} className="border-b border-zinc-700 last:border-0 hover:bg-zinc-700/30">
+                                        <tr 
+                                            key={p.id}
+                                            id={p.id}
+                                            className={`border-b border-zinc-700 last:border-0 hover:bg-zinc-700/30 transition-colors duration-300 ${highlightedId === p.id ? 'bg-golden-yellow/20' : ''}`}
+                                        >
                                             <td className="p-3 font-medium">{p.projectName}</td>
                                             <td className="p-3">{p.client}</td>
                                             <td className="p-3">{p.startDate}</td>
