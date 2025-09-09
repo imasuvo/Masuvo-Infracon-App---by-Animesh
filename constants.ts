@@ -1,397 +1,191 @@
-import type { Property, Service, Testimonial, Notification, FAQ, FloorPlan } from './types';
-import { InteriorCategory } from './types';
-import { HomeIcon, BuildingOffice2Icon, PaintBrushIcon, WrenchScrewdriverIcon, SparklesIcon, SunIcon, MoonIcon, UserGroupIcon, MapPinIcon } from '@heroicons/react/24/outline';
-
-
-export const PROPERTIES: Property[] = [
-  // BIDHAN NAGAR AREA
-  {
-    id: 'bn1',
-    title: 'Affordable 3BHK Bungalow',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'CHRISTANPALLY, Near Suchana Complex',
-    type: '3BHK',
-    style: 'Normal',
-    size: 1200,
-    price: '₹24,99,000',
-    priceValue: 24.99,
-    description: 'A practical and affordable 3BHK home spanning 1200 sq. ft. Located conveniently in Christanpally near Suchana Complex, it offers a great balance of space and value. Perfect for first-time homebuyers or small families.',
-    images: ['https://picsum.photos/seed/bn1a/800/600', 'https://picsum.photos/seed/bn1b/800/600', 'https://picsum.photos/seed/bn1c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn1/800/1000'
-  },
-  {
-    id: 'bn2',
-    title: 'Luxury 3BHK Residence',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'CHRISTANPALLY, Near Suchana Complex',
-    type: '3BHK',
-    style: 'Luxury',
-    size: 1400,
-    price: '₹26,99,000',
-    priceValue: 26.99,
-    description: 'Experience enhanced living in this 1400 sq. ft. luxury 3BHK bungalow. Situated near Suchana Complex in Christanpally, this home features premium finishes and thoughtful design for a comfortable lifestyle.',
-    images: ['https://picsum.photos/seed/bn2a/800/600', 'https://picsum.photos/seed/bn2b/800/600', 'https://picsum.photos/seed/bn2c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn2/800/1000'
-  },
-  {
-    id: 'bn3',
-    title: 'Spacious 4BHK Duplex',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'CHRISTANPALLY, Near Suchana Complex',
-    type: '4BHK',
-    style: 'Duplex',
-    size: 1500,
-    price: '₹27,99,000',
-    priceValue: 27.99,
-    description: 'This 1500 sq. ft. 4BHK Duplex offers ample space for a growing family. Located in the desirable area of Christanpally near Suchana Complex, it combines modern architecture with functional living spaces.',
-    images: ['https://picsum.photos/seed/bn3a/800/600', 'https://picsum.photos/seed/bn3b/800/600', 'https://picsum.photos/seed/bn3c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn3/800/1000'
-  },
-  {
-    id: 'bn4',
-    title: 'Prime Location 3BHK',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'CHRISTANPALLY, More Near to Road',
-    type: '3BHK',
-    style: 'Normal',
-    size: 1300,
-    price: '₹34,99,000',
-    priceValue: 34.99,
-    description: 'A well-appointed 1300 sq. ft. 3BHK bungalow in a prime Christanpally location with excellent road access. This home is perfect for those who value convenience and connectivity.',
-    images: ['https://picsum.photos/seed/bn4a/800/600', 'https://picsum.photos/seed/bn4b/800/600', 'https://picsum.photos/seed/bn4c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn4/800/1000'
-  },
-  {
-    id: 'bn5',
-    title: 'Charming 3BHK in Fuljhore',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'FULZHORE',
-    type: '3BHK',
-    style: 'Normal',
-    size: 1200,
-    price: '₹33,00,000',
-    priceValue: 33.00,
-    description: 'Discover this charming 1200 sq. ft. 3BHK home in the serene locality of Fuljhore. It offers a peaceful retreat with all modern amenities, making it a perfect family home.',
-    images: ['https://picsum.photos/seed/bn5a/800/600', 'https://picsum.photos/seed/bn5b/800/600', 'https://picsum.photos/seed/bn5c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn5/800/1000'
-  },
-  {
-    id: 'bn6',
-    title: 'Fuljhore Luxury 3BHK',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'FULZHORE',
-    type: '3BHK',
-    style: 'Luxury',
-    size: 1400,
-    price: '₹34,49,000',
-    priceValue: 34.49,
-    description: 'Indulge in luxury with this 1400 sq. ft. 3BHK residence in Fuljhore. Featuring high-end fittings and a superior design, this home is crafted for those with a taste for the finer things in life.',
-    images: ['https://picsum.photos/seed/bn6a/800/600', 'https://picsum.photos/seed/bn6b/800/600', 'https://picsum.photos/seed/bn6c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn6/800/1000'
-  },
-  {
-    id: 'bn7',
-    title: 'Fuljhore 4BHK Duplex',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'FULZHORE',
-    type: '4BHK',
-    style: 'Duplex',
-    size: 1500,
-    price: '₹35,49,000',
-    priceValue: 35.49,
-    description: 'A beautifully designed 1500 sq. ft. 4BHK Duplex in Fuljhore. With its spacious layout and modern aesthetics, it provides an ideal environment for family living and entertaining.',
-    images: ['https://picsum.photos/seed/bn7a/800/600', 'https://picsum.photos/seed/bn7b/800/600', 'https://picsum.photos/seed/bn7c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn7/800/1000'
-  },
-  {
-    id: 'bn8',
-    title: '3BHK at Saptarshi Park Down',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'SAPTARSHI PARK DOWN AREA',
-    type: '3BHK',
-    style: 'Normal',
-    size: 1400,
-    landArea: '1.7 Kattha',
-    price: '₹30,49,000',
-    priceValue: 30.49,
-    description: 'This 1400 sq. ft. 3BHK home is situated on a 1.7 Kattha plot in the Saptarshi Park Down area. It offers a generous living space and a sizable land area, perfect for outdoor activities.',
-    images: ['https://picsum.photos/seed/bn8a/800/600', 'https://picsum.photos/seed/bn8b/800/600', 'https://picsum.photos/seed/bn8c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn8/800/1000'
-  },
-  {
-    id: 'bn9',
-    title: 'Premium Duplex at Saptarshi Park',
-    mainArea: 'BIDHAN NAGAR AREA',
-    subLocation: 'SAPTARSHI PARK',
-    type: '4BHK',
-    style: 'Duplex',
-    size: 1500,
-    landArea: '2.5 Kattha',
-    price: '₹49,00,000',
-    priceValue: 49.00,
-    description: 'An exclusive 1500 sq. ft. 4BHK Duplex in the prestigious Saptarshi Park. Set on a 2.5 Kattha plot, this property offers luxury, space, and a prime address.',
-    images: ['https://picsum.photos/seed/bn9a/800/600', 'https://picsum.photos/seed/bn9b/800/600', 'https://picsum.photos/seed/bn9c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpbn9/800/1000'
-  },
-  // DURGAPUR -01 AREA
-  {
-    id: 'd1',
-    title: 'Elegant Duplex at Shyampur',
-    mainArea: 'DURGAPUR -01 AREA',
-    subLocation: 'Shyampur – Rabindrapally',
-    type: '4BHK',
-    style: 'Duplex',
-    size: 1500,
-    landArea: '2.78 Kattha',
-    price: '₹55,00,000',
-    priceValue: 55.00,
-    description: 'A stunning 1500 sq. ft. 4BHK Duplex on a 2.78 Kattha plot in Shyampur – Rabindrapally. This home combines elegant design with a spacious layout for a truly premium living experience.',
-    images: ['https://picsum.photos/seed/d1a/800/600', 'https://picsum.photos/seed/d1b/800/600', 'https://picsum.photos/seed/d1c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpd1/800/1000'
-  },
-  {
-    id: 'd2',
-    title: 'Grand Duplex at Dakshinayan',
-    mainArea: 'DURGAPUR -01 AREA',
-    subLocation: 'Dakshinayan',
-    type: '4BHK',
-    style: 'Duplex',
-    size: 1500,
-    landArea: '3 Kattha',
-    price: '₹55,00,000',
-    priceValue: 55.00,
-    description: 'This grand 1500 sq. ft. 4BHK Duplex is set on a large 3 Kattha plot in Dakshinayan. It offers expansive living spaces, both indoors and out, perfect for those seeking luxury and privacy.',
-    images: ['https://picsum.photos/seed/d2a/800/600', 'https://picsum.photos/seed/d2b/800/600', 'https://picsum.photos/seed/d2c/800/600'],
-    floorPlan: 'https://picsum.photos/seed/fpd2/800/1000'
-  }
-];
-
-export const CONSTRUCTION_SERVICES: Service[] = [
-  {
-    title: 'New Bungalows',
-    description: 'End-to-end construction of premium bungalows, from foundation to finishing, tailored to your vision. Our process ensures quality materials and expert craftsmanship at every stage of the building process.',
-    icon: HomeIcon
-  },
-  {
-    title: 'Duplex/Triplex Construction',
-    description: 'Specializing in multi-level luxury homes with modern architectural designs and robust engineering. We handle complex structural requirements to create spacious and functional living environments.',
-    icon: BuildingOffice2Icon
-  },
-  {
-    title: 'Renovation Services',
-    description: 'Transform your existing space with our expert renovation and remodeling solutions. We can update your home to the latest standards, improving both aesthetics and functionality.',
-    icon: WrenchScrewdriverIcon
-  },
-  {
-    title: 'Custom Construction',
-    description: 'Have a unique plan? We bring your custom architectural dreams to life with precision and quality. Our team works closely with you to ensure every detail of your vision is realized.',
-    icon: PaintBrushIcon
-  }
-];
-
-export const INTERIOR_DESIGN_GALLERY = {
-    [InteriorCategory.LivingRoom]: [
-        'https://picsum.photos/seed/lr1/800/600',
-        'https://picsum.photos/seed/lr2/800/600',
-        'https://picsum.photos/seed/lr3/800/600',
-    ],
-    [InteriorCategory.Bedroom]: [
-        'https://picsum.photos/seed/br1/800/600',
-        'https://picsum.photos/seed/br2/800/600',
-        'https://picsum.photos/seed/br3/800/600',
-    ],
-    [InteriorCategory.Kitchen]: [
-        'https://picsum.photos/seed/kt1/800/600',
-        'https://picsum.photos/seed/kt2/800/600',
-        'https://picsum.photos/seed/kt3/800/600',
-    ],
-    [InteriorCategory.Bathroom]: [
-        'https://picsum.photos/seed/bt1/800/600',
-        'https://picsum.photos/seed/bt2/800/600',
-        'https://picsum.photos/seed/bt3/800/600',
-    ]
-}
-
-
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    quote: "Masuvo Infracon delivered our dream home on time without compromising on quality. The team was professional and transparent throughout the process.",
-    author: "R. & S. Sharma",
-    project: "4BHK Duplex, Christianpally",
-    avatar: "https://picsum.photos/seed/avatar1/200/200"
-  },
-  {
-    quote: "The attention to detail in both construction and interiors by Trayaksh is exceptional. Highly recommended for anyone looking for a premium experience.",
-    author: "A. Gupta",
-    project: "5BHK Triplex, Fuljhore",
-    avatar: "https://picsum.photos/seed/avatar2/200/200"
-  },
-  {
-    quote: "From start to finish, the communication was excellent. The client portal kept us updated, and the final result exceeded our expectations.",
-    author: "P. Banerjee",
-    project: "3BHK Bungalow, Bidhan Nagar",
-    avatar: "https://picsum.photos/seed/avatar3/200/200"
-  },
-  {
-    quote: "The entire process was seamless, from design to execution. Masuvo Infracon's client portal is a fantastic tool that kept us informed every step of the way.",
-    author: "S. & N. Roy",
-    project: "Custom 3BHK, Shyampur",
-    avatar: "https://picsum.photos/seed/avatar4/200/200"
-  },
-  {
-    quote: "We approached Trayaksh Interior for our renovation, and they completely transformed our living space. Their design sense is modern and elegant. Truly impressed!",
-    author: "M. Verma",
-    project: "Interior Renovation, Durgapur-01",
-    avatar: "https://picsum.photos/seed/avatar5/200/200"
-  },
-  {
-    quote: "Building a home can be stressful, but Masuvo Infracon made it an enjoyable journey. Their team is professional, responsive, and dedicated to quality.",
-    author: "K. Singh",
-    project: "4BHK Duplex, Saptarshi Park",
-    avatar: "https://picsum.photos/seed/avatar6/200/200"
-  },
-  {
-    quote: "The quality of materials and the craftsmanship is top-notch. Our bungalow feels solid and looks beautiful. Thank you for building our forever home.",
-    author: "The Das Family",
-    project: "Luxury 3BHK, Fuljhore",
-    avatar: "https://picsum.photos/seed/avatar7/200/200"
-  }
-];
-
-export const PROJECT_NOTIFICATIONS: Notification[] = [
-  { 
-    id: 'n3', 
-    message: 'Kitchen countertop installation is complete.', 
-    timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), 
-    read: true 
-  },
-  { 
-    id: 'n2', 
-    message: 'Your next payment invoice has been generated.', 
-    timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), 
-    read: false 
-  },
-  { 
-    id: 'n1', 
-    message: 'Exterior painting has begun. Photos have been uploaded to the gallery.', 
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), 
-    read: false 
-  },
-];
-
-export const FAQS: FAQ[] = [
-  {
-    question: "What is the typical timeline for building a new bungalow?",
-    answer: "The construction timeline can vary depending on the size and complexity of the project. On average, a new bungalow construction takes between 10 to 14 months from foundation to handover."
-  },
-  {
-    question: "What is your payment structure?",
-    answer: "We follow a milestone-based payment structure. Payments are due upon completion of specific stages of the project, such as foundation, structure, finishing, etc. A detailed schedule will be provided in your contract."
-  },
-  {
-    question: "Can I customize the floor plans for the properties listed?",
-    answer: "Absolutely. We encourage customization to ensure your new home perfectly fits your needs. Our architects will work with you to modify existing plans or create a completely new design."
-  },
-  {
-    question: "Do you offer standalone interior design services through Trayaksh Interior?",
-    answer: "Yes, Trayaksh Interior offers comprehensive interior design services independently of our construction projects. This includes consultation, space planning, furniture selection, and complete turnkey interior solutions."
-  },
-  {
-    question: "How can I track the progress of my ongoing project?",
-    answer: "Clients are given access to our exclusive Client Portal. Through the portal, you can view real-time progress updates, see the latest site photos, manage payments, and communicate directly with your project manager."
-  },
-  {
-    question: "What kind of warranty or post-construction support do you provide?",
-    answer: "We provide a one-year warranty on structural integrity and against any construction defects. Our team is also available for any support or assistance you may need after you move in."
-  }
-];
-
-
-export const FLOOR_PLANS: FloorPlan[] = [
-  // 3BHK
-  {
-    id: 'fp_3bhk_1200',
-    type: '3BHK',
-    sizeSqFt: 1200,
-    configuration: 'Super Built-up Area',
-    thumbnailUrl: 'https://picsum.photos/seed/thumb_3bhk_1200/800/600',
-    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
-    model3dUrl: 'https://sketchfab.com/models/b7167664323c4a15a31b64e5b97436a1/embed?autospin=1&autostart=1&ui_theme=dark',
-    price: '₹24,99,000',
-    description: 'This well-designed 3BHK floor plan offers a perfect blend of comfort and functionality. It includes three spacious bedrooms, two modern bathrooms, a contemporary kitchen, a cozy living area, and a private balcony. Ideal for small families seeking an affordable yet elegant home.',
-    pdfUrl: '#',
-  },
-  {
-    id: 'fp_3bhk_1400',
-    type: '3BHK',
-    sizeSqFt: 1400,
-    configuration: 'Super Built-up Area',
-    thumbnailUrl: 'https://picsum.photos/seed/thumb_3bhk_1400/800/600',
-    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
-    model3dUrl: 'https://sketchfab.com/models/d69e853114a84985a73e13768393539e/embed?autospin=1&autostart=1&ui_theme=dark',
-    price: '₹26,99,000',
-    description: 'An expansive 1400 sq. ft. 3BHK layout featuring larger bedrooms and an open-concept living and dining space. Includes three bedrooms, two bathrooms, a utility area attached to the kitchen, and enhanced natural lighting. Perfect for families desiring more space and luxury.',
-    pdfUrl: '#',
-  },
-  // 4BHK
-  {
-    id: 'fp_4bhk_1500',
-    type: '4BHK',
-    sizeSqFt: 1500,
-    configuration: 'Super Built-up Area',
-    thumbnailUrl: 'https://picsum.photos/seed/thumb_4bhk_1500/800/600',
-    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
-    model3dUrl: 'https://sketchfab.com/models/4e80f08147d4464bb67d934151703666/embed?autospin=1&autostart=1&ui_theme=dark',
-    price: '₹27,99,000',
-    description: 'A spacious 4BHK duplex design optimized for modern family living. The ground floor comprises a living area, kitchen, dining, and one bedroom, while the first floor houses three additional bedrooms. Includes four bedrooms, three bathrooms, a family lounge, and two balconies.',
-    pdfUrl: '#',
-  },
-  {
-    id: 'fp_4bhk_1800',
-    type: '4BHK',
-    sizeSqFt: 1800,
-    configuration: 'Super Built-up Area',
-    thumbnailUrl: 'https://picsum.photos/seed/thumb_4bhk_1800/800/600',
-    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
-    model3dUrl: 'https://sketchfab.com/models/3052ac66a31945a29858348393081e7d/embed?autospin=1&autostart=1&ui_theme=dark',
-    price: '₹35,49,000',
-    description: 'Luxury 4BHK duplex offering generous room sizes and premium specifications. This layout includes four large bedrooms, four attached bathrooms, a modular kitchen, a separate servant room, a large terrace, and dedicated parking. Designed for those who appreciate fine living.',
-    pdfUrl: '#',
-  },
-  // 5BHK
-  {
-    id: 'fp_5bhk_2200',
-    type: '5BHK',
-    sizeSqFt: 2200,
-    configuration: 'Super Built-up Area',
-    thumbnailUrl: 'https://picsum.photos/seed/thumb_5bhk_2200/800/600',
-    viewerUrl: 'https://www.99acres.com/exidmicrosite/property_2d3d_xid.php?property_id=M55383548&p_type=1&from=microsite&is_vtour=1&is_new_vtour=1&menu=0&autoplay=1',
-    model3dUrl: 'https://sketchfab.com/models/2034914c68f447a19548f9e2b1022944/embed?autospin=1&autostart=1&ui_theme=dark',
-    price: 'Price on Request',
-    description: 'The ultimate in luxury and space, this 5BHK triplex plan is designed for large families. It features five master bedrooms with en-suite bathrooms, a home theater room, a private gym, a sprawling terrace garden, and a double-height living room. Every detail is crafted to perfection.',
-    pdfUrl: '#',
-  },
-];
-
+import {
+    BuildingOffice2Icon,
+    WrenchScrewdriverIcon,
+    PaintBrushIcon,
+} from '@heroicons/react/24/solid';
+import { Property, Service, Testimonial, InteriorCategory, FloorPlan, Project } from './types';
 
 export const COMPANY_INFO = {
-    name: "Masuvo Infracon Pvt. Ltd.",
-    founder: "Anabik Maity",
-    slogan: "Building Beyond Boundaries",
-    tagline: "Building Beyond Boundaries",
-    mission: "To redefine the real estate landscape in Durgapur by building premium, quality homes that offer unparalleled value and customer satisfaction. We are committed to transparency, innovation, and excellence in every project we undertake.",
-    address: "P9, Hambir Sarani, Sector-2C, Bidhannagar, Durgapur, West Bengal 713212",
-    phone: "+919749443553",
-    whatsapp: "919749443553",
-    email: "contact@masuvoinfracon.com",
-    website: "https://infraconmasuvo.com/",
-    googleMapsLink: "https://share.google/SRPM2ZIIsSernVj0P"
+    name: 'Masuvo Infracon Pvt. Ltd.',
+    tagline: 'Your Dream, Our Foundation.',
+    founder: 'Mr. Suvankar Maji',
+    address: 'City Centre, Durgapur, West Bengal, India',
+    phone: '+919876543210',
+    whatsapp: '919876543210',
+    email: 'imasuvo@gmail.com',
+    website: 'https://infraconmasuvo.com',
+    googleMapsLink: 'https://maps.app.goo.gl/abcdefg123456',
 };
 
 export const SOCIAL_LINKS = {
-    facebook: "https://www.facebook.com/masuvo.infraco",
-    instagram: "https://www.instagram.com/masuvoinfracon/",
-    linkedin: "https://www.linkedin.com/in/animeshmaji/",
-    youtube: "https://www.youtube.com/@masuvoinfracon",
-    x: "https://x.com/MasuvoInfracon"
+    facebook: '#',
+    instagram: '#',
+    x: '#',
+    linkedin: '#',
+    youtube: '#',
+};
+
+export const PROPERTIES: Property[] = [
+    {
+        id: 'p1',
+        title: 'Elegant 4BHK Duplex in Bidhan Nagar',
+        price: '₹ 1.2 Cr',
+        subLocation: 'Near City Centre, Bidhan Nagar',
+        mainArea: 'BIDHAN NAGAR AREA',
+        type: '4BHK',
+        style: 'Duplex',
+        size: 2400,
+        landArea: '3 Kottah',
+        description: 'A stunning duplex with modern amenities, spacious rooms, and a beautiful garden. Perfect for families looking for a blend of luxury and comfort.',
+        images: ['https://picsum.photos/seed/p1-1/800/600', 'https://picsum.photos/seed/p1-2/800/600', 'https://picsum.photos/seed/p1-3/800/600'],
+        floorPlan: 'https://picsum.photos/seed/fp1/800/600',
+    },
+    {
+        id: 'p2',
+        title: 'Modern 3BHK Bungalow in Durgapur-01',
+        price: '₹ 85 Lacs',
+        subLocation: 'A-Zone, Durgapur',
+        mainArea: 'DURGAPUR -01 AREA',
+        type: '3BHK',
+        style: 'Bungalow',
+        size: 1800,
+        description: 'A cozy and modern bungalow located in a prime area. Features an open-plan living space and high-quality fittings.',
+        images: ['https://picsum.photos/seed/p2-1/800/600', 'https://picsum.photos/seed/p2-2/800/600'],
+        floorPlan: 'https://picsum.photos/seed/fp2/800/600',
+    },
+    {
+        id: 'p3',
+        title: 'Spacious 5BHK Triplex Villa',
+        price: '₹ 2.5 Cr',
+        subLocation: 'B-Zone, Bidhan Nagar',
+        mainArea: 'BIDHAN NAGAR AREA',
+        type: '5BHK',
+        style: 'Triplex',
+        size: 4000,
+        landArea: '5 Kottah',
+        description: 'The epitome of luxury. This triplex villa boasts a private elevator, terrace garden, and home theatre. An exclusive residence for the discerning buyer.',
+        images: ['https://picsum.photos/seed/p3-1/800/600', 'https://picsum.photos/seed/p3-2/800/600', 'https://picsum.photos/seed/p3-3/800/600', 'https://picsum.photos/seed/p3-4/800/600'],
+        floorPlan: 'https://picsum.photos/seed/fp3/800/600',
+    }
+];
+
+export const CONSTRUCTION_SERVICES: Service[] = [
+    {
+        icon: BuildingOffice2Icon,
+        title: 'Residential Construction',
+        description: 'From foundation to finishing, we build high-quality, durable homes including bungalows, duplexes, and multi-story residences tailored to your needs.',
+    },
+    {
+        icon: WrenchScrewdriverIcon,
+        title: 'Structural Engineering',
+        description: 'Our expert engineers ensure the structural integrity and safety of your building, using advanced analysis and design techniques.',
+    },
+    {
+        icon: PaintBrushIcon,
+        title: 'Interior & Exterior Finishes',
+        description: 'We provide premium finishing services, including painting, plastering, flooring, and facade work, to give your property a polished and appealing look.',
+    },
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+    {
+        quote: 'Masuvo Infracon turned our dream into a reality. The quality of construction and attention to detail was exceptional. Highly recommended!',
+        author: 'A. K. Sharma',
+        project: '4BHK Duplex in Bidhan Nagar',
+        avatar: 'https://picsum.photos/seed/avatar1/100/100',
+    },
+    {
+        quote: 'The entire process, from design to handover, was seamless. The team was professional, transparent, and delivered on time. We love our new home!',
+        author: 'Sunita Roy',
+        project: '3BHK Bungalow in A-Zone',
+        avatar: 'https://picsum.photos/seed/avatar2/100/100',
+    },
+];
+
+export const INTERIOR_DESIGN_GALLERY: Record<InteriorCategory, string[]> = {
+    [InteriorCategory.LivingRoom]: [
+        'https://picsum.photos/seed/lr1/400/300', 'https://picsum.photos/seed/lr2/400/300',
+        'https://picsum.photos/seed/lr3/400/300', 'https://picsum.photos/seed/lr4/400/300'
+    ],
+    [InteriorCategory.Bedroom]: [
+        'https://picsum.photos/seed/br1/400/300', 'https://picsum.photos/seed/br2/400/300',
+        'https://picsum.photos/seed/br3/400/300', 'https://picsum.photos/seed/br4/400/300'
+    ],
+    [InteriorCategory.Kitchen]: [
+        'https://picsum.photos/seed/kc1/400/300', 'https://picsum.photos/seed/kc2/400/300',
+        'https://picsum.photos/seed/kc3/400/300', 'https://picsum.photos/seed/kc4/400/300'
+    ],
+    [InteriorCategory.Bathroom]: [
+        'https://picsum.photos/seed/ba1/400/300', 'https://picsum.photos/seed/ba2/400/300'
+    ],
+    [InteriorCategory.Office]: [
+        'https://picsum.photos/seed/of1/400/300', 'https://picsum.photos/seed/of2/400/300'
+    ],
+};
+
+export const FAQS = [
+    {
+        question: "What types of construction projects do you handle?",
+        answer: "We specialize in residential construction, including custom bungalows, duplexes, and triplex villas. We also offer interior design and land acquisition services."
+    },
+    {
+        question: "How long does a typical construction project take?",
+        answer: "The timeline varies depending on the project's complexity and size. A standard 2000 sq.ft. residential building typically takes around 10-12 months from foundation to handover."
+    },
+    {
+        question: "Can I customize the floor plans?",
+        answer: "Absolutely! We encourage customization. Our team works closely with you to design a home that fits your lifestyle and preferences perfectly."
+    }
+];
+
+export const FLOOR_PLANS: FloorPlan[] = [
+    {
+        id: 'fp-3bhk-1800',
+        type: '3BHK',
+        sizeSqFt: 1800,
+        configuration: '3 Beds, 3 Baths, 2 Balconies',
+        price: '₹ 75 Lacs onwards',
+        thumbnailUrl: 'https://picsum.photos/seed/fp-thumb-1/400/300',
+        model3dUrl: 'https://my.matterport.com/show/?m=aAbBcC12345',
+        description: 'An efficient and spacious 3BHK layout perfect for modern families. Features an open-plan living area and well-ventilated bedrooms.'
+    },
+    {
+        id: 'fp-4bhk-2400',
+        type: '4BHK',
+        sizeSqFt: 2400,
+        configuration: '4 Beds, 4 Baths, Puja Room, 3 Balconies',
+        price: '₹ 1.1 Cr onwards',
+        thumbnailUrl: 'https://picsum.photos/seed/fp-thumb-2/400/300',
+        model3dUrl: 'https://my.matterport.com/show/?m=dDeEfF67890',
+        description: 'A luxurious 4BHK design with ample space for everyone. Includes a dedicated puja room and large balconies for relaxation.'
+    },
+    {
+        id: 'fp-5bhk-3200',
+        type: '5BHK',
+        sizeSqFt: 3200,
+        configuration: '5 Beds, 5 Baths, Home Office, Terrace Garden',
+        price: '₹ 1.8 Cr onwards',
+        thumbnailUrl: 'https://picsum.photos/seed/fp-thumb-3/400/300',
+        model3dUrl: 'https://my.matterport.com/show/?m=gGhHiI54321',
+        description: 'The ultimate in luxury living. This expansive 5BHK plan features a home office, a private terrace garden, and premium finishes.'
+    },
+];
+
+export const MOCK_PROJECT_DATA: Project = {
+  id: "PROJ-123",
+  clientName: "Animesh Maji",
+  projectName: "4BHK Duplex at Bidhan Nagar",
+  status: 'Ongoing',
+  progress: 65,
+  updates: [
+    { id: 4, date: "2024-07-20", title: "Internal Plastering Started", description: "Internal wall plastering work has commenced on the first floor.", stage: 'Finishing', imageUrl: "https://picsum.photos/seed/update4/800/600" },
+    { id: 3, date: "2024-06-15", title: "Roof Casting Complete", description: "The final roof slab has been cast successfully. Curing is in progress.", stage: 'Framing', imageUrl: "https://picsum.photos/seed/update3/800/600" },
+    { id: 2, date: "2024-05-10", title: "Foundation Work Finished", description: "Foundation and plinth beam work have been completed as per the structural drawings.", stage: 'Foundation', imageUrl: "https://picsum.photos/seed/update2/800/600" },
+    { id: 1, date: "2024-04-01", title: "Project Kick-off", description: "Site cleared and project officially started.", stage: 'Planning' },
+  ],
+  documents: [
+    { id: 1, name: "Architectural Plan v2.pdf", url: "#", type: 'Plan' },
+    { id: 2, name: "Construction Agreement.pdf", url: "#", type: 'Contract' },
+    { id: 3, name: "Invoice-JUL2024.pdf", url: "#", type: 'Invoice' },
+  ],
 };
