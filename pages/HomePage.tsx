@@ -43,7 +43,7 @@ const HeroSlider: React.FC = () => {
 };
 
 const CTAButton: React.FC<{ to: string, children: React.ReactNode }> = ({ to, children }) => (
-    <ReactRouterDOM.Link to={to} className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold py-3 px-4 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+    <ReactRouterDOM.Link to={to} className="flex-1 text-center bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-semibold py-3 px-4 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
         {children}
     </ReactRouterDOM.Link>
 );
@@ -116,7 +116,7 @@ const TestimonialCarousel: React.FC = () => {
         >
             <div className="overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 p-6 relative h-[300px] sm:h-[280px] flex flex-col justify-center">
                 {/* Decorative Quote Icon */}
-                <span className="absolute top-4 left-4 text-7xl font-serif text-golden-yellow/20 opacity-50 select-none z-0" aria-hidden="true">“</span>
+                <span className="absolute top-4 left-4 text-7xl font-serif text-orange-600/20 dark:text-golden-yellow/20 opacity-50 select-none z-0" aria-hidden="true">“</span>
                 
                 <AnimatePresence initial={false} custom={direction}>
                      <motion.div
@@ -148,9 +148,9 @@ const TestimonialCarousel: React.FC = () => {
                             {TESTIMONIALS[imageIndex].quote}
                         </p>
                         <div className="relative mt-auto flex items-center gap-4 z-10 pt-4">
-                            <img src={TESTIMONIALS[imageIndex].avatar} alt={TESTIMONIALS[imageIndex].author} className="w-12 h-12 rounded-full object-cover border-2 border-golden-yellow" />
+                            <img src={TESTIMONIALS[imageIndex].avatar} alt={TESTIMONIALS[imageIndex].author} className="w-12 h-12 rounded-full object-cover border-2 border-orange-600 dark:border-golden-yellow" />
                             <div>
-                                <p className="font-bold text-golden-yellow">{TESTIMONIALS[imageIndex].author}</p>
+                                <p className="font-bold text-orange-600 dark:text-golden-yellow">{TESTIMONIALS[imageIndex].author}</p>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">{TESTIMONIALS[imageIndex].project}</p>
                             </div>
                         </div>
@@ -160,14 +160,14 @@ const TestimonialCarousel: React.FC = () => {
             
             <button
                 onClick={() => paginate(-1)}
-                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
+                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:bg-orange-500 dark:hover:bg-golden-yellow hover:text-white dark:hover:text-charcoal transition-colors z-20"
                 aria-label="Previous testimonial"
             >
                 <ChevronLeftIcon className="h-6 w-6" />
             </button>
             <button
                 onClick={() => paginate(1)}
-                className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-3 bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
+                className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-3 bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:bg-orange-500 dark:hover:bg-golden-yellow hover:text-white dark:hover:text-charcoal transition-colors z-20"
                 aria-label="Next testimonial"
             >
                 <ChevronRightIcon className="h-6 w-6" />
@@ -178,7 +178,7 @@ const TestimonialCarousel: React.FC = () => {
                     <button
                         key={index}
                         onClick={() => goToSlide(index)}
-                        className={`h-2.5 rounded-full transition-all duration-300 ${imageIndex === index ? 'bg-golden-yellow w-6' : 'bg-gray-300 dark:bg-zinc-600 hover:bg-gray-400 dark:hover:bg-zinc-500 w-2.5'}`}
+                        className={`h-2.5 rounded-full transition-all duration-300 ${imageIndex === index ? 'bg-orange-500 dark:bg-golden-yellow w-6' : 'bg-gray-300 dark:bg-zinc-600 hover:bg-gray-400 dark:hover:bg-zinc-500 w-2.5'}`}
                         aria-label={`Go to testimonial ${index + 1}`}
                     ></button>
                 ))}
@@ -210,17 +210,17 @@ const HomePage: React.FC = () => {
                 </div>
 
                 <section className="px-4">
-                    <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Featured Properties</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">Featured Properties</h3>
                     <div className="space-y-6">
                         {PROPERTIES.slice(0, 2).map(prop => (
                             <PropertyCard key={prop.id} property={prop} />
                         ))}
                     </div>
-                    <ReactRouterDOM.Link to="/properties" className="block text-center mt-6 text-golden-yellow hover:underline">View All Properties</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/properties" className="block text-center mt-6 text-orange-600 dark:text-golden-yellow hover:underline">View All Properties</ReactRouterDOM.Link>
                 </section>
 
                 <section className="px-4">
-                     <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Our Services</h3>
+                     <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">Our Services</h3>
                      <div className="grid grid-cols-2 gap-4">
                          <ReactRouterDOM.Link to="/construction" className="block p-4 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors duration-300">
                             <h4 className="font-semibold text-lg">Construction</h4>
@@ -234,15 +234,15 @@ const HomePage: React.FC = () => {
                 </section>
 
                 <section className="px-4">
-                    <h3 className="text-2xl font-bold mb-4 text-golden-yellow">Company Brochure</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">Company Brochure</h3>
                     <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
                         <div className="bg-white/50 dark:bg-zinc-900/50 p-8 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-300 dark:border-zinc-700">
-                            <DocumentTextIcon className="h-16 w-16 text-golden-yellow/50 mb-4" />
+                            <DocumentTextIcon className="h-16 w-16 text-orange-600/50 dark:text-golden-yellow/50 mb-4" />
                             <h4 className="text-lg font-bold text-zinc-900 dark:text-white">Explore Our Company Profile</h4>
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-4">Get an in-depth look at our projects, mission, and vision.</p>
                             <button 
                                 onClick={() => setBrochureModalOpen(true)}
-                                className="bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
+                                className="bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
                             >
                                 View Brochure
                             </button>
@@ -251,7 +251,7 @@ const HomePage: React.FC = () => {
                 </section>
                 
                 <section className="px-4">
-                    <h3 className="text-2xl font-bold mb-4 text-golden-yellow">What Our Clients Say</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">What Our Clients Say</h3>
                     <TestimonialCarousel />
                 </section>
             </div>

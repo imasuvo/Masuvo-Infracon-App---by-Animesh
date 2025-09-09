@@ -62,25 +62,25 @@ const DownloadFormModal: React.FC<DownloadFormModalProps> = ({ onClose, onSucces
                 ) : (
                     <form onSubmit={handleSubmit} className="p-6 space-y-4">
                         <div className="text-center">
-                            <h3 className="text-lg font-bold text-golden-yellow">Enter your details to download</h3>
+                            <h3 className="text-lg font-bold text-orange-600 dark:text-golden-yellow">Enter your details to download</h3>
                             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">We'll keep you updated on our latest projects.</p>
                         </div>
                         <div>
                             <label htmlFor="name" className="sr-only">Full Name</label>
-                            <input id="name" type="text" name="name" placeholder="Full Name" className="w-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg p-3 border border-transparent focus:border-golden-yellow focus:ring-0 transition" required />
+                            <input id="name" type="text" name="name" placeholder="Full Name" className="w-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg p-3 border border-transparent focus:border-orange-500 dark:focus:border-golden-yellow focus:ring-0 transition" required />
                         </div>
                          <div>
                              <label htmlFor="email" className="sr-only">Email Address</label>
-                            <input id="email" type="email" name="email" placeholder="Email Address" className="w-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg p-3 border border-transparent focus:border-golden-yellow focus:ring-0 transition" required />
+                            <input id="email" type="email" name="email" placeholder="Email Address" className="w-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg p-3 border border-transparent focus:border-orange-500 dark:focus:border-golden-yellow focus:ring-0 transition" required />
                         </div>
                         <div>
                             <label htmlFor="phone" className="sr-only">Phone Number</label>
-                            <input id="phone" type="tel" name="phone" placeholder="Phone Number" className="w-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg p-3 border border-transparent focus:border-golden-yellow focus:ring-0 transition" required />
+                            <input id="phone" type="tel" name="phone" placeholder="Phone Number" className="w-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white rounded-lg p-3 border border-transparent focus:border-orange-500 dark:focus:border-golden-yellow focus:ring-0 transition" required />
                         </div>
-                         <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
+                         <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
                             {isSubmitting ? (
                                 <>
-                                    <Spinner size="sm" className="mr-2 text-charcoal" />
+                                    <Spinner size="sm" className="mr-2 text-white dark:text-charcoal" />
                                     <span>Submitting...</span>
                                 </>
                             ) : (

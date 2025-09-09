@@ -12,7 +12,7 @@ const FilterButton: React.FC<{ active: boolean, onClick: () => void, children: R
     return (
         <button 
             onClick={onClick}
-            className={`px-3 py-1 text-sm rounded-full transition-colors duration-200 ${active ? 'bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
+            className={`px-3 py-1 text-sm rounded-full transition-colors duration-200 ${active ? 'bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
         >
             {children}
         </button>
@@ -55,7 +55,7 @@ const PropertiesPage: React.FC = () => {
             transition={{ duration: 0.3 }}
         >
             <div className="p-4 min-h-screen">
-                <h2 className="text-3xl font-bold mb-6 text-golden-yellow">Our Properties</h2>
+                <h2 className="text-3xl font-bold mb-6 text-orange-600 dark:text-golden-yellow">Our Properties</h2>
                 
                 <div className="space-y-4 mb-6">
                     <div>
@@ -83,7 +83,7 @@ const PropertiesPage: React.FC = () => {
                         {Object.entries(groupedProperties).map(([area, props]) => (
                             (props && props.length > 0) && (
                                 <section key={area}>
-                                    <h3 className="text-2xl font-bold mb-4 text-golden-orange border-b-2 border-golden-yellow/20 pb-2">{area}</h3>
+                                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-orange border-b-2 border-orange-600/20 dark:border-golden-yellow/20 pb-2">{area}</h3>
                                     <div className="space-y-6">
                                         {props.map(prop => <PropertyCard key={prop.id} property={prop} />)}
                                     </div>
@@ -97,8 +97,8 @@ const PropertiesPage: React.FC = () => {
                     </div>
                 )}
 
-                <div className="mt-8 p-4 bg-gray-100 dark:bg-zinc-800 rounded-lg text-center border border-golden-yellow/20">
-                    <h4 className="font-bold text-golden-yellow">Terms & Conditions Apply</h4>
+                <div className="mt-8 p-4 bg-gray-100 dark:bg-zinc-800 rounded-lg text-center border border-orange-600/20 dark:border-golden-yellow/20">
+                    <h4 className="font-bold text-orange-600 dark:text-golden-yellow">Terms & Conditions Apply</h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">ALL ARE INITIAL STARTING PRICE. IT MAY VARY AS PER LAND VALUATION AND DEMAND IN PARTICULAR AREA.</p>
                 </div>
             </div>

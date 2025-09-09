@@ -14,7 +14,7 @@ const sqftToSqm = (sqft: number) => (sqft * 0.092903).toFixed(2);
 const FilterButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
     <button 
         onClick={onClick}
-        className={`px-4 py-2 text-sm rounded-full transition-colors duration-200 ${active ? 'bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
+        className={`px-4 py-2 text-sm rounded-full transition-colors duration-200 ${active ? 'bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
     >
         {children}
     </button>
@@ -23,7 +23,7 @@ const FilterButton: React.FC<{ active: boolean; onClick: () => void; children: R
 const DetailCTAButton: React.FC<{ children: React.ReactNode; icon: React.ElementType; onClick?: () => void; to?: string; }> = ({ children, icon: Icon, onClick, to }) => {
     const content = (
         <div className="flex flex-col items-center justify-center text-center gap-1.5 p-3 bg-gray-100 dark:bg-zinc-800 rounded-xl hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
-            <Icon className="h-6 w-6 text-golden-yellow" />
+            <Icon className="h-6 w-6 text-orange-600 dark:text-golden-yellow" />
             <span className="text-xs font-semibold text-zinc-900 dark:text-white">{children}</span>
         </div>
     );
@@ -49,13 +49,13 @@ const FloorPlanDetailView: React.FC<{ plan: FloorPlan; onBack: () => void }> = (
             <div className="p-4 space-y-6">
                 <div className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">
                     <h3 className="text-sm text-gray-500 dark:text-gray-400">Price</h3>
-                    <p className="text-2xl font-bold text-golden-yellow">{plan.price}</p>
+                    <p className="text-2xl font-bold text-orange-600 dark:text-golden-yellow">{plan.price}</p>
                     <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Govt. charges applicable</p>
                 </div>
 
                 <div>
-                    <h3 className="text-xl font-semibold text-golden-yellow mb-3">Interactive 3D Model</h3>
-                    <div className="h-96 rounded-lg overflow-hidden border-2 border-golden-yellow/20">
+                    <h3 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-3">Interactive 3D Model</h3>
+                    <div className="h-96 rounded-lg overflow-hidden border-2 border-orange-500/20 dark:border-golden-yellow/20">
                         <iframe 
                             src={plan.model3dUrl}
                             width="100%" 
@@ -76,7 +76,7 @@ const FloorPlanDetailView: React.FC<{ plan: FloorPlan; onBack: () => void }> = (
                 </div>
 
                 <div>
-                    <h3 className="text-xl font-semibold text-golden-yellow mb-2">Additional Info</h3>
+                    <h3 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Additional Info</h3>
                     <p className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">{plan.description}</p>
                 </div>
             </div>
@@ -101,7 +101,7 @@ const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> =
     
     return (
         <div className="p-4 min-h-screen">
-            <h2 className="text-3xl font-bold mb-6 text-golden-yellow">Floor Plans & Pricing</h2>
+            <h2 className="text-3xl font-bold mb-6 text-orange-600 dark:text-golden-yellow">Floor Plans & Pricing</h2>
             
             <div className="mb-6 flex flex-wrap gap-2">
                 {tabs.map(tab => (
@@ -113,7 +113,7 @@ const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> =
             
             <div className="space-y-6">
                 {filteredPlans.map(plan => (
-                     <div key={plan.id} className="bg-gray-100 dark:bg-zinc-800 rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row group hover:shadow-golden-yellow/20 transition-shadow duration-300">
+                     <div key={plan.id} className="bg-gray-100 dark:bg-zinc-800 rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row group hover:shadow-orange-500/20 dark:hover:shadow-golden-yellow/20 transition-shadow duration-300">
                         <div className="md:w-1/3">
                              <img src={plan.thumbnailUrl} alt={`${plan.type} Floor Plan Thumbnail`} className="w-full h-48 md:h-full object-cover"/>
                         </div>
@@ -121,10 +121,10 @@ const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> =
                             <div>
                                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white">{plan.sizeSqFt.toLocaleString('en-IN')} sq.ft / {sqftToSqm(plan.sizeSqFt)} sq.m</h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">{plan.configuration} | {plan.type}</p>
-                                <p className="text-2xl font-semibold text-golden-yellow mt-2">{plan.price}</p>
+                                <p className="text-2xl font-semibold text-orange-600 dark:text-golden-yellow mt-2">{plan.price}</p>
                             </div>
                             <div className="mt-auto pt-4 flex flex-col gap-2">
-                                <button onClick={() => onSelectPlan(plan)} className="w-full text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold py-2.5 px-4 rounded-lg text-sm transition-transform duration-200 group-hover:scale-105">
+                                <button onClick={() => onSelectPlan(plan)} className="w-full text-center bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-semibold py-2.5 px-4 rounded-lg text-sm transition-transform duration-200 group-hover:scale-105">
                                     View Details
                                 </button>
                                 <div className="flex gap-2">

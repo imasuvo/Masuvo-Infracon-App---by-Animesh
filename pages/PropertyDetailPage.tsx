@@ -84,7 +84,7 @@ const PropertyDetailPage: React.FC = () => {
 
     const DetailItem: React.FC<{ icon: React.ElementType, label: string, value: string, className?: string }> = ({ icon: Icon, label, value, className = '' }) => (
         <div className={`flex items-start ${className}`}>
-            <Icon className="h-5 w-5 mr-3 text-golden-yellow flex-shrink-0 mt-0.5" />
+            <Icon className="h-5 w-5 mr-3 text-orange-600 dark:text-golden-yellow flex-shrink-0 mt-0.5" />
             <div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">{label}</p>
                 <p className="font-semibold text-zinc-900 dark:text-white">{value}</p>
@@ -109,7 +109,7 @@ const PropertyDetailPage: React.FC = () => {
                  <div className="absolute top-4 right-4 flex items-center gap-2">
                     <button
                         onClick={handleShare}
-                        className="bg-black/50 p-2 rounded-full text-white hover:text-golden-yellow transition-colors duration-200 z-10"
+                        className="bg-black/50 p-2 rounded-full text-white hover:text-orange-600 dark:hover:text-golden-yellow transition-colors duration-200 z-10"
                         aria-label="Share property"
                     >
                         <ShareIcon className="h-6 w-6" />
@@ -124,7 +124,7 @@ const PropertyDetailPage: React.FC = () => {
                 </div>
                  <div className="absolute bottom-0 left-0 p-4 w-full">
                      <h1 className="text-3xl font-bold text-zinc-900 dark:text-white break-words">{property.title}</h1>
-                     <p className="text-lg text-golden-yellow font-semibold">{property.price}</p>
+                     <p className="text-lg text-orange-600 dark:text-golden-yellow font-semibold">{property.price}</p>
                  </div>
             </div>
             
@@ -140,12 +140,12 @@ const PropertyDetailPage: React.FC = () => {
 
 
                 <div>
-                    <h2 className="text-xl font-semibold text-golden-yellow mb-2">Description</h2>
+                    <h2 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Description</h2>
                     <ReadMore text={property.description} maxLength={150} />
                 </div>
                 
                 <div>
-                    <h2 className="text-xl font-semibold text-golden-yellow mb-2">Photo Gallery</h2>
+                    <h2 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Photo Gallery</h2>
                     {property.images && property.images.length > 0 ? (
                         <div className="relative w-full h-64 rounded-lg overflow-hidden bg-gray-200 dark:bg-zinc-800 flex items-center justify-center">
                             <AnimatePresence initial={false} custom={direction}>
@@ -211,12 +211,12 @@ const PropertyDetailPage: React.FC = () => {
                 </div>
 
                 <div>
-                    <h2 className="text-xl font-semibold text-golden-yellow mb-2">Floor Plan</h2>
+                    <h2 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Floor Plan</h2>
                     <img src={property.floorPlan} alt="Floor Plan" className="rounded-lg w-full" />
                 </div>
                 
                 <div>
-                     <h2 className="text-xl font-semibold text-golden-yellow mb-2">Location on Map</h2>
+                     <h2 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Location on Map</h2>
                      <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
                         <iframe 
                             src={`https://maps.google.com/maps?q=${encodeURIComponent(`${property.subLocation}, Durgapur, West Bengal`)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
@@ -234,7 +234,7 @@ const PropertyDetailPage: React.FC = () => {
                     <a href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hi, I am interested in the property: ${property.title} (ID: ${property.id})`}
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="w-full block text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-4 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
+                        className="w-full block text-center bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-4 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
                     >
                         Enquire Now on WhatsApp
                     </a>

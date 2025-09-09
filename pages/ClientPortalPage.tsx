@@ -223,7 +223,7 @@ const ClientPortalPage: React.FC = () => {
             {/* Portal Header */}
             <header className={`${theme === 'light' ? 'bg-white border-gray-200' : 'bg-charcoal border-golden-yellow/20'} p-4 flex justify-between items-center sticky top-0 z-20 border-b`}>
                 <div>
-                     <h1 className="text-xl font-bold text-golden-yellow">Client Portal</h1>
+                     <h1 className="text-xl font-bold text-orange-600 dark:text-golden-yellow">Client Portal</h1>
                      <p className={`text-xs ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'}`}>Welcome, {project?.clientName || 'Client'}</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -246,7 +246,7 @@ const ClientPortalPage: React.FC = () => {
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                     transition={{ duration: 0.15, ease: 'easeOut' }}
-                                    className={`absolute top-full right-0 mt-2 w-80 rounded-xl shadow-2xl z-30 ${theme === 'light' ? 'bg-white border border-gray-200 text-zinc-900' : 'bg-zinc-800 border border-golden-yellow/20 text-white'}`}
+                                    className={`absolute top-full right-0 mt-2 w-80 rounded-xl shadow-2xl z-30 ${theme === 'light' ? 'bg-white border border-gray-200 text-zinc-900' : 'bg-zinc-800 border-golden-yellow/20 text-white'}`}
                                 >
                                     <div className={`p-3 border-b ${theme === 'light' ? 'border-gray-200' : 'border-zinc-700'}`}>
                                         <h4 className="font-semibold">Notifications</h4>
@@ -261,7 +261,7 @@ const ClientPortalPage: React.FC = () => {
                                         ))}
                                     </div>
                                     <div className={`p-2 text-center ${theme === 'light' ? 'bg-gray-50' : 'bg-zinc-800/50'}`}>
-                                        <button className="text-xs text-golden-yellow hover:underline">Mark all as read</button>
+                                        <button className="text-xs text-orange-600 dark:text-golden-yellow hover:underline">Mark all as read</button>
                                     </div>
                                 </motion.div>
                             )}
@@ -289,7 +289,7 @@ const ClientPortalPage: React.FC = () => {
 
                         {/* Recent Updates */}
                         <section>
-                            <h3 className="text-xl font-semibold mb-3 text-golden-yellow">Recent Updates</h3>
+                            <h3 className="text-xl font-semibold mb-3 text-orange-600 dark:text-golden-yellow">Recent Updates</h3>
                             <div className="space-y-4">
                                 {project.updates.slice(0, 3).map(update => (
                                      <div key={update.id} className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-4 rounded-xl flex gap-4 items-start shadow-sm`}>
@@ -315,7 +315,7 @@ const ClientPortalPage: React.FC = () => {
 
                         {/* Documents */}
                          <section>
-                            <h3 className="text-xl font-semibold mb-3 text-golden-yellow">Documents</h3>
+                            <h3 className="text-xl font-semibold mb-3 text-orange-600 dark:text-golden-yellow">Documents</h3>
                              <div className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-6 rounded-xl shadow-sm space-y-4`}>
                                 <h4 className="font-semibold text-lg">Upload a Document</h4>
                                 <div className={`border-2 border-dashed ${theme === 'light' ? 'border-gray-300' : 'border-zinc-600'} rounded-lg p-4 text-center`}>
@@ -345,11 +345,11 @@ const ClientPortalPage: React.FC = () => {
                                 <button
                                     onClick={handleDocumentUpload}
                                     disabled={!selectedFile || isUploading}
-                                    className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2.5 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                                    className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-2.5 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
                                 >
                                     {isUploading ? (
                                         <>
-                                            <Spinner size="sm" className="mr-2 text-charcoal"/>
+                                            <Spinner size="sm" className="mr-2 text-white dark:text-charcoal"/>
                                             <span>Uploading...</span>
                                         </>
                                     ) : (
@@ -382,7 +382,7 @@ const ClientPortalPage: React.FC = () => {
                         
                         {/* Feedback Section */}
                         <section>
-                            <h3 className="text-xl font-semibold mb-3 text-golden-yellow">Provide Feedback</h3>
+                            <h3 className="text-xl font-semibold mb-3 text-orange-600 dark:text-golden-yellow">Provide Feedback</h3>
                             <div className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-6 rounded-xl shadow-sm`}>
                                 {feedbackSubmitted ? (
                                     <div className="text-center py-8">
@@ -391,7 +391,7 @@ const ClientPortalPage: React.FC = () => {
                                         <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} mt-2 mb-4`}>We appreciate you taking the time to share your thoughts.</p>
                                         <button 
                                             onClick={resetFeedbackForm}
-                                            className="text-sm font-semibold text-golden-yellow hover:underline"
+                                            className="text-sm font-semibold text-orange-600 dark:text-golden-yellow hover:underline"
                                         >
                                             Submit another feedback
                                         </button>
@@ -415,7 +415,7 @@ const ClientPortalPage: React.FC = () => {
                                                             className="text-3xl transition-colors"
                                                             aria-label={`Rate ${starValue} stars`}
                                                         >
-                                                            <StarIcon className={`h-8 w-8 ${starValue <= (hoverRating || rating) ? 'text-yellow-400' : theme === 'light' ? 'text-gray-300' : 'text-gray-500'}`} />
+                                                            <StarIcon className={`h-8 w-8 ${starValue <= (hoverRating || rating) ? 'text-amber-500 dark:text-yellow-400' : theme === 'light' ? 'text-gray-300' : 'text-gray-500'}`} />
                                                         </button>
                                                     );
                                                 })}
@@ -432,18 +432,18 @@ const ClientPortalPage: React.FC = () => {
                                                 value={feedbackComment}
                                                 onChange={(e) => setFeedbackComment(e.target.value)}
                                                 placeholder="Share your comments or suggestions..."
-                                                className={`w-full rounded-lg p-3 text-sm ${theme === 'light' ? 'bg-gray-100 border-gray-300 text-zinc-900 placeholder-gray-500 focus:ring-golden-yellow focus:border-golden-yellow' : 'bg-zinc-700 border-zinc-600 text-white placeholder-gray-400 focus:ring-golden-yellow focus:border-golden-yellow'}`}
+                                                className={`w-full rounded-lg p-3 text-sm ${theme === 'light' ? 'bg-gray-100 border-gray-300 text-zinc-900 placeholder-gray-500 focus:ring-orange-500 focus:border-orange-500' : 'bg-zinc-700 border-zinc-600 text-white placeholder-gray-400 focus:ring-golden-yellow focus:border-golden-yellow'}`}
                                             ></textarea>
                                         </div>
 
                                         <button
                                             type="submit"
                                             disabled={isSubmittingFeedback || rating === 0}
-                                            className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2.5 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                                            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-2.5 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
                                         >
                                             {isSubmittingFeedback ? (
                                                 <>
-                                                    <Spinner size="sm" className="mr-2 text-charcoal" />
+                                                    <Spinner size="sm" className="mr-2 text-white dark:text-charcoal" />
                                                     <span>Submitting...</span>
                                                 </>
                                             ) : (

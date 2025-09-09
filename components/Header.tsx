@@ -18,22 +18,22 @@ const Header: React.FC = () => {
                         <ReactRouterDOM.Link to="/" className="flex items-center gap-3 group">
                             <img src="https://infraconmasuvo.com/wp-content/uploads/2025/02/Masuvo-Infracon-Logo-Rounded.png" alt="Masuvo Infracon Pvt. Ltd. Logo" className="h-12 w-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300" />
                             <div>
-                                <span className="font-bold text-zinc-900 dark:text-white text-lg tracking-wide group-hover:text-golden-yellow transition-colors">Masuvo Infracon</span>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 -mt-1 group-hover:text-golden-yellow transition-colors">Made by Animesh</p>
+                                <span className="font-bold text-zinc-900 dark:text-white text-lg tracking-wide group-hover:text-orange-600 dark:group-hover:text-golden-yellow transition-colors">Masuvo Infracon</span>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 -mt-1 group-hover:text-orange-600 dark:group-hover:text-golden-yellow transition-colors">Made by Animesh</p>
                             </div>
                         </ReactRouterDOM.Link>
 
                         <div className="flex items-center gap-2">
                              <button
                                 onClick={toggleTheme}
-                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-golden-yellow dark:hover:text-golden-yellow transition-colors"
+                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow transition-colors"
                                 aria-label="Toggle theme"
                             >
                                 {theme === 'dark' ? <SunIcon className="h-6 w-6" /> : <MoonIcon className="h-6 w-6" />}
                             </button>
                             <button
                                 onClick={() => setIsSidebarOpen(true)}
-                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-golden-yellow dark:hover:text-golden-yellow transition-colors"
+                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow transition-colors"
                                 aria-label="Open navigation menu"
                             >
                                 <Bars3Icon className="h-7 w-7" />

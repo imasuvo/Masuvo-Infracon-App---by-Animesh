@@ -13,7 +13,7 @@ const navItems = [
 
 const BottomNav: React.FC = () => {
     const location = ReactRouterDOM.useLocation();
-    const activeClass = 'text-golden-yellow';
+    const activeClass = 'text-orange-600 dark:text-golden-yellow';
     const inactiveClass = 'text-gray-500 dark:text-gray-400';
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
@@ -35,7 +35,7 @@ const BottomNav: React.FC = () => {
                         end={item.path === '/'}
                         onClick={(e) => handleNavClick(e, item.path)}
                         className={({ isActive }) => 
-                            `flex flex-col items-center justify-center w-full text-xs transition-colors duration-300 ${isActive ? activeClass : inactiveClass} hover:text-golden-yellow`
+                            `flex flex-col items-center justify-center w-full text-xs transition-colors duration-300 ${isActive ? activeClass : inactiveClass} hover:text-orange-600 dark:hover:text-golden-yellow`
                         }
                     >
                         <item.icon className="h-6 w-6 mb-1" />

@@ -4,6 +4,7 @@ import * as ReactRouterDOM from 'react-router-dom';
 import type { Resource, CalculatedResource, QualityOption } from '../types';
 import { motion } from 'framer-motion';
 import ErrorDisplay from '../components/ErrorDisplay';
+import { useTheme } from '../contexts/ThemeContext';
 
 const indianStatesAndCities: { [key: string]: string[] } = {
   "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
@@ -52,8 +53,11 @@ const RESOURCES_DATA: Resource[] = [
     { name: 'Contractor (RCC, etc.)', unit: 'Sq. Ft', quantityFactor: 1, qualityOptions: { 'Basic': 180, 'Medium': 210, 'Premium': 250 }, defaultQuality: 'Medium' },
 ];
 
-const PieChart: React.FC<{ data: { name: string; value: number }[] }> = ({ data }) => {
-    const colors = ['#FFD700', '#FFA500', '#FF6347', '#4682B4', '#32CD32', '#DA70D6', '#6A5ACD', '#FF4500', '#20B2AA', '#D2B48C', '#9ACD32', '#BA55D3', '#BDB76B'];
+const PieChart: React.FC<{ data: { name: string; value: number }[]; theme: 'light' | 'dark' }> = ({ data, theme }) => {
+    const darkThemeColors = ['#FFD700', '#FFA500', '#FF6347', '#4682B4', '#32CD32', '#DA70D6', '#6A5ACD', '#FF4500', '#20B2AA', '#D2B48C', '#9ACD32', '#BA55D3', '#BDB76B'];
+    const lightThemeColors = ['#ca8a04', '#ea580c', '#ef4444', '#2563eb', '#22c55e', '#d946ef', '#7c3aed', '#f97316', '#14b8a6', '#a16207', '#84cc16', '#c026d3', '#854d0e'];
+    const colors = theme === 'dark' ? darkThemeColors : lightThemeColors;
+
     const total = data.reduce((sum, item) => sum + item.value, 0);
     let cumulativePercent = 0;
 
@@ -86,6 +90,7 @@ const PieChart: React.FC<{ data: { name: string; value: number }[] }> = ({ data 
 
 
 const BudgetPage: React.FC = () => {
+    const { theme } = useTheme();
     const [step, setStep] = useState(1);
     const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
@@ -163,7 +168,7 @@ const BudgetPage: React.FC = () => {
 
     const renderStep1 = () => (
         <>
-            <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Home Construction Cost Calculator</h2>
+            <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Home Construction Cost Calculator</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8">Estimate Your Budget</p>
             {error && (
                 <div className="mb-6">
@@ -191,15 +196,15 @@ const BudgetPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-4">
                     <label className="flex items-center text-gray-700 dark:text-gray-300">
-                        <input type="radio" name="unit" value="sqft" checked={unit === 'sqft'} onChange={() => setUnit('sqft')} className="form-radio accent-golden-yellow mr-2"/>
+                        <input type="radio" name="unit" value="sqft" checked={unit === 'sqft'} onChange={() => setUnit('sqft')} className="form-radio accent-orange-600 dark:accent-golden-yellow mr-2"/>
                         Sq. Feet
                     </label>
                      <label className="flex items-center text-gray-700 dark:text-gray-300">
-                        <input type="radio" name="unit" value="sqm" checked={unit === 'sqm'} onChange={() => setUnit('sqm')} className="form-radio accent-golden-yellow mr-2"/>
+                        <input type="radio" name="unit" value="sqm" checked={unit === 'sqm'} onChange={() => setUnit('sqm')} className="form-radio accent-orange-600 dark:accent-golden-yellow mr-2"/>
                         Sq. Meter
                     </label>
                 </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
                     Next →
                 </button>
             </form>
@@ -208,23 +213,23 @@ const BudgetPage: React.FC = () => {
 
     const renderStep2 = () => (
         <>
-             <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Estimated Results</h2>
+             <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Estimated Results</h2>
              <p className="text-gray-600 dark:text-gray-300 mb-2">For {area} {unit === 'sqft' ? 'Sq. Feet' : 'Sq. Meter'} in {selectedCity}, {selectedState}</p>
-             <button onClick={() => setStep(1)} className="text-sm text-golden-yellow hover:underline mb-6">← Go Back & Edit</button>
+             <button onClick={() => setStep(1)} className="text-sm text-orange-600 dark:text-golden-yellow hover:underline mb-6">← Go Back & Edit</button>
 
             <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl mb-6">
                 <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Cost</h3>
-                <p className="text-4xl font-bold text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
+                <p className="text-4xl font-bold text-orange-600 dark:text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
                 <p className="text-sm text-gray-700 dark:text-gray-300">Cost Per Sq. Ft: <span className="font-semibold">₹{costPerSqFt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
                 
                 <div className="mt-4">
                     <h4 className="font-semibold mb-2">Cost Distribution</h4>
-                    <PieChart data={chartData} />
+                    <PieChart data={chartData} theme={theme} />
                 </div>
             </div>
 
             <div className="space-y-4">
-                 <h3 className="text-xl font-semibold text-golden-yellow mb-2">Phase-wise Cost Breakdown</h3>
+                 <h3 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Phase-wise Cost Breakdown</h3>
                 {calculatedData.map(resource => (
                     <div key={resource.name} className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">
                         <div className="flex justify-between items-start">
@@ -232,7 +237,7 @@ const BudgetPage: React.FC = () => {
                                 <h4 className="font-bold">{resource.name}</h4>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {resource.calculatedQuantity}</p>
                            </div>
-                           <p className="text-lg font-semibold text-golden-yellow">₹{resource.calculatedAmount.toLocaleString('en-IN')}</p>
+                           <p className="text-lg font-semibold text-orange-600 dark:text-golden-yellow">₹{resource.calculatedAmount.toLocaleString('en-IN')}</p>
                         </div>
                          <div className="mt-2">
                             <select value={resource.selectedQuality} onChange={e => handleQualityChange(resource.name, e.target.value as QualityOption)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-2 text-sm">
@@ -243,16 +248,16 @@ const BudgetPage: React.FC = () => {
                 ))}
             </div>
 
-            <div className="mt-8 text-center bg-gray-200 dark:bg-zinc-900 p-6 rounded-xl border border-golden-yellow/30">
+            <div className="mt-8 text-center bg-gray-200 dark:bg-zinc-900 p-6 rounded-xl border border-orange-600/30 dark:border-golden-yellow/30">
                 <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Amount</h3>
-                <p className="text-3xl font-bold text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
+                <p className="text-3xl font-bold text-orange-600 dark:text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
             </div>
 
              <div className="mt-6 flex flex-col sm:flex-row gap-4">
                 <button onClick={() => alert('PDF download functionality coming soon!')} className="flex-1 bg-gray-300 dark:bg-zinc-700 text-zinc-900 dark:text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-gray-400 dark:hover:bg-zinc-600 transition-colors">
                     Download Estimate PDF
                 </button>
-                 <ReactRouterDOM.Link to="/contact" className="flex-1 text-center bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                 <ReactRouterDOM.Link to="/contact" className="flex-1 text-center bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
                     Request Custom Quote
                 </ReactRouterDOM.Link>
             </div>

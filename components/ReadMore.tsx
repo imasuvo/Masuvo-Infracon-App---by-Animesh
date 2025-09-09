@@ -23,7 +23,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength }) => {
       </p>
       <button 
         onClick={toggleReadMore} 
-        className="text-golden-yellow font-semibold mt-2 hover:underline text-sm"
+        className="text-orange-600 dark:text-golden-yellow font-semibold mt-2 hover:underline text-sm"
       >
         {isExpanded ? 'Read Less' : 'Read More'}
       </button>

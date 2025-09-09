@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import BrochureViewerModal from '../components/BrochureViewerModal';
 
 const CTAButton: React.FC<{ to: string, children: React.ReactNode }> = ({ to, children }) => (
-    <ReactRouterDOM.Link to={to} className="inline-block mt-4 bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+    <ReactRouterDOM.Link to={to} className="inline-block mt-4 bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
         {children}
     </ReactRouterDOM.Link>
 );
@@ -40,12 +40,12 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
         >
             <div className="p-4 min-h-screen space-y-8">
                 <div>
-                    <h2 className="text-3xl font-bold mb-2 text-golden-yellow">{COMPANY_INFO.name}</h2>
+                    <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">{COMPANY_INFO.name}</h2>
                     <p className="italic text-lg text-gray-700 dark:text-gray-300">"{COMPANY_INFO.tagline}"</p>
                 </div>
 
                 <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
-                     <h3 className="text-xl font-semibold mb-2 text-golden-yellow">About Company</h3>
+                     <h3 className="text-xl font-semibold mb-2 text-orange-600 dark:text-golden-yellow">About Company</h3>
                      <p className="font-semibold text-gray-800 dark:text-gray-300 mb-3">The Story Of Masuvo Infracon And The Team Behind Your Next Home.</p>
                      <div className="text-gray-600 dark:text-gray-400 text-sm">
                         <ReadMore text={aboutText} maxLength={200} />
@@ -54,7 +54,7 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
                 </div>
                 
                 <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
-                     <h3 className="text-xl font-semibold mb-2 text-golden-yellow">Building Your Dreams</h3>
+                     <h3 className="text-xl font-semibold mb-2 text-orange-600 dark:text-golden-yellow">Building Your Dreams</h3>
                      <p className="font-semibold text-gray-800 dark:text-gray-300 mb-3">Create The Building You Want Here</p>
                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                         At Masuvo Infracon Private Limited, we transform your architectural dreams into reality. Whether you're envisioning a modern home, a sprawling commercial complex, or a bespoke retail space, we’re here to bring your vision to life.
@@ -71,14 +71,14 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
                 </div>
 
                  <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
-                    <h3 className="text-xl font-semibold mb-4 text-golden-yellow">Company Brochure</h3>
+                    <h3 className="text-xl font-semibold mb-4 text-orange-600 dark:text-golden-yellow">Company Brochure</h3>
                     <div className="bg-white/50 dark:bg-zinc-900/50 p-8 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-300 dark:border-zinc-700">
-                        <DocumentTextIcon className="h-16 w-16 text-golden-yellow/50 mb-4" />
+                        <DocumentTextIcon className="h-16 w-16 text-orange-600/50 dark:text-golden-yellow/50 mb-4" />
                         <h4 className="text-lg font-bold text-zinc-900 dark:text-white">Explore Our Company Profile</h4>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-4">Get an in-depth look at our projects, mission, and vision.</p>
                         <button 
                             onClick={() => setBrochureModalOpen(true)}
-                            className="bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
+                            className="bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
                         >
                             View Brochure
                         </button>
@@ -86,9 +86,9 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
                 </div>
 
                  <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
-                     <h3 className="text-xl font-semibold mb-2 text-golden-yellow">Founder's Message</h3>
+                     <h3 className="text-xl font-semibold mb-2 text-orange-600 dark:text-golden-yellow">Founder's Message</h3>
                      <div className="flex items-start gap-4">
-                        <img src="https://infraconmasuvo.com/wp-content/uploads/2025/02/1-1.png" alt={COMPANY_INFO.founder} className="w-20 h-20 rounded-full object-cover border-2 border-golden-yellow" />
+                        <img src="https://infraconmasuvo.com/wp-content/uploads/2025/02/1-1.png" alt={COMPANY_INFO.founder} className="w-20 h-20 rounded-full object-cover border-2 border-orange-600 dark:border-golden-yellow" />
                         <div>
                             <p className="text-gray-700 dark:text-gray-300 italic">"Our goal is simple: to build homes that we would be proud to live in ourselves. Quality is not an act, it is a habit."</p>
                             <p className="mt-2 font-bold text-right text-zinc-900 dark:text-white">- {COMPANY_INFO.founder}</p>
@@ -97,7 +97,7 @@ A standout strength of Masuvo Infracon is its expertise in land search and acqui
                 </div>
 
                 <div>
-                    <h3 className="text-xl font-semibold mb-2 text-golden-yellow">Our Office</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-orange-600 dark:text-golden-yellow">Our Office</h3>
                     <p className="text-gray-700 dark:text-gray-300 mb-4">{COMPANY_INFO.address}</p>
                     <div className="rounded-lg overflow-hidden">
                        <iframe 

@@ -49,7 +49,7 @@ const SchedulerPage: React.FC = () => {
         return (
              <div className="p-4 min-h-screen flex flex-col items-center justify-center text-center">
                  <CheckCircleIcon className="h-20 w-20 text-green-500 mb-4"/>
-                <h2 className="text-2xl font-bold mb-2 text-golden-yellow">
+                <h2 className="text-2xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">
                     {formType === 'visit' ? 'Inquiry Submitted!' : 'Appointment Booked!'}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">Thank you! Our team will contact you shortly to confirm the details.</p>
@@ -89,18 +89,18 @@ const SchedulerPage: React.FC = () => {
             transition={{ duration: 0.3 }}
         >
             <div className="p-4 min-h-screen">
-                <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Book an Appointment</h2>
+                <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Book an Appointment</h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-8">Choose a convenient time to meet us.</p>
                 
                 <div className="flex gap-4 mb-6">
-                    <button type="button" onClick={() => setFormType('visit')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'visit' ? 'bg-golden-yellow text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700'}`}>Schedule Site Visit</button>
-                    <button type="button" onClick={() => setFormType('office')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'office' ? 'bg-golden-yellow text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700'}`}>Book Office Appointment</button>
+                    <button type="button" onClick={() => setFormType('visit')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'visit' ? 'bg-orange-500 dark:bg-golden-yellow text-white dark:text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700'}`}>Schedule Site Visit</button>
+                    <button type="button" onClick={() => setFormType('office')} className={`flex-1 p-3 rounded-lg text-sm transition-colors ${formType === 'office' ? 'bg-orange-500 dark:bg-golden-yellow text-white dark:text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700'}`}>Book Office Appointment</button>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {formType === 'visit' ? (
                         <>
-                            <h3 className="text-lg font-semibold text-golden-yellow border-b border-golden-yellow/20 pb-2">Site Visit Inquiry</h3>
+                            <h3 className="text-lg font-semibold text-orange-600 dark:text-golden-yellow border-b border-orange-600/20 dark:border-golden-yellow/20 pb-2">Site Visit Inquiry</h3>
                             <FormInput label="Full Name" name="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Enter your full name" required />
                             <FormInput label="Phone Number" name="phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Mobile number" required />
                             <FormInput label="Email Address" name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email address" />
@@ -110,10 +110,10 @@ const SchedulerPage: React.FC = () => {
                             </FormSelect>
                             <FormInput label="Budget (Optional)" name="budget" type="number" value={budget} onChange={e => setBudget(e.target.value)} placeholder="Budget in Lakhs (e.g., 50)" />
                             <FormTextarea label="Additional Message" name="message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell us more about your project requirements..." rows={3} />
-                            <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4 flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed">
+                            <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4 flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed">
                                 {isSubmitting ? (
                                     <>
-                                        <Spinner size="sm" className="mr-2 text-charcoal" />
+                                        <Spinner size="sm" className="mr-2 text-white dark:text-charcoal" />
                                         <span>Submitting...</span>
                                     </>
                                 ) : (
@@ -123,7 +123,7 @@ const SchedulerPage: React.FC = () => {
                         </>
                     ) : (
                         <>
-                            <h3 className="text-lg font-semibold text-golden-yellow border-b border-golden-yellow/20 pb-2">Office Appointment Booking</h3>
+                            <h3 className="text-lg font-semibold text-orange-600 dark:text-golden-yellow border-b border-orange-600/20 dark:border-golden-yellow/20 pb-2">Office Appointment Booking</h3>
                             <FormInput label="Full Name" name="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Enter your full name" required />
                             <FormInput label="Phone Number" name="phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Mobile number" required />
                             <FormInput label="Email Address" name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email address" />
@@ -137,10 +137,10 @@ const SchedulerPage: React.FC = () => {
                                 {timeSlots.map(time => <option key={time} value={time}>{time}</option>)}
                             </FormSelect>
                             <FormTextarea label="Additional Notes" name="notes" value={notes} onChange={e => setNotes(e.target.value)} placeholder="Any specific requirements or questions..." rows={3} />
-                             <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4 flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed">
+                             <button type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 mt-4 flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed">
                                 {isSubmitting ? (
                                     <>
-                                        <Spinner size="sm" className="mr-2 text-charcoal" />
+                                        <Spinner size="sm" className="mr-2 text-white dark:text-charcoal" />
                                         <span>Booking...</span>
                                     </>
                                 ) : (

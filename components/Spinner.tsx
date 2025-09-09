@@ -14,7 +14,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 'md', className = '' }) => {
 
   return (
     <svg 
-      className={`animate-spin ${sizeClasses[size]} text-golden-yellow ${className}`} 
+      className={`animate-spin ${sizeClasses[size]} text-orange-600 dark:text-golden-yellow ${className}`} 
       xmlns="http://www.w3.org/2000/svg" 
       fill="none" 
       viewBox="0 0 24 24"

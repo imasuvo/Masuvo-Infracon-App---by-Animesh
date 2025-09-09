@@ -47,7 +47,7 @@ const ContactPage: React.FC = () => {
             transition={{ duration: 0.3 }}
         >
             <div className="p-4 min-h-screen">
-                 <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Get in Touch with Masuvo Infracon</h2>
+                 <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Get in Touch with Masuvo Infracon</h2>
                  <p className="text-gray-600 dark:text-gray-300 mb-8">We're here to help you build your dream home.</p>
 
                 <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl mb-8">
@@ -103,11 +103,11 @@ const ContactPage: React.FC = () => {
                             <button 
                                 type="submit" 
                                 disabled={isSubmitting}
-                                className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                             >
                                 {isSubmitting ? (
                                     <>
-                                        <Spinner size="sm" className="mr-2 text-charcoal" />
+                                        <Spinner size="sm" className="mr-2 text-white dark:text-charcoal" />
                                         <span>Submitting...</span>
                                     </>
                                 ) : (
@@ -120,17 +120,17 @@ const ContactPage: React.FC = () => {
 
                 {/* Quick Contact Options */}
                 <div className="text-center">
-                     <h3 className="text-xl font-semibold text-golden-yellow mb-4">Or Contact Us Directly</h3>
+                     <h3 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-4">Or Contact Us Directly</h3>
                      <div className="grid grid-cols-2 gap-2 mb-2">
                         <a href={`tel:${COMPANY_INFO.phone}`} className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl text-center hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
-                            <p className="font-semibold text-golden-yellow">Call Now</p>
+                            <p className="font-semibold text-orange-600 dark:text-golden-yellow">Call Now</p>
                         </a>
                          <a href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello Masuvo Infracon!`} target="_blank" rel="noopener noreferrer" className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl text-center hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
-                            <p className="font-semibold text-golden-yellow">WhatsApp</p>
+                            <p className="font-semibold text-orange-600 dark:text-golden-yellow">WhatsApp</p>
                         </a>
                     </div>
                     <a href={COMPANY_INFO.googleMapsLink} target="_blank" rel="noopener noreferrer" className="block bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl text-center hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors">
-                        <p className="font-semibold text-golden-yellow">Get Directions</p>
+                        <p className="font-semibold text-orange-600 dark:text-golden-yellow">Get Directions</p>
                     </a>
                 </div>
             </div>

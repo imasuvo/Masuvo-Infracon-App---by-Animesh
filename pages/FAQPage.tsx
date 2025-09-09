@@ -17,7 +17,7 @@ const FAQItem: React.FC<{
             >
                 <h3 className="text-md font-semibold text-zinc-900 dark:text-white pr-4">{faq.question}</h3>
                 {isOpen ? (
-                    <MinusIcon className="h-5 w-5 text-golden-yellow flex-shrink-0" />
+                    <MinusIcon className="h-5 w-5 text-orange-600 dark:text-golden-yellow flex-shrink-0" />
                 ) : (
                     <PlusIcon className="h-5 w-5 text-gray-500 dark:text-gray-400 flex-shrink-0" />
                 )}
@@ -62,7 +62,7 @@ const FAQPage: React.FC = () => {
             transition={{ duration: 0.3 }}
         >
             <div className="p-4 min-h-screen">
-                <h2 className="text-3xl font-bold mb-2 text-golden-yellow">Frequently Asked Questions</h2>
+                <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Frequently Asked Questions</h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-8">Find answers to common questions about our services.</p>
 
                 <div className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">

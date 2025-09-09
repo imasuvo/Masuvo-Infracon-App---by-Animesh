@@ -40,7 +40,7 @@ const ClientPortalLoginPage: React.FC = () => {
         >
             <div className="p-4 flex-grow flex flex-col justify-center">
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold text-golden-yellow">Client Portal Login</h2>
+                    <h2 className="text-3xl font-bold text-orange-600 dark:text-golden-yellow">Client Portal Login</h2>
                     <p className="text-gray-600 dark:text-gray-300">Access your project dashboard.</p>
                 </div>
 
@@ -74,11 +74,11 @@ const ClientPortalLoginPage: React.FC = () => {
                     <button 
                         type="submit" 
                         disabled={isSubmitting} 
-                        className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                         {isSubmitting ? (
                             <>
-                                <Spinner size="sm" className="mr-2 text-charcoal" />
+                                <Spinner size="sm" className="mr-2 text-white dark:text-charcoal" />
                                 <span>Logging In...</span>
                             </>
                         ) : (
@@ -87,14 +87,14 @@ const ClientPortalLoginPage: React.FC = () => {
                     </button>
                 </form>
                  <div className="text-center mt-6">
-                    <ReactRouterDOM.Link to="/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-golden-yellow hover:underline transition-colors">
+                    <ReactRouterDOM.Link to="/" className="text-sm text-gray-500 dark:text-gray-400 hover:text-orange-600 dark:hover:text-golden-yellow hover:underline transition-colors">
                         ← Back to Home
                     </ReactRouterDOM.Link>
                 </div>
                 <div className="text-center mt-8 pt-4 border-t border-gray-200 dark:border-zinc-700/50">
                     <p className="text-xs text-gray-400 dark:text-zinc-500">
                         Are you an administrator?{' '}
-                        <ReactRouterDOM.Link to="/admin" className="font-semibold text-gray-500 dark:text-zinc-400 hover:text-golden-yellow hover:underline transition-colors">
+                        <ReactRouterDOM.Link to="/admin" className="font-semibold text-gray-500 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-golden-yellow hover:underline transition-colors">
                             Sign in here.
                         </ReactRouterDOM.Link>
                     </p>

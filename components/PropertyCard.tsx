@@ -51,13 +51,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     };
     
     return (
-        <ReactRouterDOM.Link to={`/properties/${property.id}`} className="group block bg-gray-100 dark:bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-golden-yellow/20 transition-shadow duration-300">
+        <ReactRouterDOM.Link to={`/properties/${property.id}`} className="group block bg-gray-100 dark:bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-orange-500/20 dark:hover:shadow-golden-yellow/20 transition-shadow duration-300">
             <div className="relative overflow-hidden">
                 <img src={property.images?.[0] || 'https://picsum.photos/seed/placeholder/800/600'} alt={property.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" />
                  <div className="absolute top-3 right-3 flex items-center gap-2">
                     <button 
                         onClick={handleShareClick}
-                        className="bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:text-golden-yellow transition-colors duration-200 z-10"
+                        className="bg-white/60 dark:bg-charcoal/60 p-2 rounded-full text-zinc-900 dark:text-white hover:text-orange-600 dark:hover:text-golden-yellow transition-colors duration-200 z-10"
                         aria-label="Share property"
                     >
                         <ShareIcon className="h-6 w-6" />
@@ -77,21 +77,21 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             <div className="p-4">
                 <h3 className="text-lg font-bold text-zinc-900 dark:text-white">{property.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 flex items-center">
-                    <MapPinIcon className="h-4 w-4 mr-1.5 text-golden-yellow flex-shrink-0"/>
+                    <MapPinIcon className="h-4 w-4 mr-1.5 text-orange-600 dark:text-golden-yellow flex-shrink-0"/>
                     <span>{property.subLocation}</span>
                 </p>
                 <div className="mt-3 space-y-2 text-sm text-gray-700 dark:text-gray-300 border-t border-gray-200 dark:border-zinc-700 pt-3">
                      <div className="flex items-center">
-                        <BuildingOfficeIcon className="h-4 w-4 mr-2 text-golden-yellow flex-shrink-0"/>
+                        <BuildingOfficeIcon className="h-4 w-4 mr-2 text-orange-600 dark:text-golden-yellow flex-shrink-0"/>
                         <span>{property.type} {property.style}</span>
                     </div>
                      <div className="flex items-center">
-                        <ArrowsPointingOutIcon className="h-4 w-4 mr-2 text-golden-yellow flex-shrink-0"/>
+                        <ArrowsPointingOutIcon className="h-4 w-4 mr-2 text-orange-600 dark:text-golden-yellow flex-shrink-0"/>
                         <span>{property.size.toLocaleString('en-IN')} sq. ft.</span>
                     </div>
                     {property.landArea && (
                          <div className="flex items-center">
-                            <GlobeAltIcon className="h-4 w-4 mr-2 text-golden-yellow flex-shrink-0"/>
+                            <GlobeAltIcon className="h-4 w-4 mr-2 text-orange-600 dark:text-golden-yellow flex-shrink-0"/>
                             <span>{property.landArea} Land Area</span>
                         </div>
                     )}

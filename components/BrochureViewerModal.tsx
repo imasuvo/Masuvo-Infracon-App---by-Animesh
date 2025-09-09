@@ -41,7 +41,7 @@ const BrochureViewerModal: React.FC<BrochureViewerModalProps> = ({ pdfUrl, onClo
                     <div className="flex items-center gap-4">
                         <button
                             onClick={() => setDownloadFormOpen(true)}
-                            className="flex items-center gap-2 text-sm bg-golden-yellow text-charcoal font-semibold px-3 py-1.5 rounded-md hover:bg-golden-orange transition-colors"
+                            className="flex items-center gap-2 text-sm bg-orange-500 dark:bg-golden-yellow text-white dark:text-charcoal font-semibold px-3 py-1.5 rounded-md hover:bg-orange-600 dark:hover:bg-golden-orange transition-colors"
                         >
                             <DocumentArrowDownIcon className="h-5 w-5" />
                             <span>Download</span>
@@ -60,7 +60,7 @@ const BrochureViewerModal: React.FC<BrochureViewerModalProps> = ({ pdfUrl, onClo
                         className="w-full h-full"
                         style={{ border: 0 }}
                     >
-                         <p>Your browser does not support embedded PDFs. You can <a href={BROCHURE_DOWNLOAD_URL} className="text-golden-yellow hover:underline">download it here</a>.</p>
+                         <p>Your browser does not support embedded PDFs. You can <a href={BROCHURE_DOWNLOAD_URL} className="text-orange-600 dark:text-golden-yellow hover:underline">download it here</a>.</p>
                     </iframe>
                 </div>
             </motion.div>

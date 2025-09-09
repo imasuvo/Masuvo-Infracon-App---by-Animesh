@@ -4,7 +4,7 @@ import * as ReactRouterDOM from 'react-router-dom';
 import { COMPANY_INFO, SOCIAL_LINKS } from '../constants';
 
 const SocialIcon: React.FC<{ href: string, children: React.ReactNode }> = ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-golden-yellow transition-colors duration-300">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-orange-600 dark:hover:text-golden-yellow transition-colors duration-300">
         {children}
     </a>
 );
@@ -32,14 +32,14 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400 flex justify-center gap-x-4 gap-y-2 flex-wrap">
-                    <ReactRouterDOM.Link to="/about" className="hover:text-golden-yellow transition-colors">About Us</ReactRouterDOM.Link>
-                    <ReactRouterDOM.Link to="/contact" className="hover:text-golden-yellow transition-colors">Contact</ReactRouterDOM.Link>
-                    <ReactRouterDOM.Link to="/faq" className="hover:text-golden-yellow transition-colors">FAQ</ReactRouterDOM.Link>
-                    <ReactRouterDOM.Link to="/portal/login" className="hover:text-golden-yellow transition-colors">Client Login</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/about" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">About Us</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/contact" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">Contact</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/faq" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">FAQ</ReactRouterDOM.Link>
+                    <ReactRouterDOM.Link to="/portal/login" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">Client Login</ReactRouterDOM.Link>
                 </div>
 
                 <div className="mt-4 text-center text-xs text-gray-500 dark:text-gray-500 space-y-1">
-                    <p><a href={COMPANY_INFO.website} target="_blank" rel="noopener noreferrer" className="hover:text-golden-yellow transition-colors">{COMPANY_INFO.website.replace('https://', '')}</a></p>
+                    <p><a href={COMPANY_INFO.website} target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">{COMPANY_INFO.website.replace('https://', '')}</a></p>
                     <p>&copy; {new Date().getFullYear()} Masuvo Infracon Pvt. Ltd. All Rights Reserved.</p>
                 </div>
             </div>

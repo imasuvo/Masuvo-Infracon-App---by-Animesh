@@ -19,7 +19,7 @@ const InteriorDesignPage: React.FC = () => {
         >
             <div className="p-4 min-h-screen">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-golden-yellow">Trayaksh Interior</h2>
+                    <h2 className="text-3xl font-bold text-orange-600 dark:text-golden-yellow">Trayaksh Interior</h2>
                     <p className="text-gray-600 dark:text-gray-300">Crafting spaces that reflect your style.</p>
                 </div>
 
@@ -29,7 +29,7 @@ const InteriorDesignPage: React.FC = () => {
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
-                                className={`px-4 py-2 text-sm rounded-full transition-colors duration-300 ${activeCategory === category ? 'bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
+                                className={`px-4 py-2 text-sm rounded-full transition-colors duration-300 ${activeCategory === category ? 'bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-semibold' : 'bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-300'}`}
                             >
                                 {category}
                             </button>
@@ -46,7 +46,7 @@ const InteriorDesignPage: React.FC = () => {
                 </div>
 
                  <div className="mt-10 text-center">
-                     <ReactRouterDOM.Link to="/schedule-visit" className="inline-block bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
+                     <ReactRouterDOM.Link to="/schedule-visit" className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300">
                         Book Interior Consultation
                     </ReactRouterDOM.Link>
                 </div>
