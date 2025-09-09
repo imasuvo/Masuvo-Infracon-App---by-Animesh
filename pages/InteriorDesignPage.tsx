@@ -19,8 +19,8 @@ const InteriorDesignPage: React.FC = () => {
         >
             <div className="p-4 min-h-screen">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-orange-600 dark:text-golden-yellow">Trayaksh Interior</h2>
-                    <p className="text-gray-600 dark:text-gray-300">Crafting spaces that reflect your style.</p>
+                    <h2 className="text-3xl lg:text-4xl font-bold text-orange-600 dark:text-golden-yellow">Trayaksh Interior</h2>
+                    <p className="text-gray-600 dark:text-gray-300 lg:text-lg">Crafting spaces that reflect your style.</p>
                 </div>
 
                 <div className="mb-6">
@@ -37,10 +37,10 @@ const InteriorDesignPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                     {INTERIOR_DESIGN_GALLERY[activeCategory].map((image, index) => (
-                         <div key={index} className="rounded-lg overflow-hidden">
-                            <img src={image} alt={`${activeCategory} design ${index + 1}`} className="w-full h-40 object-cover hover:scale-110 transition-transform duration-300" />
+                         <div key={index} className="rounded-lg overflow-hidden aspect-w-4 aspect-h-3">
+                            <img src={image} alt={`${activeCategory} design ${index + 1}`} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                         </div>
                     ))}
                 </div>

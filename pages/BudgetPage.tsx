@@ -168,14 +168,16 @@ const BudgetPage: React.FC = () => {
 
     const renderStep1 = () => (
         <>
-            <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Home Construction Cost Calculator</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-8">Estimate Your Budget</p>
+            <div className="text-center">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Home Construction Cost Calculator</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-8 lg:text-lg">Get an instant, detailed estimate for your project.</p>
+            </div>
             {error && (
-                <div className="mb-6">
+                <div className="mb-6 max-w-2xl mx-auto">
                     <ErrorDisplay title="Calculation Error" message={error} />
                 </div>
             )}
-            <form onSubmit={handleCalculate} className="space-y-6 bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
+            <form onSubmit={handleCalculate} className="space-y-6 bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl lg:max-w-2xl lg:mx-auto">
                  <div>
                     <label htmlFor="state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Select State</label>
                     <select id="state" value={selectedState} onChange={e => setSelectedState(e.target.value)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-3" required>
@@ -213,47 +215,53 @@ const BudgetPage: React.FC = () => {
 
     const renderStep2 = () => (
         <>
-             <h2 className="text-3xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Estimated Results</h2>
-             <p className="text-gray-600 dark:text-gray-300 mb-2">For {area} {unit === 'sqft' ? 'Sq. Feet' : 'Sq. Meter'} in {selectedCity}, {selectedState}</p>
-             <button onClick={() => setStep(1)} className="text-sm text-orange-600 dark:text-golden-yellow hover:underline mb-6">← Go Back & Edit</button>
+            <div className="text-center">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-orange-600 dark:text-golden-yellow">Estimated Results</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-2">For {area} {unit === 'sqft' ? 'Sq. Feet' : 'Sq. Meter'} in {selectedCity}, {selectedState}</p>
+                <button onClick={() => setStep(1)} className="text-sm text-orange-600 dark:text-golden-yellow hover:underline mb-6">← Go Back & Edit</button>
+            </div>
+            
+            <div className="lg:grid lg:grid-cols-5 lg:gap-8">
+                <div className="lg:col-span-2 space-y-6">
+                    <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl mb-6 sticky top-20">
+                        <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Cost</h3>
+                        <p className="text-4xl font-bold text-orange-600 dark:text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
+                        <p className="text-sm text-gray-700 dark:text-gray-300">Cost Per Sq. Ft: <span className="font-semibold">₹{costPerSqFt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+                        
+                        <div className="mt-4">
+                            <h4 className="font-semibold mb-2">Cost Distribution</h4>
+                            <PieChart data={chartData} theme={theme} />
+                        </div>
+                    </div>
+                </div>
 
-            <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl mb-6">
-                <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Cost</h3>
-                <p className="text-4xl font-bold text-orange-600 dark:text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
-                <p className="text-sm text-gray-700 dark:text-gray-300">Cost Per Sq. Ft: <span className="font-semibold">₹{costPerSqFt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
-                
-                <div className="mt-4">
-                    <h4 className="font-semibold mb-2">Cost Distribution</h4>
-                    <PieChart data={chartData} theme={theme} />
+                <div className="space-y-4 lg:col-span-3">
+                     <h3 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Phase-wise Cost Breakdown</h3>
+                    {calculatedData.map(resource => (
+                        <div key={resource.name} className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">
+                            <div className="flex justify-between items-start">
+                               <div>
+                                    <h4 className="font-bold">{resource.name}</h4>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {resource.calculatedQuantity}</p>
+                               </div>
+                               <p className="text-lg font-semibold text-orange-600 dark:text-golden-yellow">₹{resource.calculatedAmount.toLocaleString('en-IN')}</p>
+                            </div>
+                             <div className="mt-2">
+                                <select value={resource.selectedQuality} onChange={e => handleQualityChange(resource.name, e.target.value as QualityOption)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-2 text-sm">
+                                    {Object.keys(resource.qualityOptions).map(q => <option key={q} value={q}>{q}</option>)}
+                                </select>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 
-            <div className="space-y-4">
-                 <h3 className="text-xl font-semibold text-orange-600 dark:text-golden-yellow mb-2">Phase-wise Cost Breakdown</h3>
-                {calculatedData.map(resource => (
-                    <div key={resource.name} className="bg-gray-100 dark:bg-zinc-800 p-4 rounded-xl">
-                        <div className="flex justify-between items-start">
-                           <div>
-                                <h4 className="font-bold">{resource.name}</h4>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {resource.calculatedQuantity}</p>
-                           </div>
-                           <p className="text-lg font-semibold text-orange-600 dark:text-golden-yellow">₹{resource.calculatedAmount.toLocaleString('en-IN')}</p>
-                        </div>
-                         <div className="mt-2">
-                            <select value={resource.selectedQuality} onChange={e => handleQualityChange(resource.name, e.target.value as QualityOption)} className="w-full bg-white dark:bg-zinc-700 border-gray-300 dark:border-zinc-600 text-zinc-900 dark:text-white rounded-lg p-2 text-sm">
-                                {Object.keys(resource.qualityOptions).map(q => <option key={q} value={q}>{q}</option>)}
-                            </select>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <div className="mt-8 text-center bg-gray-200 dark:bg-zinc-900 p-6 rounded-xl border border-orange-600/30 dark:border-golden-yellow/30">
+            <div className="mt-8 text-center bg-gray-200 dark:bg-zinc-900 p-6 rounded-xl border border-orange-600/30 dark:border-golden-yellow/30 lg:max-w-2xl lg:mx-auto">
                 <h3 className="text-lg text-gray-500 dark:text-gray-400">Total Estimated Amount</h3>
                 <p className="text-3xl font-bold text-orange-600 dark:text-golden-yellow my-2">₹{totalCost.toLocaleString('en-IN')}</p>
             </div>
 
-             <div className="mt-6 flex flex-col sm:flex-row gap-4">
+             <div className="mt-6 flex flex-col sm:flex-row gap-4 lg:max-w-2xl lg:mx-auto">
                 <button onClick={() => alert('PDF download functionality coming soon!')} className="flex-1 bg-gray-300 dark:bg-zinc-700 text-zinc-900 dark:text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-gray-400 dark:hover:bg-zinc-600 transition-colors">
                     Download Estimate PDF
                 </button>
@@ -262,7 +270,7 @@ const BudgetPage: React.FC = () => {
                 </ReactRouterDOM.Link>
             </div>
 
-            <div className="mt-8 text-xs text-gray-500 bg-gray-100 dark:bg-zinc-800 p-4 rounded-lg">
+            <div className="mt-8 text-xs text-gray-500 bg-gray-100 dark:bg-zinc-800 p-4 rounded-lg lg:max-w-4xl lg:mx-auto">
                 <h4 className="font-bold mb-1">Disclaimer</h4>
                 <p>The costs indicated are approximate for each resource. Actual costs may vary by city and project requirements. Please consult your contractor or visit our nearest outlet for accurate pricing. The amount shown does not include compound wall area. Default quality is Medium but can be changed using dropdown options.</p>
             </div>

@@ -55,9 +55,9 @@ const PropertiesPage: React.FC = () => {
             transition={{ duration: 0.3 }}
         >
             <div className="p-4 min-h-screen">
-                <h2 className="text-3xl font-bold mb-6 text-orange-600 dark:text-golden-yellow">Our Properties</h2>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-center lg:text-left text-orange-600 dark:text-golden-yellow">Our Properties</h2>
                 
-                <div className="space-y-4 mb-6">
+                <div className="space-y-4 mb-6 lg:flex lg:space-y-0 lg:space-x-8 lg:items-center">
                     <div>
                         <h3 className="text-sm font-semibold mb-2 text-gray-500 dark:text-gray-400">Filter by Location</h3>
                         <div className="flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ const PropertiesPage: React.FC = () => {
                             (props && props.length > 0) && (
                                 <section key={area}>
                                     <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-orange border-b-2 border-orange-600/20 dark:border-golden-yellow/20 pb-2">{area}</h3>
-                                    <div className="space-y-6">
+                                    <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-6">
                                         {props.map(prop => <PropertyCard key={prop.id} property={prop} />)}
                                     </div>
                                 </section>

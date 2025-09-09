@@ -85,7 +85,7 @@ const AdminDashboardPage: React.FC = () => {
         if (storedDocs) {
             const docs: ClientDocument[] = JSON.parse(storedDocs);
             setClientDocCount(docs.length);
-            setRecentUploads(docs.slice(-3).reverse()); // Get last 3, newest first
+            setRecentUploads(docs.slice(-5).reverse()); // Get last 5, newest first
         }
     }, [navigate, location.state]);
 
@@ -217,63 +217,69 @@ const AdminDashboardPage: React.FC = () => {
                     aria-label="Logout"
                 >
                     <ArrowRightOnRectangleIcon className="h-5 w-5" />
-                    <span>Logout</span>
+                    <span className="hidden md:inline">Logout</span>
                 </button>
             </header>
 
-            <main className="p-4 space-y-6">
+            <main className="p-4 lg:p-6">
                  {permissionError && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
                         <ErrorDisplay title="Access Denied" message={permissionError} />
                     </motion.div>
                 )}
-                <section>
-                    <h2 className="text-lg font-semibold text-gray-300 mb-4">Overview</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/clients" title="Total Clients" value="15" icon={UsersIcon} />}
-                        {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/projects" title="Ongoing Projects" value="8" icon={BriefcaseIcon} />}
-                        {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/documents" title="Client Documents" value={clientDocCount.toString()} icon={DocumentDuplicateIcon} />}
+                <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-6">
+                    <div className="lg:col-span-2 space-y-6">
+                        <section>
+                            <h2 className="text-lg font-semibold text-gray-300 mb-4">Overview</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/clients" title="Total Clients" value="15" icon={UsersIcon} />}
+                                {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/projects" title="Ongoing Projects" value="8" icon={BriefcaseIcon} />}
+                                {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/documents" title="Client Documents" value={clientDocCount.toString()} icon={DocumentDuplicateIcon} />}
+                            </div>
+                        </section>
+                        
+                        <section className="bg-zinc-800 p-6 rounded-lg">
+                            <h2 className="text-lg font-semibold text-gray-300 mb-4">Quick Actions</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {(role === 'Super Admin' || role === 'Project Manager') && (
+                                    <QuickActionButton to="/admin/projects" icon={DocumentPlusIcon} label="Add Project" />
+                                )}
+                                {(role === 'Super Admin' || role === 'Project Manager') && (
+                                    <QuickActionButton to="/admin/clients" icon={UsersIcon} label="Manage Clients" />
+                                )}
+                                {(role === 'Super Admin' || role === 'Project Manager') && (
+                                    <QuickActionButton to="/admin/documents" icon={ArrowUpTrayIcon} label="Upload Document" />
+                                )}
+                                {role === 'Super Admin' && (
+                                    <QuickActionButton onClick={() => alert('Reports feature coming soon!')} icon={ChartBarIcon} label="View Reports" />
+                                )}
+                            </div>
+                        </section>
                     </div>
-                </section>
-                
-                <section className="bg-zinc-800 p-6 rounded-lg">
-                    <h2 className="text-lg font-semibold text-gray-300 mb-4">Quick Actions</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {(role === 'Super Admin' || role === 'Project Manager') && (
-                            <QuickActionButton to="/admin/projects" icon={DocumentPlusIcon} label="Add Project" />
-                        )}
-                        {(role === 'Super Admin' || role === 'Project Manager') && (
-                            <QuickActionButton to="/admin/clients" icon={UsersIcon} label="Manage Clients" />
-                        )}
-                        {(role === 'Super Admin' || role === 'Project Manager') && (
-                            <QuickActionButton to="/admin/documents" icon={ArrowUpTrayIcon} label="Upload Document" />
-                        )}
-                        {role === 'Super Admin' && (
-                            <QuickActionButton onClick={() => alert('Reports feature coming soon!')} icon={ChartBarIcon} label="View Reports" />
-                        )}
-                    </div>
-                </section>
 
-                 <section>
-                    <h2 className="text-lg font-semibold text-gray-300 mb-4">Recent Client Uploads</h2>
-                    <div className="bg-zinc-800 p-4 rounded-lg">
-                        {recentUploads.length > 0 ? (
-                            <ul className="divide-y divide-zinc-700">
-                                {recentUploads.map(doc => (
-                                     <li key={doc.id} className="py-2 flex justify-between items-center">
-                                        <div className="flex items-center gap-3">
-                                            <DocumentDuplicateIcon className="h-5 w-5 text-gray-400" />
-                                            <span className="font-medium text-white">{doc.name}</span>
-                                        </div>
-                                        <span className="text-xs text-gray-500">{new Date(doc.uploadDate).toLocaleDateString()}</span>
-                                     </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p className="text-center text-sm text-gray-500 py-4">No recent documents uploaded by clients.</p>
-                        )}
+                    <div className="lg:col-span-1 mt-6 lg:mt-0">
+                         <section>
+                            <h2 className="text-lg font-semibold text-gray-300 mb-4">Recent Client Uploads</h2>
+                            <div className="bg-zinc-800 p-4 rounded-lg">
+                                {recentUploads.length > 0 ? (
+                                    <ul className="divide-y divide-zinc-700">
+                                        {recentUploads.map(doc => (
+                                             <li key={doc.id} className="py-3 flex justify-between items-center">
+                                                <div className="flex items-center gap-3 overflow-hidden">
+                                                    <DocumentDuplicateIcon className="h-5 w-5 text-gray-400 flex-shrink-0" />
+                                                    <span className="font-medium text-white truncate">{doc.name}</span>
+                                                </div>
+                                                <span className="text-xs text-gray-500 flex-shrink-0">{new Date(doc.uploadDate).toLocaleDateString()}</span>
+                                             </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p className="text-center text-sm text-gray-500 py-4">No recent documents uploaded by clients.</p>
+                                )}
+                            </div>
+                        </section>
                     </div>
-                </section>
+                </div>
             </main>
 
             {/* Logout Confirmation Modal */}

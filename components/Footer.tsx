@@ -12,35 +12,59 @@ const SocialIcon: React.FC<{ href: string, children: React.ReactNode }> = ({ hre
 const Footer: React.FC = () => {
     return (
         <footer className="bg-gray-100 dark:bg-zinc-900 border-t border-gray-200 dark:border-golden-yellow/20">
-            <div className="max-w-lg mx-auto py-6 px-4 sm:px-6">
-                <div className="flex justify-center space-x-6">
-                    <SocialIcon href={SOCIAL_LINKS.facebook}>
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
-                    </SocialIcon>
-                    <SocialIcon href={SOCIAL_LINKS.instagram}>
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.398 1.363.444 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.046 1.064-.197 1.791-.444 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.398-2.427.444-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.046-1.791-.197-2.427-.444a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.398-1.363-.444-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.046-1.064.197-1.791.444-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363.398 2.427-.444C9.531 2.013 9.885 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm6.406-11.845a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z" clipRule="evenodd" /></svg>
-                    </SocialIcon>
-                    <SocialIcon href={SOCIAL_LINKS.x}>
-                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </SocialIcon>
-                    <SocialIcon href={SOCIAL_LINKS.linkedin}>
-                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </SocialIcon>
-                     <SocialIcon href={SOCIAL_LINKS.youtube}>
-                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                    </SocialIcon>
+            <div className="max-w-lg mx-auto py-8 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                {/* Main content grid */}
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+                    {/* Company Info */}
+                    <div className="space-y-4 text-center lg:text-left lg:col-span-1">
+                         <ReactRouterDOM.Link to="/" className="inline-flex items-center justify-center lg:justify-start gap-3 group">
+                            <img src="https://infraconmasuvo.com/wp-content/uploads/2025/02/Masuvo-Infracon-Logo-Rounded.png" alt="Logo" className="h-12 w-12 rounded-full" />
+                            <div>
+                                <span className="font-bold text-zinc-900 dark:text-white text-lg">Masuvo Infracon</span>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 -mt-1">{COMPANY_INFO.tagline}</p>
+                            </div>
+                        </ReactRouterDOM.Link>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{COMPANY_INFO.address}</p>
+                    </div>
+
+                    {/* Links grid */}
+                    <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:col-span-3">
+                        <div>
+                            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">Navigation</h3>
+                            <ul className="mt-4 space-y-2">
+                                <li><ReactRouterDOM.Link to="/properties" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Properties</ReactRouterDOM.Link></li>
+                                <li><ReactRouterDOM.Link to="/floor-plans" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Floor Plans</ReactRouterDOM.Link></li>
+                                <li><ReactRouterDOM.Link to="/services" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Services</ReactRouterDOM.Link></li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">Company</h3>
+                            <ul className="mt-4 space-y-2">
+                                <li><ReactRouterDOM.Link to="/about" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">About</ReactRouterDOM.Link></li>
+                                <li><ReactRouterDOM.Link to="/contact" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Contact</ReactRouterDOM.Link></li>
+                                <li><ReactRouterDOM.Link to="/faq" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">FAQ</ReactRouterDOM.Link></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">Tools</h3>
+                            <ul className="mt-4 space-y-2">
+                                 <li><ReactRouterDOM.Link to="/budget-estimator" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Budget Estimator</ReactRouterDOM.Link></li>
+                                <li><ReactRouterDOM.Link to="/schedule-visit" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Schedule Visit</ReactRouterDOM.Link></li>
+                                <li><ReactRouterDOM.Link to="/portal/login" className="text-base text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-golden-yellow">Client Portal</ReactRouterDOM.Link></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400 flex justify-center gap-x-4 gap-y-2 flex-wrap">
-                    <ReactRouterDOM.Link to="/about" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">About Us</ReactRouterDOM.Link>
-                    <ReactRouterDOM.Link to="/contact" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">Contact</ReactRouterDOM.Link>
-                    <ReactRouterDOM.Link to="/faq" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">FAQ</ReactRouterDOM.Link>
-                    <ReactRouterDOM.Link to="/portal/login" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">Client Login</ReactRouterDOM.Link>
-                </div>
-
-                <div className="mt-4 text-center text-xs text-gray-500 dark:text-gray-500 space-y-1">
-                    <p><a href={COMPANY_INFO.website} target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 dark:hover:text-golden-yellow transition-colors">{COMPANY_INFO.website.replace('https://', '')}</a></p>
-                    <p>&copy; {new Date().getFullYear()} Masuvo Infracon Pvt. Ltd. All Rights Reserved.</p>
+                {/* Bottom section with social links and copyright */}
+                <div className="mt-8 border-t border-gray-200 dark:border-zinc-800 pt-8 flex flex-col-reverse items-center gap-4 sm:flex-row sm:justify-between">
+                     <p className="text-sm text-gray-500 dark:text-gray-500 text-center sm:text-left">&copy; {new Date().getFullYear()} Masuvo Infracon. All Rights Reserved.</p>
+                     <div className="flex space-x-6">
+                        <SocialIcon href={SOCIAL_LINKS.facebook}><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9.19795 21.5H13.198V13.4901H16.1618L16.6711 9.49012H13.198V7.54012C13.198 6.94512 13.6521 6.54012 14.248 6.54012H16.5V2.5H13.198C11.0765 2.5 9.19795 4.50012 9.19795 7.54012V9.49012H7.19795V13.4901H9.19795V21.5Z"/></svg></SocialIcon>
+                        <SocialIcon href={SOCIAL_LINKS.instagram}><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664 4.771 4.919 4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg></SocialIcon>
+                        <SocialIcon href={SOCIAL_LINKS.x}><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></SocialIcon>
+                        <SocialIcon href={SOCIAL_LINKS.linkedin}><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></SocialIcon>
+                     </div>
                 </div>
             </div>
         </footer>

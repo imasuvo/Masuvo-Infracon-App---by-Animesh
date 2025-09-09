@@ -26,7 +26,7 @@ const BottomNav: React.FC = () => {
     };
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-charcoal/90 backdrop-blur-sm border-t border-gray-200 dark:border-golden-yellow/20 max-w-lg mx-auto z-50">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-charcoal/90 backdrop-blur-sm border-t border-gray-200 dark:border-golden-yellow/20 max-w-lg mx-auto z-50 lg:hidden">
             <div className="flex justify-around h-16">
                 {navItems.map((item) => (
                     <ReactRouterDOM.NavLink

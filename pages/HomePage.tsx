@@ -10,9 +10,9 @@ import { DocumentTextIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/
 
 const HeroSlider: React.FC = () => {
     const images = [
-        'https://picsum.photos/seed/hero1/800/600',
-        'https://picsum.photos/seed/hero2/800/600',
-        'https://picsum.photos/seed/hero3/800/600',
+        'https://picsum.photos/seed/hero1/1200/600',
+        'https://picsum.photos/seed/hero2/1200/600',
+        'https://picsum.photos/seed/hero3/1200/600',
     ];
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -24,7 +24,7 @@ const HeroSlider: React.FC = () => {
     }, [images.length]);
 
     return (
-        <div className="relative w-full h-80 overflow-hidden">
+        <div className="relative w-full h-80 lg:h-96 overflow-hidden">
             {images.map((image, index) => (
                 <div
                     key={index}
@@ -35,8 +35,8 @@ const HeroSlider: React.FC = () => {
                 </div>
             ))}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">
-                <h2 className="text-4xl font-bold tracking-tight">{COMPANY_INFO.tagline}</h2>
-                <p className="mt-2 text-lg">Your dream home, built with precision and passion.</p>
+                <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">{COMPANY_INFO.tagline}</h2>
+                <p className="mt-2 text-lg lg:text-xl">Your dream home, built with precision and passion.</p>
             </div>
         </div>
     );
@@ -108,7 +108,7 @@ const TestimonialCarousel: React.FC = () => {
 
     return (
         <div 
-            className="relative"
+            className="relative max-w-3xl mx-auto"
             onMouseEnter={resetTimeout}
             onMouseLeave={() => {
                  timeoutRef.current = window.setTimeout(() => paginate(1), 7000);
@@ -199,19 +199,19 @@ const HomePage: React.FC = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
         >
-            <div className="space-y-12 pb-12">
+            <div className="space-y-12 lg:space-y-24 pb-12">
                 <HeroSlider />
 
-                <div className="px-4 space-y-4 -mt-10 relative z-10">
+                <div className="px-4 space-y-4 -mt-10 relative z-10 lg:max-w-md lg:mx-auto">
                     <div className="flex gap-2">
                         <CTAButton to="/schedule-visit">Schedule Site Visit</CTAButton>
                         <CTAButton to="/budget-estimator">Estimate Budget</CTAButton>
                     </div>
                 </div>
 
-                <section className="px-4">
-                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">Featured Properties</h3>
-                    <div className="space-y-6">
+                <section className="px-4 lg:px-0">
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-6 text-center text-orange-600 dark:text-golden-yellow">Featured Properties</h3>
+                    <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-6">
                         {PROPERTIES.slice(0, 2).map(prop => (
                             <PropertyCard key={prop.id} property={prop} />
                         ))}
@@ -219,39 +219,43 @@ const HomePage: React.FC = () => {
                     <ReactRouterDOM.Link to="/properties" className="block text-center mt-6 text-orange-600 dark:text-golden-yellow hover:underline">View All Properties</ReactRouterDOM.Link>
                 </section>
 
-                <section className="px-4">
-                     <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">Our Services</h3>
-                     <div className="grid grid-cols-2 gap-4">
-                         <ReactRouterDOM.Link to="/construction" className="block p-4 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors duration-300">
-                            <h4 className="font-semibold text-lg">Construction</h4>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Quality you can trust.</p>
+                <section className="px-4 lg:px-0">
+                     <h3 className="text-2xl lg:text-3xl font-bold mb-6 text-center text-orange-600 dark:text-golden-yellow">Our Services</h3>
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+                         <ReactRouterDOM.Link to="/construction" className="block p-6 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all duration-300 hover:scale-[1.02]">
+                            <h4 className="font-semibold text-xl">Construction</h4>
+                            <p className="text-md text-gray-500 dark:text-gray-400">Quality you can trust.</p>
                          </ReactRouterDOM.Link>
-                         <ReactRouterDOM.Link to="/interiors" className="block p-4 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors duration-300">
-                            <h4 className="font-semibold text-lg">Trayaksh Interior</h4>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Designs that inspire.</p>
+                         <ReactRouterDOM.Link to="/interiors" className="block p-6 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all duration-300 hover:scale-[1.02]">
+                            <h4 className="font-semibold text-xl">Trayaksh Interior</h4>
+                            <p className="text-md text-gray-500 dark:text-gray-400">Designs that inspire.</p>
                          </ReactRouterDOM.Link>
                      </div>
                 </section>
 
-                <section className="px-4">
-                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">Company Brochure</h3>
-                    <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl">
-                        <div className="bg-white/50 dark:bg-zinc-900/50 p-8 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-300 dark:border-zinc-700">
-                            <DocumentTextIcon className="h-16 w-16 text-orange-600/50 dark:text-golden-yellow/50 mb-4" />
-                            <h4 className="text-lg font-bold text-zinc-900 dark:text-white">Explore Our Company Profile</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-4">Get an in-depth look at our projects, mission, and vision.</p>
-                            <button 
+                <section className="px-4 lg:px-0">
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-6 text-center text-orange-600 dark:text-golden-yellow">Company Brochure</h3>
+                    <div className="bg-gray-100 dark:bg-zinc-800 p-6 rounded-xl lg:flex lg:items-center lg:gap-8 lg:p-12">
+                         <div className="lg:w-1/2 text-center lg:text-left">
+                            <h4 className="text-2xl font-bold text-zinc-900 dark:text-white">Explore Our Company Profile</h4>
+                            <p className="text-md text-gray-600 dark:text-gray-400 mt-2 mb-6">Get an in-depth look at our projects, mission, and vision for creating exceptional living spaces.</p>
+                             <button 
                                 onClick={() => setBrochureModalOpen(true)}
-                                className="bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-2 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
+                                className="bg-gradient-to-r from-orange-500 to-orange-600 dark:from-golden-yellow dark:to-golden-orange text-white dark:text-charcoal font-bold py-3 px-8 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300"
                             >
                                 View Brochure
                             </button>
                         </div>
+                        <div className="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
+                            <div className="bg-white/50 dark:bg-zinc-900/50 p-8 rounded-lg border-2 border-dashed border-gray-300 dark:border-zinc-700 w-64 h-64 flex items-center justify-center">
+                                <DocumentTextIcon className="h-24 w-24 text-orange-600/30 dark:text-golden-yellow/30" />
+                            </div>
+                        </div>
                     </div>
                 </section>
                 
-                <section className="px-4">
-                    <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-golden-yellow">What Our Clients Say</h3>
+                <section className="px-4 lg:px-0">
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-6 text-center text-orange-600 dark:text-golden-yellow">What Our Clients Say</h3>
                     <TestimonialCarousel />
                 </section>
             </div>
