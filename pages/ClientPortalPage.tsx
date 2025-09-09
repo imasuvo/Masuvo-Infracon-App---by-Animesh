@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useProject } from '../contexts/ProjectContext';
 import Spinner from '../components/Spinner';
 import ErrorDisplay from '../components/ErrorDisplay';
-import { ArrowLeftOnRectangleIcon, BellIcon, DocumentTextIcon, SunIcon, MoonIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftOnRectangleIcon, BellIcon, DocumentTextIcon, SunIcon, MoonIcon, StarIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
 const demoNotifications = [
   { id: 1, title: 'New Document Uploaded', body: 'The "Final Architectural Plan" has been added.', time: '2h ago' },
@@ -88,6 +88,13 @@ const ClientPortalPage: React.FC = () => {
         return (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'dark';
     });
 
+    // Feedback form state
+    const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
+    const [feedbackComment, setFeedbackComment] = useState('');
+    const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
     useEffect(() => {
         localStorage.setItem('portalTheme', theme);
     }, [theme]);
@@ -132,6 +139,22 @@ const ClientPortalPage: React.FC = () => {
             case 'Completed': return 'bg-green-500';
             default: return 'bg-gray-500';
         }
+    };
+
+    const handleFeedbackSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmittingFeedback(true);
+        console.log({ rating, feedbackComment });
+        setTimeout(() => {
+            setIsSubmittingFeedback(false);
+            setFeedbackSubmitted(true);
+        }, 1500);
+    };
+    
+    const resetFeedbackForm = () => {
+        setFeedbackSubmitted(false);
+        setRating(0);
+        setFeedbackComment('');
     };
 
 
@@ -242,6 +265,81 @@ const ClientPortalPage: React.FC = () => {
                              <div className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-6 rounded-xl text-center shadow-sm`}>
                                 <DocumentTextIcon className={`h-12 w-12 mx-auto mb-3 ${theme === 'light' ? 'text-gray-300' : 'text-zinc-600'}`} />
                                 <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>Documents will appear here once uploaded by the project manager.</p>
+                            </div>
+                        </section>
+                        
+                        {/* Feedback Section */}
+                        <section>
+                            <h3 className="text-xl font-semibold mb-3 text-golden-yellow">Provide Feedback</h3>
+                            <div className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-6 rounded-xl shadow-sm`}>
+                                {feedbackSubmitted ? (
+                                    <div className="text-center py-8">
+                                        <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4"/>
+                                        <h4 className="text-xl font-bold">Thank you for your feedback!</h4>
+                                        <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} mt-2 mb-4`}>We appreciate you taking the time to share your thoughts.</p>
+                                        <button 
+                                            onClick={resetFeedbackForm}
+                                            className="text-sm font-semibold text-golden-yellow hover:underline"
+                                        >
+                                            Submit another feedback
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+                                        <div>
+                                            <label className={`block text-sm font-medium mb-2 ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                How would you rate the project progress?
+                                            </label>
+                                            <div className="flex items-center justify-center space-x-2">
+                                                {[...Array(5)].map((_, index) => {
+                                                    const starValue = index + 1;
+                                                    return (
+                                                        <button
+                                                            type="button"
+                                                            key={starValue}
+                                                            onClick={() => setRating(starValue)}
+                                                            onMouseEnter={() => setHoverRating(starValue)}
+                                                            onMouseLeave={() => setHoverRating(0)}
+                                                            className="text-3xl transition-colors"
+                                                            aria-label={`Rate ${starValue} stars`}
+                                                        >
+                                                            <StarIcon className={`h-8 w-8 ${starValue <= (hoverRating || rating) ? 'text-yellow-400' : theme === 'light' ? 'text-gray-300' : 'text-gray-500'}`} />
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="feedback-comment" className={`block text-sm font-medium mb-1 ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                                Comments
+                                            </label>
+                                            <textarea
+                                                id="feedback-comment"
+                                                rows={4}
+                                                value={feedbackComment}
+                                                onChange={(e) => setFeedbackComment(e.target.value)}
+                                                placeholder="Share your comments or suggestions..."
+                                                className={`w-full rounded-lg p-3 text-sm ${theme === 'light' ? 'bg-gray-100 border-gray-300 text-zinc-900 placeholder-gray-500 focus:ring-golden-yellow focus:border-golden-yellow' : 'bg-zinc-700 border-zinc-600 text-white placeholder-gray-400 focus:ring-golden-yellow focus:border-golden-yellow'}`}
+                                            ></textarea>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmittingFeedback || rating === 0}
+                                            className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2.5 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                                        >
+                                            {isSubmittingFeedback ? (
+                                                <>
+                                                    <Spinner size="sm" className="mr-2 text-charcoal" />
+                                                    <span>Submitting...</span>
+                                                </>
+                                            ) : (
+                                                <span>Submit Feedback</span>
+                                            )}
+                                        </button>
+                                    </form>
+                                )}
                             </div>
                         </section>
                     </>

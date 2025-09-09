@@ -19,9 +19,12 @@ const Header: React.FC = () => {
                     </ReactRouterDOM.Link>
 
                     <div className="flex items-center gap-4">
-                        <ReactRouterDOM.Link to="/portal/login" className="flex items-center gap-1.5 text-sm font-medium text-gray-300 hover:text-golden-yellow transition-colors">
-                            <UserCircleIcon className="h-6 w-6" />
-                            <span>Login</span>
+                        <ReactRouterDOM.Link 
+                            to="/portal/login" 
+                            className="p-2 text-gray-300 hover:text-golden-yellow transition-colors"
+                            aria-label="Client Portal Login"
+                        >
+                            <UserCircleIcon className="h-7 w-7" />
                         </ReactRouterDOM.Link>
                         <ReactRouterDOM.Link to="/saved" className="relative p-2 text-gray-300 hover:text-white transition-colors">
                             <HeartIcon className="h-7 w-7" />

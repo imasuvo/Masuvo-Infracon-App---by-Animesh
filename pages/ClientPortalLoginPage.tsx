@@ -91,6 +91,14 @@ const ClientPortalLoginPage: React.FC = () => {
                         ← Back to Home
                     </ReactRouterDOM.Link>
                 </div>
+                <div className="text-center mt-8 pt-4 border-t border-zinc-700/50">
+                    <p className="text-xs text-zinc-500">
+                        Are you an administrator?{' '}
+                        <ReactRouterDOM.Link to="/admin" className="font-semibold text-zinc-400 hover:text-golden-yellow hover:underline transition-colors">
+                            Sign in here.
+                        </ReactRouterDOM.Link>
+                    </p>
+                </div>
             </div>
         </motion.div>
     );

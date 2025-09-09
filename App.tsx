@@ -28,6 +28,11 @@ import FloorPlansPage from './pages/FloorPlansPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ClientPortalLoginPage from './pages/ClientPortalLoginPage';
 import ClientPortalPage from './pages/ClientPortalPage';
+import AdminPanelPage from './pages/AdminPanelPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminClientsPage from './pages/AdminClientsPage';
+import AdminProjectsPage from './pages/AdminProjectsPage';
+import AdminDocumentsPage from './pages/AdminDocumentsPage';
 
 const App: React.FC = () => {
     return (
@@ -46,13 +51,16 @@ const App: React.FC = () => {
 const AppContent: React.FC = () => {
     const location = ReactRouterDOM.useLocation();
     const isClientPortalDashboard = location.pathname === '/portal';
+    const isAdminPage = location.pathname.startsWith('/admin');
+
+    const showLayout = !isClientPortalDashboard && !isAdminPage;
 
     return (
-         <div className="max-w-lg mx-auto bg-charcoal text-gray-100 font-sans flex flex-col min-h-screen">
+         <div className={`${showLayout ? 'max-w-lg mx-auto' : ''} bg-charcoal text-gray-100 font-sans flex flex-col min-h-screen`}>
             <ScrollToTop />
-            {!isClientPortalDashboard && <Header />}
+            {showLayout && <Header />}
 
-            <main className={`flex-grow ${!isClientPortalDashboard && 'pb-16'}`}>
+            <main className={`flex-grow ${showLayout && 'pb-16'}`}>
                 <ReactRouterDOM.Routes>
                     <ReactRouterDOM.Route path="/" element={<HomePage />} />
                     <ReactRouterDOM.Route path="/properties" element={<PropertiesPage />} />
@@ -72,11 +80,19 @@ const AppContent: React.FC = () => {
                     <ReactRouterDOM.Route path="/portal/login" element={<ClientPortalLoginPage />} />
                     <ReactRouterDOM.Route path="/portal" element={<ClientPortalPage />} />
                     
+                    {/* Admin Routes */}
+                    <ReactRouterDOM.Route path="/admin" element={<AdminPanelPage />} />
+                    <ReactRouterDOM.Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+                    <ReactRouterDOM.Route path="/admin/clients" element={<AdminClientsPage />} />
+                    <ReactRouterDOM.Route path="/admin/projects" element={<AdminProjectsPage />} />
+                    <ReactRouterDOM.Route path="/admin/documents" element={<AdminDocumentsPage />} />
+
+
                     <ReactRouterDOM.Route path="*" element={<NotFoundPage />} />
                 </ReactRouterDOM.Routes>
             </main>
             
-            {!isClientPortalDashboard && (
+            {showLayout && (
                 <>
                     <Footer />
                     <BottomNav />
