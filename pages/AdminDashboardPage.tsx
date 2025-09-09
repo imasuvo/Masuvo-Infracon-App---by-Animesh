@@ -4,8 +4,10 @@ import * as ReactRouterDOM from 'react-router-dom';
 import { ArrowRightOnRectangleIcon, UsersIcon, BriefcaseIcon, DocumentDuplicateIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { motion, AnimatePresence } from 'framer-motion';
 import ErrorDisplay from '../components/ErrorDisplay';
+import { ClientDocument } from '../types';
 
 type AdminRole = 'Super Admin' | 'Project Manager' | 'Content Editor' | null;
+const CLIENT_DOCS_STORAGE_KEY = 'client_uploaded_documents';
 
 // Mock data for search functionality
 const mockSearchableData = [
@@ -32,6 +34,8 @@ const AdminDashboardPage: React.FC = () => {
     const [role, setRole] = useState<AdminRole>(null);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [permissionError, setPermissionError] = useState<string | null>(null);
+    const [clientDocCount, setClientDocCount] = useState(0);
+    const [recentUploads, setRecentUploads] = useState<ClientDocument[]>([]);
 
     // Search state
     const [searchQuery, setSearchQuery] = useState('');
@@ -53,6 +57,14 @@ const AdminDashboardPage: React.FC = () => {
             setPermissionError(location.state.error);
             // Clear state to prevent message from persisting on refresh
             window.history.replaceState({}, document.title);
+        }
+
+        // Load client documents
+        const storedDocs = localStorage.getItem(CLIENT_DOCS_STORAGE_KEY);
+        if (storedDocs) {
+            const docs: ClientDocument[] = JSON.parse(storedDocs);
+            setClientDocCount(docs.length);
+            setRecentUploads(docs.slice(-3).reverse()); // Get last 3, newest first
         }
     }, [navigate, location.state]);
 
@@ -195,7 +207,7 @@ const AdminDashboardPage: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/clients" title="Total Clients" value="15" icon={UsersIcon} />}
                         {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/projects" title="Ongoing Projects" value="8" icon={BriefcaseIcon} />}
-                        {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/documents" title="Documents Uploaded" value="42" icon={DocumentDuplicateIcon} />}
+                        {(role === 'Super Admin' || role === 'Project Manager') && <StatCard to="/admin/documents" title="Client Documents" value={clientDocCount.toString()} icon={DocumentDuplicateIcon} />}
                     </div>
                 </section>
                 
@@ -210,13 +222,23 @@ const AdminDashboardPage: React.FC = () => {
                 </section>
 
                  <section>
-                    <h2 className="text-lg font-semibold text-gray-300 mb-4">Recent Activity</h2>
+                    <h2 className="text-lg font-semibold text-gray-300 mb-4">Recent Client Uploads</h2>
                     <div className="bg-zinc-800 p-4 rounded-lg">
-                        <ul className="divide-y divide-zinc-700">
-                           <li className="py-2">Client 'A. K. Sharma' signed a new contract.</li>
-                           <li className="py-2">Project '4BHK Duplex' status updated to 'Finishing'.</li>
-                           <li className="py-2">'Architectural Plan v3.pdf' uploaded for project 'PROJ-123'.</li>
-                        </ul>
+                        {recentUploads.length > 0 ? (
+                            <ul className="divide-y divide-zinc-700">
+                                {recentUploads.map(doc => (
+                                     <li key={doc.id} className="py-2 flex justify-between items-center">
+                                        <div className="flex items-center gap-3">
+                                            <DocumentDuplicateIcon className="h-5 w-5 text-gray-400" />
+                                            <span className="font-medium text-white">{doc.name}</span>
+                                        </div>
+                                        <span className="text-xs text-gray-500">{new Date(doc.uploadDate).toLocaleDateString()}</span>
+                                     </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-center text-sm text-gray-500 py-4">No recent documents uploaded by clients.</p>
+                        )}
                     </div>
                 </section>
             </main>

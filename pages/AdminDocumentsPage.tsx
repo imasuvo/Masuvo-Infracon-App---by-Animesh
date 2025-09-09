@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // FIX: Using namespace import for react-router-dom to resolve module export errors.
 import * as ReactRouterDOM from 'react-router-dom';
-import { ArrowLeftIcon, ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, ArrowUpTrayIcon, DocumentDuplicateIcon } from '@heroicons/react/24/solid';
+import { ClientDocument } from '../types';
+
+const CLIENT_DOCS_STORAGE_KEY = 'client_uploaded_documents';
 
 const AdminDocumentsPage: React.FC = () => {
     const navigate = ReactRouterDOM.useNavigate();
+    const [clientDocuments, setClientDocuments] = useState<ClientDocument[]>([]);
 
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('admin_auth') === 'true';
@@ -20,12 +24,28 @@ const AdminDocumentsPage: React.FC = () => {
                 state: { error: "You do not have permission to access the Document Management page." } 
             });
         }
+        
+        // Load client documents from localStorage
+        const storedDocs = localStorage.getItem(CLIENT_DOCS_STORAGE_KEY);
+        if (storedDocs) {
+            setClientDocuments(JSON.parse(storedDocs));
+        }
     }, [navigate]);
 
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         alert('This is a placeholder form. No document will be uploaded.');
     }
+    
+    const formatBytes = (bytes: number, decimals = 2) => {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    };
+
 
     return (
         <div className="min-h-screen bg-charcoal text-white">
@@ -40,11 +60,11 @@ const AdminDocumentsPage: React.FC = () => {
                 <h1 className="text-xl font-bold text-golden-yellow">Manage Documents</h1>
             </header>
             <main className="p-4 space-y-6">
-                 {/* Upload New Document Form */}
+                 {/* Upload New Document Form (Admin) */}
                 <section className="bg-zinc-800 p-6 rounded-lg">
                     <h2 className="text-lg font-semibold text-golden-yellow mb-4 flex items-center gap-2">
                         <ArrowUpTrayIcon className="h-5 w-5" />
-                        Upload New Document
+                        Upload New Document (For Admins)
                     </h2>
                     <form onSubmit={handleFormSubmit} className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -83,11 +103,47 @@ const AdminDocumentsPage: React.FC = () => {
                     </form>
                 </section>
 
-                {/* Existing Documents List */}
-                <section className="bg-zinc-800 p-6 rounded-lg text-center">
-                    <h2 className="text-2xl font-semibold">Project Documents</h2>
-                    <p className="text-gray-400 mt-2">This is where you will upload and organize project documents like plans, contracts, and invoices.</p>
-                    <p className="text-gray-500 mt-4 text-sm">Feature coming soon.</p>
+                {/* Client Uploaded Documents List */}
+                 <section className="bg-zinc-800 p-6 rounded-lg">
+                    <h2 className="text-lg font-semibold text-golden-yellow mb-4 flex items-center gap-2">
+                        <DocumentDuplicateIcon className="h-5 w-5" />
+                        Client Uploaded Documents
+                    </h2>
+                     {clientDocuments.length > 0 ? (
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left text-sm">
+                                <thead className="bg-zinc-700/50 text-gray-300 uppercase tracking-wider">
+                                    <tr>
+                                        <th className="p-3">File Name</th>
+                                        <th className="p-3">File Size</th>
+                                        <th className="p-3">Uploaded On</th>
+                                        <th className="p-3 text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {clientDocuments.map(doc => (
+                                        <tr key={doc.id} className="border-b border-zinc-700 last:border-0 hover:bg-zinc-700/30">
+                                            <td className="p-3 font-medium">{doc.name}</td>
+                                            <td className="p-3">{formatBytes(doc.size)}</td>
+                                            <td className="p-3">{new Date(doc.uploadDate).toLocaleString()}</td>
+                                            <td className="p-3 text-center">
+                                                <button 
+                                                    onClick={() => alert('Placeholder for viewing/downloading the file.')}
+                                                    className="text-xs font-semibold text-golden-yellow hover:underline"
+                                                >
+                                                    View
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <div className="text-center py-8">
+                            <p className="text-gray-400">No documents have been uploaded by the client yet.</p>
+                        </div>
+                    )}
                 </section>
             </main>
         </div>

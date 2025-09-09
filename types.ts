@@ -88,3 +88,19 @@ export interface Project {
   updates: ProjectUpdate[];
   documents: ProjectDocument[];
 }
+
+export interface AdminProject {
+  id: string;
+  projectName: string;
+  client: string;
+  startDate: string;
+  progress: string;
+}
+
+export interface ClientDocument {
+  id: string;
+  name: string;
+  size: number;
+  type: string;
+  uploadDate: string;
+}

@@ -5,7 +5,10 @@ import { useAuth } from '../contexts/AuthContext';
 import { useProject } from '../contexts/ProjectContext';
 import Spinner from '../components/Spinner';
 import ErrorDisplay from '../components/ErrorDisplay';
-import { ArrowLeftOnRectangleIcon, BellIcon, DocumentTextIcon, SunIcon, MoonIcon, StarIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import { ClientDocument } from '../types';
+import { ArrowLeftOnRectangleIcon, BellIcon, DocumentTextIcon, SunIcon, MoonIcon, StarIcon, CheckCircleIcon, ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+
+const CLIENT_DOCS_STORAGE_KEY = 'client_uploaded_documents';
 
 const demoNotifications = [
   { id: 1, title: 'New Document Uploaded', body: 'The "Final Architectural Plan" has been added.', time: '2h ago' },
@@ -94,14 +97,26 @@ const ClientPortalPage: React.FC = () => {
     const [feedbackComment, setFeedbackComment] = useState('');
     const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
     const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+    
+    // Document Upload State
+    const [clientDocuments, setClientDocuments] = useState<ClientDocument[]>([]);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadSuccess, setUploadSuccess] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         localStorage.setItem('portalTheme', theme);
     }, [theme]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!isAuthenticated) {
             navigate('/portal/login');
+        }
+        // Load documents from localStorage
+        const storedDocs = localStorage.getItem(CLIENT_DOCS_STORAGE_KEY);
+        if (storedDocs) {
+            setClientDocuments(JSON.parse(storedDocs));
         }
     }, [isAuthenticated, navigate]);
 
@@ -155,6 +170,51 @@ const ClientPortalPage: React.FC = () => {
         setFeedbackSubmitted(false);
         setRating(0);
         setFeedbackComment('');
+    };
+    
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+            setUploadSuccess(false);
+        }
+    };
+
+    const handleDocumentUpload = () => {
+        if (!selectedFile) return;
+
+        setIsUploading(true);
+        setUploadSuccess(false);
+
+        // Simulate upload
+        setTimeout(() => {
+            const newDocument: ClientDocument = {
+                id: `doc-${Date.now()}`,
+                name: selectedFile.name,
+                size: selectedFile.size,
+                type: selectedFile.type,
+                uploadDate: new Date().toISOString(),
+            };
+
+            const updatedDocuments = [...clientDocuments, newDocument];
+            setClientDocuments(updatedDocuments);
+            localStorage.setItem(CLIENT_DOCS_STORAGE_KEY, JSON.stringify(updatedDocuments));
+
+            setIsUploading(false);
+            setUploadSuccess(true);
+            setSelectedFile(null);
+            if(fileInputRef.current) fileInputRef.current.value = ""; // Reset file input
+
+            setTimeout(() => setUploadSuccess(false), 3000);
+        }, 1500);
+    };
+
+    const formatBytes = (bytes: number, decimals = 2) => {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     };
 
 
@@ -260,11 +320,69 @@ const ClientPortalPage: React.FC = () => {
                         </section>
 
                         {/* Documents */}
-                        <section>
+                         <section>
                             <h3 className="text-xl font-semibold mb-3 text-golden-yellow">Documents</h3>
-                             <div className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-6 rounded-xl text-center shadow-sm`}>
-                                <DocumentTextIcon className={`h-12 w-12 mx-auto mb-3 ${theme === 'light' ? 'text-gray-300' : 'text-zinc-600'}`} />
-                                <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>Documents will appear here once uploaded by the project manager.</p>
+                             <div className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-800'} p-6 rounded-xl shadow-sm space-y-4`}>
+                                <h4 className="font-semibold text-lg">Upload a Document</h4>
+                                <div className={`border-2 border-dashed ${theme === 'light' ? 'border-gray-300' : 'border-zinc-600'} rounded-lg p-4 text-center`}>
+                                     <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        onChange={handleFileChange}
+                                        className={`w-full text-sm ${theme === 'light' ? 'text-gray-700' : 'text-gray-400'}
+                                            file:mr-4 file:py-2 file:px-4
+                                            file:rounded-full file:border-0
+                                            file:text-sm file:font-semibold
+                                            ${theme === 'light' ? 'file:bg-gray-200 file:text-zinc-800 hover:file:bg-gray-300' : 'file:bg-zinc-700 file:text-golden-yellow hover:file:bg-zinc-600'}`}
+                                    />
+                                </div>
+                                {selectedFile && (
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="truncate pr-2">{selectedFile.name}</span>
+                                        <span className={`${theme === 'light' ? 'text-gray-500' : 'text-gray-400'}`}>{formatBytes(selectedFile.size)}</span>
+                                    </div>
+                                )}
+                                {uploadSuccess && (
+                                     <div className={`text-sm font-semibold flex items-center gap-2 ${theme === 'light' ? 'text-green-600' : 'text-green-400'}`}>
+                                        <CheckCircleIcon className="h-5 w-5" />
+                                        <span>File uploaded successfully!</span>
+                                    </div>
+                                )}
+                                <button
+                                    onClick={handleDocumentUpload}
+                                    disabled={!selectedFile || isUploading}
+                                    className="w-full bg-gradient-to-r from-golden-yellow to-golden-orange text-charcoal font-bold py-2.5 px-6 rounded-lg shadow-md hover:scale-105 active:scale-95 transition-transform duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                                >
+                                    {isUploading ? (
+                                        <>
+                                            <Spinner size="sm" className="mr-2 text-charcoal"/>
+                                            <span>Uploading...</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ArrowUpTrayIcon className="h-5 w-5 mr-2" />
+                                            <span>Upload Document</span>
+                                        </>
+                                    )}
+                                </button>
+                                <div className="pt-4 border-t border-dashed_">
+                                    <h4 className="font-semibold text-lg mb-2">Your Uploaded Files</h4>
+                                    {clientDocuments.length > 0 ? (
+                                        <ul className="space-y-2">
+                                            {clientDocuments.map(doc => (
+                                                <li key={doc.id} className={`flex items-center justify-between p-2 rounded-md ${theme === 'light' ? 'bg-gray-100' : 'bg-zinc-700/50'}`}>
+                                                    <div className="flex items-center gap-2 truncate">
+                                                        <DocumentTextIcon className={`h-5 w-5 ${theme === 'light' ? 'text-gray-400' : 'text-gray-500'}`} />
+                                                        <span className="text-sm truncate">{doc.name}</span>
+                                                    </div>
+                                                    <span className={`text-xs ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'}`}>{new Date(doc.uploadDate).toLocaleDateString()}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p className={`text-sm text-center py-4 ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'}`}>You have not uploaded any documents yet.</p>
+                                    )}
+                                </div>
                             </div>
                         </section>
                         
