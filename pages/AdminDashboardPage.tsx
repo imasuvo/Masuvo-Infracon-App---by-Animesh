@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 // FIX: Using namespace import for react-router-dom to resolve module export errors.
 import * as ReactRouterDOM from 'react-router-dom';
-import { ArrowRightOnRectangleIcon, UsersIcon, BriefcaseIcon, DocumentDuplicateIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { ArrowRightOnRectangleIcon, UsersIcon, BriefcaseIcon, DocumentDuplicateIcon, MagnifyingGlassIcon, DocumentPlusIcon, ArrowUpTrayIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import { motion, AnimatePresence } from 'framer-motion';
 import ErrorDisplay from '../components/ErrorDisplay';
 import { ClientDocument } from '../types';
@@ -26,6 +26,25 @@ interface SearchResult {
     name: string;
     link: string;
 }
+
+const QuickActionButton: React.FC<{ icon: React.ElementType; label: string; onClick?: () => void; to?: string }> = ({ icon: Icon, label, onClick, to }) => {
+    const content = (
+        <div className="bg-zinc-800 p-4 rounded-lg hover:bg-zinc-700 transition-all duration-300 flex flex-col items-center justify-center gap-2 aspect-square group hover:scale-105">
+            <Icon className="h-8 w-8 text-golden-yellow transition-transform duration-300 group-hover:scale-110" />
+            <span className="text-sm font-semibold text-center text-white">{label}</span>
+        </div>
+    );
+
+    const commonProps = {
+        className: "w-full h-full block"
+    };
+
+    if (to) {
+        return <ReactRouterDOM.Link to={to} {...commonProps}>{content}</ReactRouterDOM.Link>;
+    }
+    return <button onClick={onClick} {...commonProps}>{content}</button>;
+};
+
 
 const AdminDashboardPage: React.FC = () => {
     const navigate = ReactRouterDOM.useNavigate();
@@ -214,10 +233,18 @@ const AdminDashboardPage: React.FC = () => {
                 <section>
                     <h2 className="text-lg font-semibold text-gray-300 mb-4">Quick Actions</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                         {(role === 'Super Admin' || role === 'Project Manager') && <button className="bg-zinc-800 p-4 rounded-lg hover:bg-zinc-700 transition-colors">Add New Project</button>}
-                        {(role === 'Super Admin' || role === 'Project Manager') && <button className="bg-zinc-800 p-4 rounded-lg hover:bg-zinc-700 transition-colors">Manage Clients</button>}
-                        {(role === 'Super Admin' || role === 'Project Manager') && <button className="bg-zinc-800 p-4 rounded-lg hover:bg-zinc-700 transition-colors">Upload Document</button>}
-                        {role === 'Super Admin' && <button className="bg-zinc-800 p-4 rounded-lg hover:bg-zinc-700 transition-colors">View Reports</button>}
+                        {(role === 'Super Admin' || role === 'Project Manager') && (
+                            <QuickActionButton to="/admin/projects" icon={DocumentPlusIcon} label="Add Project" />
+                        )}
+                        {(role === 'Super Admin' || role === 'Project Manager') && (
+                            <QuickActionButton to="/admin/clients" icon={UsersIcon} label="Manage Clients" />
+                        )}
+                        {(role === 'Super Admin' || role === 'Project Manager') && (
+                            <QuickActionButton to="/admin/documents" icon={ArrowUpTrayIcon} label="Upload Document" />
+                        )}
+                        {role === 'Super Admin' && (
+                            <QuickActionButton onClick={() => alert('Reports feature coming soon!')} icon={ChartBarIcon} label="View Reports" />
+                        )}
                     </div>
                 </section>
 

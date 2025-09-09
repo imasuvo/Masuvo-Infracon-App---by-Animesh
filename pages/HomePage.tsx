@@ -144,10 +144,10 @@ const TestimonialCarousel: React.FC = () => {
                         }}
                         className="absolute inset-0 p-6 flex flex-col justify-center"
                     >
-                         <p className="text-gray-300 italic text-md sm:text-lg leading-relaxed pt-2 relative z-10 flex-grow">
+                         <p className="text-gray-300 italic text-md sm:text-lg leading-relaxed pt-2 relative z-10">
                             {TESTIMONIALS[imageIndex].quote}
                         </p>
-                        <div className="relative mt-4 flex items-center gap-4 z-10">
+                        <div className="relative mt-6 flex items-center gap-4 z-10">
                             <img src={TESTIMONIALS[imageIndex].avatar} alt={TESTIMONIALS[imageIndex].author} className="w-12 h-12 rounded-full object-cover border-2 border-golden-yellow" />
                             <div>
                                 <p className="font-bold text-golden-yellow">{TESTIMONIALS[imageIndex].author}</p>
