@@ -45,14 +45,14 @@ const App: React.FC = () => {
 
 const AppContent: React.FC = () => {
     const location = ReactRouterDOM.useLocation();
-    const isPortalRoute = location.pathname.startsWith('/portal');
+    const isClientPortalDashboard = location.pathname === '/portal';
 
     return (
          <div className="max-w-lg mx-auto bg-charcoal text-gray-100 font-sans flex flex-col min-h-screen">
             <ScrollToTop />
-            {!isPortalRoute && <Header />}
+            {!isClientPortalDashboard && <Header />}
 
-            <main className={`flex-grow ${!isPortalRoute && 'pb-16'}`}>
+            <main className={`flex-grow ${!isClientPortalDashboard && 'pb-16'}`}>
                 <ReactRouterDOM.Routes>
                     <ReactRouterDOM.Route path="/" element={<HomePage />} />
                     <ReactRouterDOM.Route path="/properties" element={<PropertiesPage />} />
@@ -76,7 +76,7 @@ const AppContent: React.FC = () => {
                 </ReactRouterDOM.Routes>
             </main>
             
-            {!isPortalRoute && (
+            {!isClientPortalDashboard && (
                 <>
                     <Footer />
                     <BottomNav />

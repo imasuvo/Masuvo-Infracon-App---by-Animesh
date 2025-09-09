@@ -1,7 +1,7 @@
 import React from 'react';
 // FIX: Using namespace import for react-router-dom to resolve module export errors.
 import * as ReactRouterDOM from 'react-router-dom';
-import { HeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { useFavorites } from '../contexts/FavoritesContext';
 
 const Header: React.FC = () => {
@@ -18,14 +18,20 @@ const Header: React.FC = () => {
                         </div>
                     </ReactRouterDOM.Link>
 
-                    <ReactRouterDOM.Link to="/saved" className="relative p-2 text-gray-300 hover:text-white transition-colors">
-                        <HeartIcon className="h-7 w-7" />
-                        {favorites.length > 0 && (
-                             <span className="absolute top-1 right-1 flex items-center justify-center h-4 w-4 rounded-full bg-coral-red text-white text-xs font-bold">
-                                {favorites.length}
-                            </span>
-                        )}
-                    </ReactRouterDOM.Link>
+                    <div className="flex items-center gap-4">
+                        <ReactRouterDOM.Link to="/portal/login" className="flex items-center gap-1.5 text-sm font-medium text-gray-300 hover:text-golden-yellow transition-colors">
+                            <UserCircleIcon className="h-6 w-6" />
+                            <span>Login</span>
+                        </ReactRouterDOM.Link>
+                        <ReactRouterDOM.Link to="/saved" className="relative p-2 text-gray-300 hover:text-white transition-colors">
+                            <HeartIcon className="h-7 w-7" />
+                            {favorites.length > 0 && (
+                                <span className="absolute top-1 right-1 flex items-center justify-center h-4 w-4 rounded-full bg-coral-red text-white text-xs font-bold">
+                                    {favorites.length}
+                                </span>
+                            )}
+                        </ReactRouterDOM.Link>
+                    </div>
                 </div>
             </div>
         </header>
