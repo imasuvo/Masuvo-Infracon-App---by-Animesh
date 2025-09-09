@@ -7,9 +7,9 @@ import { Property, Service, Testimonial, InteriorCategory, FloorPlan, Project } 
 
 export const COMPANY_INFO = {
     name: 'Masuvo Infracon Pvt. Ltd.',
-    tagline: 'Your Dream, Our Foundation.',
+    tagline: 'BUILDING BEYOND BOUNDARIES',
     founder: 'Anabik Maity',
-    address: 'City Centre, Durgapur, West Bengal, India',
+    address: 'P9, Hambir Sarani, Sector-2C, Bidhannagar, Durgapur, West Bengal 713212',
     phone: '+919876543210',
     whatsapp: '919876543210',
     email: 'imasuvo@gmail.com',
@@ -18,11 +18,11 @@ export const COMPANY_INFO = {
 };
 
 export const SOCIAL_LINKS = {
-    facebook: '#',
-    instagram: '#',
-    x: '#',
+    facebook: 'https://www.facebook.com/masuvo.infraco',
+    instagram: 'https://www.instagram.com/masuvoinfracon/',
+    x: 'https://x.com/MasuvoInfracon',
     linkedin: '#',
-    youtube: '#',
+    youtube: 'https://www.youtube.com/@masuvoinfracon',
 };
 
 export const PROPERTIES: Property[] = [
