@@ -8,7 +8,7 @@ import { Property, Service, Testimonial, InteriorCategory, FloorPlan, Project } 
 export const COMPANY_INFO = {
     name: 'Masuvo Infracon Pvt. Ltd.',
     tagline: 'Your Dream, Our Foundation.',
-    founder: 'Mr. Suvankar Maji',
+    founder: 'Anabik Maity',
     address: 'City Centre, Durgapur, West Bengal, India',
     phone: '+919876543210',
     whatsapp: '919876543210',
@@ -100,6 +100,54 @@ export const TESTIMONIALS: Testimonial[] = [
         project: '3BHK Bungalow in A-Zone',
         avatar: 'https://picsum.photos/seed/avatar2/100/100',
     },
+    {
+        quote: 'The interior design team at Trayaksh is phenomenal. They completely transformed our living space into something both beautiful and functional.',
+        author: 'Priya & Rohan Mehra',
+        project: 'Interior Design for 5BHK Villa',
+        avatar: 'https://picsum.photos/seed/avatar3/100/100',
+    },
+    {
+        quote: 'Masuvo Infracon handled everything from land acquisition to final handover. Their turnkey solution is perfect for anyone who wants a hassle-free experience.',
+        author: 'Rajesh Gupta',
+        project: 'Turnkey Bungalow Project',
+        avatar: 'https://picsum.photos/seed/avatar4/100/100',
+    },
+    {
+        quote: 'Their budget estimator tool was surprisingly accurate and helped us plan our finances effectively. The transparency is commendable.',
+        author: 'Anjali Desai',
+        project: 'Budget Estimation & Consultation',
+        avatar: 'https://picsum.photos/seed/avatar5/100/100',
+    },
+    {
+        quote: 'The structural engineering is top-notch. Our home feels incredibly solid and safe, a testament to their focus on quality materials and design.',
+        author: 'Vikram Singh',
+        project: 'Structural Consultation',
+        avatar: 'https://picsum.photos/seed/avatar6/100/100',
+    },
+    {
+        quote: 'We were impressed by their commitment to the timeline. They delivered our beautiful duplex right on schedule, without cutting any corners.',
+        author: 'The Chatterjee Family',
+        project: '4BHK Duplex in Durgapur',
+        avatar: 'https://picsum.photos/seed/avatar7/100/100',
+    },
+    {
+        quote: 'The client portal is a fantastic feature! We loved getting regular updates with photos and documents. It made us feel involved throughout the process.',
+        author: 'Sameer Patel',
+        project: 'Client Portal Experience',
+        avatar: 'https://picsum.photos/seed/avatar8/100/100',
+    },
+    {
+        quote: 'From the elegant facade to the premium interior finishes, every detail was executed with perfection. Their craftsmanship is truly remarkable.',
+        author: 'Nisha Agarwal',
+        project: 'Exterior & Interior Finishes',
+        avatar: 'https://picsum.photos/seed/avatar9/100/100',
+    },
+    {
+        quote: 'A truly professional and reliable construction partner. They listened to our needs and delivered a home that exceeded all our expectations.',
+        author: 'D. Banerjee',
+        project: 'Custom Bungalow in Bidhan Nagar',
+        avatar: 'https://picsum.photos/seed/avatar10/100/100',
+    }
 ];
 
 export const INTERIOR_DESIGN_GALLERY: Record<InteriorCategory, string[]> = {

@@ -5,7 +5,7 @@ import { PROPERTIES, CONSTRUCTION_SERVICES, TESTIMONIALS, COMPANY_INFO } from '.
 import PropertyCard from '../components/PropertyCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import BrochureViewerModal from '../components/BrochureViewerModal';
-import { DocumentTextIcon } from '@heroicons/react/24/solid';
+import { DocumentTextIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 
 const HeroSlider: React.FC = () => {
@@ -48,9 +48,41 @@ const CTAButton: React.FC<{ to: string, children: React.ReactNode }> = ({ to, ch
     </ReactRouterDOM.Link>
 );
 
+const variants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0
+    };
+  },
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1
+  },
+  exit: (direction: number) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0
+    };
+  }
+};
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
+
 const TestimonialCarousel: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [[page, direction], setPage] = useState([0, 0]);
     const timeoutRef = React.useRef<number | null>(null);
+
+    const imageIndex = ((page % TESTIMONIALS.length) + TESTIMONIALS.length) % TESTIMONIALS.length;
+
+    const paginate = (newDirection: number) => {
+        setPage([page + newDirection, newDirection]);
+    };
 
     const resetTimeout = () => {
         if (timeoutRef.current) {
@@ -60,92 +92,93 @@ const TestimonialCarousel: React.FC = () => {
 
     useEffect(() => {
         resetTimeout();
-        timeoutRef.current = window.setTimeout(
-            () =>
-                setCurrentIndex((prevIndex) =>
-                    prevIndex === TESTIMONIALS.length - 1 ? 0 : prevIndex + 1
-                ),
-            7000 // Change slide every 7 seconds
-        );
+        timeoutRef.current = window.setTimeout(() => paginate(1), 7000);
 
         return () => {
             resetTimeout();
         };
-    }, [currentIndex]);
-
-    const goToSlide = (slideIndex: number) => {
-        setCurrentIndex(slideIndex);
-    };
+    }, [page]);
     
-    const handleInteractionStart = () => {
-        resetTimeout();
-    };
-
-    const handleInteractionEnd = () => {
-         timeoutRef.current = window.setTimeout(
-            () =>
-                setCurrentIndex((prevIndex) =>
-                    prevIndex === TESTIMONIALS.length - 1 ? 0 : prevIndex + 1
-                ),
-            7000
-        );
+    const goToSlide = (slideIndex: number) => {
+        const diff = slideIndex - imageIndex;
+        if (diff !== 0) {
+           setPage([page + diff, diff > 0 ? 1 : -1]);
+        }
     };
 
     return (
         <div 
             className="relative"
-            onMouseEnter={handleInteractionStart}
-            onMouseLeave={handleInteractionEnd}
-            onTouchStart={handleInteractionStart}
-            onTouchEnd={handleInteractionEnd}
+            onMouseEnter={resetTimeout}
+            onMouseLeave={() => {
+                 timeoutRef.current = window.setTimeout(() => paginate(1), 7000);
+            }}
         >
-            <div className="overflow-hidden rounded-xl bg-zinc-800 p-6 relative h-[280px] sm:h-[260px] flex flex-col justify-between">
+            <div className="overflow-hidden rounded-xl bg-zinc-800 p-6 relative h-[300px] sm:h-[280px] flex flex-col justify-center">
                 {/* Decorative Quote Icon */}
-                <span className="absolute top-4 left-4 text-7xl font-serif text-golden-yellow/20 opacity-50 select-none" aria-hidden="true">“</span>
+                <span className="absolute top-4 left-4 text-7xl font-serif text-golden-yellow/20 opacity-50 select-none z-0" aria-hidden="true">“</span>
                 
-                <div className="relative flex-grow overflow-hidden">
-                    <div
-                        className="absolute inset-0"
-                    >
-                        {TESTIMONIALS.map((testimonial, index) => (
-                            <div 
-                                key={index} 
-                                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
-                                aria-hidden={index !== currentIndex}
-                            >
-                                <p className="text-gray-300 italic text-md sm:text-lg leading-relaxed pt-8">
-                                    {testimonial.quote}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <AnimatePresence initial={false} custom={direction}>
+                     <motion.div
+                        key={page}
+                        custom={direction}
+                        variants={variants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{
+                            x: { type: "spring", stiffness: 300, damping: 30 },
+                            opacity: { duration: 0.2 }
+                        }}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={1}
+                        onDragEnd={(e, { offset, velocity }) => {
+                            const swipe = swipePower(offset.x, velocity.x);
 
-                <div className="relative mt-4">
-                    <div className="relative h-14">
-                        {TESTIMONIALS.map((testimonial, index) => (
-                           <div 
-                                key={index} 
-                                className={`absolute inset-0 flex items-center gap-4 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
-                                aria-hidden={index !== currentIndex}
-                            >
-                                <img src={testimonial.avatar} alt={testimonial.author} className="w-12 h-12 rounded-full object-cover border-2 border-golden-yellow" />
-                                <div>
-                                    <p className="font-bold text-golden-yellow">{testimonial.author}</p>
-                                    <p className="text-xs text-gray-400">{testimonial.project}</p>
-                                </div>
+                            if (swipe < -swipeConfidenceThreshold) {
+                                paginate(1);
+                            } else if (swipe > swipeConfidenceThreshold) {
+                                paginate(-1);
+                            }
+                        }}
+                        className="absolute inset-0 p-6 flex flex-col justify-center"
+                    >
+                         <p className="text-gray-300 italic text-md sm:text-lg leading-relaxed pt-2 relative z-10 flex-grow">
+                            {TESTIMONIALS[imageIndex].quote}
+                        </p>
+                        <div className="relative mt-4 flex items-center gap-4 z-10">
+                            <img src={TESTIMONIALS[imageIndex].avatar} alt={TESTIMONIALS[imageIndex].author} className="w-12 h-12 rounded-full object-cover border-2 border-golden-yellow" />
+                            <div>
+                                <p className="font-bold text-golden-yellow">{TESTIMONIALS[imageIndex].author}</p>
+                                <p className="text-xs text-gray-400">{TESTIMONIALS[imageIndex].project}</p>
                             </div>
-                        ))}
-                    </div>
-                 </div>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
+            
+            <button
+                onClick={() => paginate(-1)}
+                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 bg-charcoal/60 p-2 rounded-full text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
+                aria-label="Previous testimonial"
+            >
+                <ChevronLeftIcon className="h-6 w-6" />
+            </button>
+            <button
+                onClick={() => paginate(1)}
+                className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-3 bg-charcoal/60 p-2 rounded-full text-white hover:bg-golden-yellow hover:text-charcoal transition-colors z-20"
+                aria-label="Next testimonial"
+            >
+                <ChevronRightIcon className="h-6 w-6" />
+            </button>
 
             <div className="flex justify-center mt-4 space-x-2">
                 {TESTIMONIALS.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => goToSlide(index)}
-                        className={`h-2.5 rounded-full transition-all duration-300 ${currentIndex === index ? 'bg-golden-yellow w-6' : 'bg-zinc-600 hover:bg-zinc-500 w-2.5'}`}
+                        className={`h-2.5 rounded-full transition-all duration-300 ${imageIndex === index ? 'bg-golden-yellow w-6' : 'bg-zinc-600 hover:bg-zinc-500 w-2.5'}`}
                         aria-label={`Go to testimonial ${index + 1}`}
                     ></button>
                 ))}
