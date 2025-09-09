@@ -92,10 +92,14 @@ const FloorPlanDetailView: React.FC<{ plan: FloorPlan; onBack: () => void }> = (
 // --- INTERFACE 1: LIST VIEW ---
 
 const FloorPlanListView: React.FC<{ onSelectPlan: (plan: FloorPlan) => void }> = ({ onSelectPlan }) => {
-    const [activeTab, setActiveTab] = useState<'3BHK' | '4BHK' | '5BHK'>('3BHK');
-    const tabs: ('3BHK' | '4BHK' | '5BHK')[] = ['3BHK', '4BHK', '5BHK'];
+    type TabType = 'All' | '3BHK' | '4BHK' | '5BHK';
+    const [activeTab, setActiveTab] = useState<TabType>('All');
+    const tabs: TabType[] = ['All', '3BHK', '4BHK', '5BHK'];
 
     const filteredPlans = useMemo(() => {
+        if (activeTab === 'All') {
+            return FLOOR_PLANS;
+        }
         return FLOOR_PLANS.filter(p => p.type === activeTab);
     }, [activeTab]);
     
