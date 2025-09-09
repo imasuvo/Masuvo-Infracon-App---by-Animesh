@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import BottomNav from './components/BottomNav';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 // Context Providers
 import { FavoritesProvider } from './contexts/FavoritesContext';
@@ -102,6 +103,7 @@ const AppContent: React.FC = () => {
                 <>
                     <Footer />
                     <BottomNav />
+                    <ScrollToTopButton />
                 </>
             )}
         </div>
